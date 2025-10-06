@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:social_media/auth_screen/kyc_verification.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class SignUpController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -15,6 +17,9 @@ class SignUpController extends GetxController {
 
   final obscurePassword = true.obs;
   final obscureConfirmPassword = true.obs;
+  final isLoading = false.obs;
+
+  final String baseUrl = 'http://192.168.1.54:8000/api';
 
   void togglePasswordVisibility() {
     obscurePassword.value = !obscurePassword.value;
@@ -25,14 +30,11 @@ class SignUpController extends GetxController {
   }
 
   bool validateForm() {
-    if (!formKey.currentState!.validate()) {
-      return false;
-    }
-
-    if (passwordController.text != confirmPasswordController.text) {
+    // Check if first name is empty
+    if (firstNameController.text.trim().isEmpty) {
       Get.snackbar(
         'Error',
-        'Passwords do not match',
+        'First name is required',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red.withOpacity(0.7),
         colorText: Colors.white,
@@ -40,6 +42,43 @@ class SignUpController extends GetxController {
       return false;
     }
 
+    // Check if last name is empty
+    if (lastNameController.text.trim().isEmpty) {
+      Get.snackbar(
+        'Error',
+        'Last name is required',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.7),
+        colorText: Colors.white,
+      );
+      return false;
+    }
+
+    // Check if email is valid
+    if (!GetUtils.isEmail(emailController.text.trim())) {
+      Get.snackbar(
+        'Error',
+        'Please enter a valid email',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.7),
+        colorText: Colors.white,
+      );
+      return false;
+    }
+
+    // Check if phone is empty
+    if (phoneController.text.trim().isEmpty) {
+      Get.snackbar(
+        'Error',
+        'Phone number is required',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.7),
+        colorText: Colors.white,
+      );
+      return false;
+    }
+
+    // Check password length
     if (passwordController.text.length < 8) {
       Get.snackbar(
         'Error',
@@ -51,31 +90,116 @@ class SignUpController extends GetxController {
       return false;
     }
 
+    // Check if passwords match
+    if (passwordController.text != confirmPasswordController.text) {
+      Get.snackbar(
+        'Error',
+        'Passwords do not match',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.7),
+        colorText: Colors.white,
+      );
+      return false;
+    }
+
     return true;
   }
 
-  void signUp() {
-    // if (
-    //   // !validateForm()
-    //   ) {
-    //   return;
-    // }
+  Future<void> signUp() async {
+    // Validate form first
+    if (!validateForm()) {
+      return;
+    }
 
-    // String firstName = firstNameController.text.trim();
-    // String lastName = lastNameController.text.trim();
-    // String email = emailController.text.trim();
-    // String phone = phoneController.text.trim();
-    // String password = passwordController.text.trim();
-    // String reference = referenceController.text.trim();
+    // Set loading state
+    isLoading.value = true;
 
-    // Get.snackbar(
-    //   'Sign Up',
-    //   'Creating account for: $firstName $lastName',
-    //   snackPosition: SnackPosition.BOTTOM,
-    //   backgroundColor: Colors.green.withOpacity(0.7),
-    //   colorText: Colors.white,
-    // );
-    Get.to(() => KYCVerificationScreen());
+    try {
+      // Prepare the data
+      final Map<String, dynamic> requestData = {
+        'first_name': firstNameController.text.trim(),
+        'last_name': lastNameController.text.trim(),
+        'email': emailController.text.trim(),
+        'phone_number': phoneController.text.trim(),
+        'password': passwordController.text,
+        'confirm_password': confirmPasswordController.text,
+      };
+
+      // Add reference number only if it's not empty
+      if (referenceController.text.trim().isNotEmpty) {
+        requestData['reference_number'] = referenceController.text.trim();
+      }
+
+      // Make API request with timeout
+      final response = await http
+          .post(
+            Uri.parse('$baseUrl/register/'),
+            headers: {'Content-Type': 'application/json'},
+            body: json.encode(requestData),
+          )
+          .timeout(
+            const Duration(seconds: 30),
+            onTimeout: () {
+              throw Exception(
+                'Connection timeout. Please check your network connection.',
+              );
+            },
+          );
+
+      // Handle response
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // Success
+        final responseData = json.decode(response.body);
+
+        Get.snackbar(
+          'Success',
+          'Account created successfully!',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green.withOpacity(0.7),
+          colorText: Colors.white,
+        );
+
+        // Navigate to KYC verification
+        Get.to(() => KYCVerificationScreen());
+      } else {
+        // Error from server
+        final errorData = json.decode(response.body);
+        String errorMessage = 'Registration failed';
+
+        // Try to extract error message from response
+        if (errorData is Map) {
+          if (errorData.containsKey('message')) {
+            errorMessage = errorData['message'];
+          } else if (errorData.containsKey('error')) {
+            errorMessage = errorData['error'];
+          } else {
+            // If there are field-specific errors
+            errorMessage = errorData.values.first.toString();
+          }
+        }
+
+        Get.snackbar(
+          'Error',
+          errorMessage,
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red.withOpacity(0.7),
+          colorText: Colors.white,
+          duration: const Duration(seconds: 4),
+        );
+      }
+    } catch (e) {
+      // Network or other errors
+      Get.snackbar(
+        'Error',
+        'Connection failed. Please check your internet connection.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.7),
+        colorText: Colors.white,
+      );
+      print('Sign up error: $e');
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   void signUpWithGoogle() {
@@ -87,7 +211,6 @@ class SignUpController extends GetxController {
     );
   }
 
-  // Facebook sign up
   void signUpWithFacebook() {
     // TODO: Implement Facebook sign up
     Get.snackbar(
@@ -97,13 +220,10 @@ class SignUpController extends GetxController {
     );
   }
 
-  // Navigate to login screen
   void navigateToLogin() {
-    // TODO: Navigate to login screen
-    Get.back(); // or Get.toNamed('/login');
+    Get.back();
   }
 
-  // Validate individual fields
   String? validateFirstName(String? value) {
     if (value == null || value.isEmpty) {
       return 'First name is required';
@@ -128,7 +248,6 @@ class SignUpController extends GetxController {
     if (value == null || value.isEmpty) {
       return 'Email is required';
     }
-    // Simple email validation
     if (!GetUtils.isEmail(value)) {
       return 'Please enter a valid email';
     }
@@ -166,7 +285,6 @@ class SignUpController extends GetxController {
   }
 
   String? validateReference(String? value) {
-    // Reference is optional, so we can return null
     return null;
   }
 

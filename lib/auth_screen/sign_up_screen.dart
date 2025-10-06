@@ -182,42 +182,55 @@ class SignUpScreen extends StatelessWidget {
 
                     const SizedBox(height: 32),
 
-                    /// Sign Up Button
-                    GestureDetector(
-                      onTap: controller.signUp,
-                      child: Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: Colors.white.withOpacity(0.25),
-                                  width: 1,
-                                ),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.white.withOpacity(0.15),
-                                    Colors.white.withOpacity(0.0),
-                                  ],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                ),
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  "Sign Up",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
+                    /// Replace the Sign Up Button section in your SignUpScreen with this:
+                    Obx(
+                      () => GestureDetector(
+                        onTap: controller.isLoading.value
+                            ? null
+                            : controller.signUp,
+                        child: Container(
+                          height: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: Colors.white.withOpacity(0.25),
+                                    width: 1,
                                   ),
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Colors.white.withOpacity(0.15),
+                                      Colors.white.withOpacity(0.0),
+                                    ],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: controller.isLoading.value
+                                      ? const SizedBox(
+                                          height: 20,
+                                          width: 20,
+                                          child: CircularProgressIndicator(
+                                            color: Colors.white,
+                                            strokeWidth: 2,
+                                          ),
+                                        )
+                                      : const Text(
+                                          "Sign Up",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
                                 ),
                               ),
                             ),
