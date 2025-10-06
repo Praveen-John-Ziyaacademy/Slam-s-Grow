@@ -1,0 +1,275 @@
+// View
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:social_media/colors/colors.dart';
+import 'package:social_media/auth_controller/forgot_controller.dart';
+
+class ForgotPasswordScreen extends StatelessWidget {
+  const ForgotPasswordScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.put(ForgotPasswordController());
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
+
+                IconButton(
+                  icon: const Icon(Icons.arrow_back_ios, size: 20),
+                  onPressed: controller.goToSignIn,
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                ),
+                const SizedBox(height: 30),
+                // Title
+                const Center(
+                  child: Text(
+                    'Forgot Password',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 60),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Enter Email Address',
+                        style: TextStyle(fontSize: 14, color: Colors.black87),
+                      ),
+                      const SizedBox(height: 8),
+
+                      Obx(
+                        () => Container(
+                          width: 304,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.white,
+                          ),
+                          child: TextField(
+                            controller: controller.emailController,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 10,
+                            ),
+                            decoration: InputDecoration(
+                              hintText: 'Enter email',
+                              hintStyle: TextStyle(
+                                color: Colors.black.withOpacity(0.5),
+                                fontSize: 10,
+                              ),
+
+                              isDense: true,
+
+                              errorText: controller.emailError.value.isEmpty
+                                  ? null
+                                  : controller.emailError.value,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  color: Color(0xFF94C21A),
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: const BorderSide(
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            ),
+                            keyboardType: TextInputType.emailAddress,
+                            onChanged: (value) {
+                              if (controller.emailError.value.isNotEmpty) {
+                                controller.validateEmail(value);
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 30),
+                // Back to sign in link
+                Center(
+                  child: TextButton(
+                    onPressed: controller.goToSignIn,
+                    child: const Text(
+                      'Back to sign in',
+                      style: TextStyle(color: Colors.black87, fontSize: 12),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                // Get OTP button
+                Obx(
+                  () => Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    child: Container(
+                      width: 304,
+                      height: 30,
+                      child: ElevatedButton(
+                        onPressed: controller.isLoading.value
+                            ? null
+                            : controller.getOTP,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primary,
+
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: controller.isLoading.value
+                            ? const SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    Colors.white,
+                                  ),
+                                ),
+                              )
+                            : const Text(
+                                'Get OTP',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                // OR divider
+                const Center(
+                  child: Text(
+                    'or',
+                    style: TextStyle(fontSize: 14, color: Colors.black54),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // Social login buttons
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _SocialButton(
+                      onPressed: controller.loginWithGoogle,
+                      child: Image.network(
+                        'https://www.google.com/favicon.ico',
+                        width: 24,
+                        height: 24,
+                        errorBuilder: (context, error, stackTrace) {
+                          return const Icon(
+                            Icons.g_mobiledata,
+                            size: 30,
+                            color: Colors.red,
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 30),
+                    _SocialButton(
+                      onPressed: controller.loginWithApple,
+                      child: const Icon(
+                        Icons.apple,
+                        size: 30,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(width: 30),
+                    _SocialButton(
+                      onPressed: controller.loginWithFacebook,
+                      child: const Icon(
+                        Icons.facebook,
+                        size: 30,
+                        color: Color(0xFF1877F2),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 40),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Don't have an account?",
+                        style: TextStyle(fontSize: 14, color: Colors.black87),
+                      ),
+                      const SizedBox(height: 12),
+                      Container(
+                        width: 304,
+                        height: 30,
+                        child: OutlinedButton(
+                          onPressed: controller.goToSignUp,
+                          style: OutlinedButton.styleFrom(
+                            side: const BorderSide(
+                              color: Color(0xFF94C21A),
+                              width: 1.5,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: const Text(
+                            'Sign up',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SocialButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  final Widget child;
+
+  const _SocialButton({required this.onPressed, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: 50,
+        height: 50,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+        child: Center(child: child),
+      ),
+    );
+  }
+}
