@@ -45,7 +45,6 @@ class LoginController extends GetxController {
   }
 
   void loginWithGoogle() {
-    // TODO: Implement Google login
     Get.snackbar(
       'Google Login',
       'Google login not implemented yet',
@@ -54,7 +53,6 @@ class LoginController extends GetxController {
   }
 
   void loginWithFacebook() {
-    // TODO: Implement Facebook login
     Get.snackbar(
       'Facebook Login',
       'Facebook login not implemented yet',

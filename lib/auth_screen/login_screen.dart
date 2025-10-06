@@ -83,16 +83,23 @@ class LoginScreen extends StatelessWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  GlassButton(
-                                    icon: Icons.g_mobiledata,
-                                    label: "Google",
-                                    onTap: controller.loginWithGoogle,
-                                  ),
-                                  const SizedBox(width: 30),
-                                  GlassButton(
-                                    icon: Icons.facebook,
-                                    label: "Facebook",
-                                    onTap: controller.loginWithFacebook,
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      GlassButton(
+                                        label: "Google",
+                                        imagePath:
+                                            "assets/google-color-svgrepo-com.svg",
+                                        onTap: controller.loginWithGoogle,
+                                      ),
+                                      const SizedBox(width: 30),
+                                      GlassButton(
+                                        label: "Facebook",
+                                        imagePath:
+                                            "assets/facebook-svgrepo-com.svg",
+                                        onTap: controller.loginWithFacebook,
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),

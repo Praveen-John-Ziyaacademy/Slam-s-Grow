@@ -1,14 +1,15 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class GlassButton extends StatelessWidget {
-  final IconData? icon;
+  final String? imagePath;
   final String label;
   final VoidCallback onTap;
 
   const GlassButton({
     super.key,
-    this.icon,
+    this.imagePath,
     required this.label,
     required this.onTap,
   });
@@ -83,13 +84,18 @@ class GlassButton extends StatelessWidget {
                     ),
                   ),
 
-                  // Button content
                   Center(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(icon, color: Colors.white, size: 18),
-                        const SizedBox(width: 10),
+                        if (imagePath != null)
+                          SvgPicture.asset(
+                            imagePath!,
+                            height: 14,
+                            width: 14,
+                            fit: BoxFit.cover,
+                          ),
+                        const SizedBox(width: 8),
                         Text(
                           label,
                           style: const TextStyle(

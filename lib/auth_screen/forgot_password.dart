@@ -1,5 +1,6 @@
 // View
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:social_media/colors/colors.dart';
@@ -174,17 +175,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                   children: [
                     _SocialButton(
                       onPressed: controller.loginWithGoogle,
-                      child: Image.network(
-                        'https://www.google.com/favicon.ico',
+                      child: SvgPicture.asset(
+                        'assets/google-color-svgrepo-com.svg',
                         width: 24,
                         height: 24,
-                        errorBuilder: (context, error, stackTrace) {
-                          return const Icon(
-                            Icons.g_mobiledata,
-                            size: 30,
-                            color: Colors.red,
-                          );
-                        },
                       ),
                     ),
                     const SizedBox(width: 30),
@@ -199,10 +193,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                     const SizedBox(width: 30),
                     _SocialButton(
                       onPressed: controller.loginWithFacebook,
-                      child: const Icon(
-                        Icons.facebook,
-                        size: 30,
-                        color: Color(0xFF1877F2),
+                      child: SvgPicture.asset(
+                        'assets/facebook-svgrepo-com.svg',
+                        width: 24,
+                        height: 24,
                       ),
                     ),
                   ],
