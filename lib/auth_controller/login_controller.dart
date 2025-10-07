@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:social_media/auth_screen/forgot_password.dart';
 import 'package:social_media/auth_screen/kyc_verification.dart';
 import 'package:social_media/auth_screen/sign_up_screen.dart';
+import 'package:social_media/components/loading.dart';
 
 class LoginController extends GetxController {
   final rememberMe = true.obs;
@@ -10,6 +11,19 @@ class LoginController extends GetxController {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  void showLoading() {
+    Get.dialog(
+      Center(child: SingleCircleLoader(size: 80)),
+      barrierDismissible: false,
+    );
+  }
+
+  void hideLoading() {
+    if (Get.isDialogOpen ?? false) {
+      Get.back();
+    }
+  }
 
   void togglePasswordVisibility() {
     obscurePassword.value = !obscurePassword.value;
@@ -19,7 +33,7 @@ class LoginController extends GetxController {
     rememberMe.value = value ?? false;
   }
 
-  void login() {
+  void login() async {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
 
@@ -31,6 +45,13 @@ class LoginController extends GetxController {
       );
       return;
     }
+
+    showLoading();
+
+    await Future.delayed(const Duration(seconds: 2));
+
+    hideLoading();
+
     Get.to(() => KYCVerificationScreen());
 
     Get.snackbar(

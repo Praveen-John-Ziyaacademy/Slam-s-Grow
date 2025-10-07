@@ -1,51 +1,214 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:social_media/auth_screen/id_verification.dart';
 
 class KYCController extends GetxController {
   final fullNameController = TextEditingController();
   final dateOfBirthController = TextEditingController();
 
+  final mobileNumberController = TextEditingController();
+  final alternateMobileController = TextEditingController();
+
+  final accountNameController = TextEditingController();
+  final accountNumberController = TextEditingController();
+  final ifscCodeController = TextEditingController();
+
   final isChecked = false.obs;
-  final selectedNationality = 'Nationality'.obs;
   final currentStep = 1.obs;
 
-  // Document files
-  final idDocument = Rx<File?>(null);
-  final panDocument = Rx<File?>(null);
+  final selectedNationality = 'Nationality'.obs;
+  final selectedGender = 'Gender'.obs;
+  final selectedMaritalStatus = 'Marital Status'.obs;
+  final selectedBloodGroup = 'Blood Group'.obs;
+  final selectedState = 'State'.obs;
+  final selectedCity = 'City'.obs;
+  final selectedDistrict = 'District'.obs;
+  final selectedPincode = 'Pin code'.obs;
 
-  // Nationality options
+  final selectedJobRole = 'Job Role'.obs;
+  final selectedUserType = 'User Type'.obs;
+
+  // Document files for ID verification screen
+  final aadharFront = Rx<File?>(null);
+  final aadharBack = Rx<File?>(null);
+  final panFront = Rx<File?>(null);
+  final panBack = Rx<File?>(null);
+  final passbookFront = Rx<File?>(null);
+  final passbookBack = Rx<File?>(null);
+  final selfieImage = Rx<File?>(null);
+
   final List<String> nationalityOptions = [
     'Nationality',
-    'USA',
-    'UK',
-    'India',
-    'Canada',
-    'Australia',
-    'Germany',
-    'France',
-    'Japan',
+    'Indian',
+    'American',
+    'British',
+    'Canadian',
+    'Australian',
+    'German',
+    'French',
+    'Japanese',
+    'Chinese',
+    'Other',
   ];
 
-  // Toggle checkbox
+  final List<String> genderOptions = ['Gender', 'Male', 'Female', 'Other'];
+
+  final List<String> maritalStatusOptions = [
+    'Marital Status',
+    'Single',
+    'Married',
+    'Divorced',
+    'Widowed',
+  ];
+
+  final List<String> bloodGroupOptions = [
+    'Blood Group',
+    'A+',
+    'A-',
+    'B+',
+    'B-',
+    'O+',
+    'O-',
+    'AB+',
+    'AB-',
+  ];
+
+  final List<String> stateOptions = [
+    'State',
+    'Kerala',
+    'Tamil Nadu',
+    'Karnataka',
+    'Maharashtra',
+    'Delhi',
+    'Gujarat',
+    'Rajasthan',
+    'West Bengal',
+    'Uttar Pradesh',
+    'Other',
+  ];
+
+  final List<String> cityOptions = [
+    'City',
+    'Thiruvananthapuram',
+    'Kochi',
+    'Kozhikode',
+    'Thrissur',
+    'Kollam',
+    'Kannur',
+    'Palakkad',
+    'Other',
+  ];
+
+  final List<String> districtOptions = [
+    'District',
+    'Thiruvananthapuram',
+    'Kollam',
+    'Pathanamthitta',
+    'Alappuzha',
+    'Kottayam',
+    'Idukki',
+    'Ernakulam',
+    'Thrissur',
+    'Palakkad',
+    'Malappuram',
+    'Kozhikode',
+    'Wayanad',
+    'Kannur',
+    'Kasaragod',
+  ];
+
+  final List<String> pincodeOptions = [
+    'Pin code',
+    '695001',
+    '695002',
+    '695003',
+    '695004',
+    '695005',
+    '695006',
+    '695007',
+    '695008',
+    '695009',
+    '695010',
+  ];
+
+  final List<String> jobRoleOptions = [
+    'Job Role',
+    'Software Engineer',
+    'Business Analyst',
+    'Project Manager',
+    'Designer',
+    'Marketing Manager',
+    'Sales Executive',
+    'Teacher',
+    'Doctor',
+    'Entrepreneur',
+    'Student',
+    'Other',
+  ];
+
+  final List<String> userTypeOptions = [
+    'User Type',
+    'Individual',
+    'Business',
+    'Professional',
+    'Enterprise',
+  ];
+
+  final ImagePicker _picker = ImagePicker();
+
+  void changeNationality(String? value) {
+    if (value != null) selectedNationality.value = value;
+  }
+
+  void changeGender(String? value) {
+    if (value != null) selectedGender.value = value;
+  }
+
+  void changeMaritalStatus(String? value) {
+    if (value != null) selectedMaritalStatus.value = value;
+  }
+
+  void changeBloodGroup(String? value) {
+    if (value != null) selectedBloodGroup.value = value;
+  }
+
+  void changeState(String? value) {
+    if (value != null) {
+      selectedState.value = value;
+      selectedCity.value = 'City';
+    }
+  }
+
+  void changeCity(String? value) {
+    if (value != null) selectedCity.value = value;
+  }
+
+  void changeDistrict(String? value) {
+    if (value != null) selectedDistrict.value = value;
+  }
+
+  void changePincode(String? value) {
+    if (value != null) selectedPincode.value = value;
+  }
+
+  void changeJobRole(String? value) {
+    if (value != null) selectedJobRole.value = value;
+  }
+
+  void changeUserType(String? value) {
+    if (value != null) selectedUserType.value = value;
+  }
+
   void toggleCheckbox(bool? value) {
     isChecked.value = value ?? false;
   }
 
-  // Change nationality
-  void changeNationality(String? value) {
-    if (value != null) {
-      selectedNationality.value = value;
-    }
-  }
-
-  // Pick date of birth
   Future<void> pickDateOfBirth(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now().subtract(
-        const Duration(days: 6570),
-      ), // 18 years ago
+      initialDate: DateTime.now().subtract(const Duration(days: 6570)),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
       builder: (context, child) {
@@ -68,132 +231,218 @@ class KYCController extends GetxController {
     }
   }
 
-  Future<void> uploadIDDocument() async {
-    // TODO: Implement file picker logic
-    // Example using image_picker or file_picker package:
-    // final ImagePicker picker = ImagePicker();
-    // final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    // if (image != null) {
-    //   idDocument.value = File(image.path);
-    // }
-
-    Get.snackbar(
-      'Upload ID',
-      'ID document upload functionality not implemented yet',
-      snackPosition: SnackPosition.BOTTOM,
-    );
-  }
-
-  // Upload PAN document
-  Future<void> uploadPANDocument() async {
-    // TODO: Implement file picker logic
-    Get.snackbar(
-      'Upload PAN',
-      'PAN document upload functionality not implemented yet',
-      snackPosition: SnackPosition.BOTTOM,
-    );
-  }
-
-  // Validate form
-  bool validateForm() {
-    if (fullNameController.text.trim().isEmpty) {
-      Get.snackbar(
-        'Error',
-        'Please enter your full name',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.7),
-        colorText: Colors.white,
+  // Document picker for ID verification
+  Future<void> pickDocument(String documentType) async {
+    try {
+      final XFile? image = await _picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 80,
       );
+
+      if (image != null) {
+        final File file = File(image.path);
+
+        switch (documentType) {
+          case 'aadhar_front':
+            aadharFront.value = file;
+            break;
+          case 'aadhar_back':
+            aadharBack.value = file;
+            break;
+          case 'pan_front':
+            panFront.value = file;
+            break;
+          case 'pan_back':
+            panBack.value = file;
+            break;
+          case 'passbook_front':
+            passbookFront.value = file;
+            break;
+          case 'passbook_back':
+            passbookBack.value = file;
+            break;
+          case 'selfie':
+            selfieImage.value = file;
+            break;
+        }
+
+        _showSuccess('Document uploaded successfully');
+      }
+    } catch (e) {
+      _showError('Failed to pick image: $e');
+    }
+  }
+
+  bool validateStep1() {
+    if (fullNameController.text.trim().isEmpty) {
+      _showError('Please enter your full name');
+      return false;
+    }
+
+    if (selectedGender.value == 'Gender') {
+      _showError('Please select your gender');
+      return false;
+    }
+
+    if (selectedMaritalStatus.value == 'Marital Status') {
+      _showError('Please select your marital status');
+      return false;
+    }
+
+    if (selectedBloodGroup.value == 'Blood Group') {
+      _showError('Please select your blood group');
       return false;
     }
 
     if (dateOfBirthController.text.trim().isEmpty) {
-      Get.snackbar(
-        'Error',
-        'Please select your date of birth',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.7),
-        colorText: Colors.white,
-      );
+      _showError('Please select your date of birth');
+      return false;
+    }
+
+    if (selectedState.value == 'State') {
+      _showError('Please select your state');
+      return false;
+    }
+
+    if (selectedCity.value == 'City') {
+      _showError('Please select your city');
+      return false;
+    }
+
+    if (selectedDistrict.value == 'District') {
+      _showError('Please select your district');
+      return false;
+    }
+
+    if (selectedPincode.value == 'Pin code') {
+      _showError('Please select your pin code');
       return false;
     }
 
     if (selectedNationality.value == 'Nationality') {
-      Get.snackbar(
-        'Error',
-        'Please select your nationality',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.7),
-        colorText: Colors.white,
-      );
+      _showError('Please select your nationality');
       return false;
     }
 
-    if (idDocument.value == null) {
-      Get.snackbar(
-        'Error',
-        'Please upload your ID document',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.7),
-        colorText: Colors.white,
-      );
+    if (mobileNumberController.text.trim().isEmpty) {
+      _showError('Please enter your mobile number');
       return false;
     }
 
-    if (panDocument.value == null) {
-      Get.snackbar(
-        'Error',
-        'Please upload your PAN document',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.7),
-        colorText: Colors.white,
-      );
+    if (mobileNumberController.text.trim().length != 10) {
+      _showError('Please enter a valid 10-digit mobile number');
       return false;
     }
 
-    if (!isChecked.value) {
-      Get.snackbar(
-        'Error',
-        'Please confirm that your information is correct',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.7),
-        colorText: Colors.white,
-      );
+    if (selectedJobRole.value == 'Job Role') {
+      _showError('Please select your job role');
+      return false;
+    }
+
+    if (selectedUserType.value == 'User Type') {
+      _showError('Please select your user type');
+      return false;
+    }
+
+    if (accountNameController.text.trim().isEmpty) {
+      _showError('Please enter account holder name');
+      return false;
+    }
+
+    if (accountNumberController.text.trim().isEmpty) {
+      _showError('Please enter your account number');
+      return false;
+    }
+
+    if (ifscCodeController.text.trim().isEmpty) {
+      _showError('Please enter IFSC code');
       return false;
     }
 
     return true;
   }
 
-  // Submit for verification
-  void submitForVerification() {
-    if (!validateForm()) {
-      return;
+  bool validateStep2() {
+    if (aadharFront.value == null) {
+      _showError('Please upload Aadhar card front');
+      return false;
     }
 
-    // TODO: Implement actual KYC submission logic here
+    if (panFront.value == null) {
+      _showError('Please upload PAN card front');
+      return false;
+    }
+
+    if (passbookFront.value == null) {
+      _showError('Please upload Pass Book front');
+      return false;
+    }
+
+    if (selfieImage.value == null) {
+      _showError('Please upload your selfie');
+      return false;
+    }
+
+    return true;
+  }
+
+  void _showError(String message) {
+    Get.snackbar(
+      'Error',
+      message,
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.red.withOpacity(0.7),
+      colorText: Colors.white,
+      duration: const Duration(seconds: 2),
+    );
+  }
+
+  void _showSuccess(String message) {
     Get.snackbar(
       'Success',
-      'Your KYC documents have been submitted for verification',
+      message,
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: Colors.green.withOpacity(0.7),
       colorText: Colors.white,
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 2),
     );
-
-    // Move to next step or navigate
-    currentStep.value = 2;
-
-    // After successful submission, you might want to navigate
-    // Get.offAllNamed('/verification-pending');
   }
 
-  // Navigate back
+  void goToNextStep() {
+    if (currentStep.value == 1) {
+      // Validate personal information
+      if (!validateStep1()) {
+        return;
+      }
+
+      currentStep.value = 2;
+      _showSuccess('Personal information saved successfully');
+
+      // Navigate to ID verification screen
+      Get.to(() => const IDVerificationScreen());
+    } else if (currentStep.value == 2) {
+      // Validate documents
+      if (!validateStep2()) {
+        return;
+      }
+
+      currentStep.value = 3;
+      _showSuccess('Documents uploaded successfully');
+
+      // Navigate to Review & Submit screen
+      // Get.to(() => const ReviewSubmitScreen());
+    }
+  }
+
   void goBack() {
-    Get.back();
+    if (currentStep.value > 1) {
+      currentStep.value--;
+      Get.back();
+    } else {
+      Get.back();
+    }
   }
 
-  // Change step (for multi-step form)
   void changeStep(int step) {
     currentStep.value = step;
   }
@@ -202,6 +451,11 @@ class KYCController extends GetxController {
   void onClose() {
     fullNameController.dispose();
     dateOfBirthController.dispose();
+    mobileNumberController.dispose();
+    alternateMobileController.dispose();
+    accountNameController.dispose();
+    accountNumberController.dispose();
+    ifscCodeController.dispose();
     super.onClose();
   }
 }

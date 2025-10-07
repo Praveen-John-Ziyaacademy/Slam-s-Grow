@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:social_media/auth_screen/kyc_verification.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:social_media/auth_screen/kyc_verification.dart';
+import 'package:social_media/components/loading.dart';
 
 class SignUpController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -17,9 +19,19 @@ class SignUpController extends GetxController {
 
   final obscurePassword = true.obs;
   final obscureConfirmPassword = true.obs;
-  final isLoading = false.obs;
 
-  final String baseUrl = 'http://192.168.1.54:8000/api';
+  void showLoading() {
+    Get.dialog(
+      Center(child: SingleCircleLoader(size: 80)),
+      barrierDismissible: false,
+    );
+  }
+
+  void hideLoading() {
+    if (Get.isDialogOpen ?? false) {
+      Get.back();
+    }
+  }
 
   void togglePasswordVisibility() {
     obscurePassword.value = !obscurePassword.value;
@@ -30,67 +42,10 @@ class SignUpController extends GetxController {
   }
 
   bool validateForm() {
-    // Check if first name is empty
-    if (firstNameController.text.trim().isEmpty) {
-      Get.snackbar(
-        'Error',
-        'First name is required',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.7),
-        colorText: Colors.white,
-      );
+    if (!formKey.currentState!.validate()) {
       return false;
     }
 
-    // Check if last name is empty
-    if (lastNameController.text.trim().isEmpty) {
-      Get.snackbar(
-        'Error',
-        'Last name is required',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.7),
-        colorText: Colors.white,
-      );
-      return false;
-    }
-
-    // Check if email is valid
-    if (!GetUtils.isEmail(emailController.text.trim())) {
-      Get.snackbar(
-        'Error',
-        'Please enter a valid email',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.7),
-        colorText: Colors.white,
-      );
-      return false;
-    }
-
-    // Check if phone is empty
-    if (phoneController.text.trim().isEmpty) {
-      Get.snackbar(
-        'Error',
-        'Phone number is required',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.7),
-        colorText: Colors.white,
-      );
-      return false;
-    }
-
-    // Check password length
-    if (passwordController.text.length < 8) {
-      Get.snackbar(
-        'Error',
-        'Password must be at least 8 characters',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.7),
-        colorText: Colors.white,
-      );
-      return false;
-    }
-
-    // Check if passwords match
     if (passwordController.text != confirmPasswordController.text) {
       Get.snackbar(
         'Error',
@@ -102,54 +57,64 @@ class SignUpController extends GetxController {
       return false;
     }
 
+    if (passwordController.text.length < 8) {
+      Get.snackbar(
+        'Error',
+        'Password must be at least 8 characters',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.7),
+        colorText: Colors.white,
+      );
+      return false;
+    }
+
     return true;
   }
 
-  Future<void> signUp() async {
-    // Validate form first
-    if (!validateForm()) {
-      return;
-    }
+  void signUp() async {
+    final firstName = firstNameController.text.trim();
+    final lastName = lastNameController.text.trim();
+    final email = emailController.text.trim();
+    final phone = phoneController.text.trim();
+    final password = passwordController.text.trim();
+    final confirmPassword = confirmPasswordController.text.trim();
 
-    // Set loading state
-    isLoading.value = true;
+    final url = Uri.parse('http://192.168.1.9:8000/api/register/');
+    print('📤 Sending sign-up request to: $url');
+    print('Request body:');
+    print(
+      jsonEncode({
+        "first_name": firstName,
+        "last_name": lastName,
+        "email": email,
+        "phone_number": phone,
+        "password": password,
+        "confirm_password": confirmPassword,
+      }),
+    );
+    showLoading();
 
+    await Future.delayed(const Duration(seconds: 2));
     try {
-      // Prepare the data
-      final Map<String, dynamic> requestData = {
-        'first_name': firstNameController.text.trim(),
-        'last_name': lastNameController.text.trim(),
-        'email': emailController.text.trim(),
-        'phone_number': phoneController.text.trim(),
-        'password': passwordController.text,
-        'confirm_password': confirmPasswordController.text,
-      };
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          "first_name": firstName,
+          "last_name": lastName,
+          "email": email,
+          "phone_number": phone,
+          "password": password,
+          "confirm_password": confirmPassword,
+        }),
+      );
 
-      // Add reference number only if it's not empty
-      if (referenceController.text.trim().isNotEmpty) {
-        requestData['reference_number'] = referenceController.text.trim();
-      }
+      print('📥 Response status: ${response.statusCode}');
+      print('📥 Response body: ${response.body}');
 
-      // Make API request with timeout
-      final response = await http
-          .post(
-            Uri.parse('$baseUrl/register/'),
-            headers: {'Content-Type': 'application/json'},
-            body: json.encode(requestData),
-          )
-          .timeout(
-            const Duration(seconds: 30),
-            onTimeout: () {
-              throw Exception(
-                'Connection timeout. Please check your network connection.',
-              );
-            },
-          );
-
-      // Handle response
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // Success
-        final responseData = json.decode(response.body);
+        final data = jsonDecode(response.body);
+        print('✅ Parsed response: $data');
 
         Get.snackbar(
           'Success',
@@ -159,51 +124,33 @@ class SignUpController extends GetxController {
           colorText: Colors.white,
         );
 
-        // Navigate to KYC verification
         Get.to(() => KYCVerificationScreen());
       } else {
-        // Error from server
-        final errorData = json.decode(response.body);
-        String errorMessage = 'Registration failed';
-
-        // Try to extract error message from response
-        if (errorData is Map) {
-          if (errorData.containsKey('message')) {
-            errorMessage = errorData['message'];
-          } else if (errorData.containsKey('error')) {
-            errorMessage = errorData['error'];
-          } else {
-            // If there are field-specific errors
-            errorMessage = errorData.values.first.toString();
-          }
-        }
+        final error = jsonDecode(response.body);
+        print('❌ Error response: $error');
 
         Get.snackbar(
-          'Error',
-          errorMessage,
+          'Error ${response.statusCode}',
+          error['message'] ?? 'Something went wrong',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red.withOpacity(0.7),
           colorText: Colors.white,
-          duration: const Duration(seconds: 4),
         );
       }
     } catch (e) {
-      // Network or other errors
+      print('🚨 Exception: $e');
       Get.snackbar(
         'Error',
-        'Connection failed. Please check your internet connection.',
+        'Failed to connect to server: $e',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.red.withOpacity(0.7),
         colorText: Colors.white,
       );
-      print('Sign up error: $e');
-    } finally {
-      isLoading.value = false;
+      hideLoading();
     }
   }
 
   void signUpWithGoogle() {
-    // TODO: Implement Google sign up
     Get.snackbar(
       'Google Sign Up',
       'Google sign up not implemented yet',
@@ -212,7 +159,6 @@ class SignUpController extends GetxController {
   }
 
   void signUpWithFacebook() {
-    // TODO: Implement Facebook sign up
     Get.snackbar(
       'Facebook Sign Up',
       'Facebook sign up not implemented yet',
@@ -248,6 +194,7 @@ class SignUpController extends GetxController {
     if (value == null || value.isEmpty) {
       return 'Email is required';
     }
+    // Simple email validation
     if (!GetUtils.isEmail(value)) {
       return 'Please enter a valid email';
     }
@@ -285,6 +232,7 @@ class SignUpController extends GetxController {
   }
 
   String? validateReference(String? value) {
+    // Reference is optional, so we can return null
     return null;
   }
 
