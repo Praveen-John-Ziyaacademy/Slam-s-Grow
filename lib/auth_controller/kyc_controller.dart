@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'package:social_media/auth_screen/id_verification.dart';
 
 class KYCController extends GetxController {
   final fullNameController = TextEditingController();
@@ -394,6 +393,7 @@ class KYCController extends GetxController {
       backgroundColor: Colors.red.withOpacity(0.7),
       colorText: Colors.white,
       duration: const Duration(seconds: 2),
+      margin: const EdgeInsets.all(16),
     );
   }
 
@@ -405,6 +405,7 @@ class KYCController extends GetxController {
       backgroundColor: Colors.green.withOpacity(0.7),
       colorText: Colors.white,
       duration: const Duration(seconds: 2),
+      margin: const EdgeInsets.all(16),
     );
   }
 
@@ -415,30 +416,31 @@ class KYCController extends GetxController {
         return;
       }
 
+      // Change step with animation (no navigation)
       currentStep.value = 2;
       _showSuccess('Personal information saved successfully');
-
-      // Navigate to ID verification screen
-      Get.to(() => const IDVerificationScreen());
     } else if (currentStep.value == 2) {
       // Validate documents
       if (!validateStep2()) {
         return;
       }
 
+      // Move to review step
       currentStep.value = 3;
       _showSuccess('Documents uploaded successfully');
-
-      // Navigate to Review & Submit screen
-      // Get.to(() => const ReviewSubmitScreen());
+    } else if (currentStep.value == 3) {
+      // Submit KYC
+      _showSuccess('KYC submitted successfully');
+      // Add your submission logic here
     }
   }
 
   void goBack() {
     if (currentStep.value > 1) {
+      // Go to previous step with animation
       currentStep.value--;
-      Get.back();
     } else {
+      // Exit the KYC screen
       Get.back();
     }
   }

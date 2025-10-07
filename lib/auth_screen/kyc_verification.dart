@@ -1,6 +1,9 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:social_media/auth_controller/kyc_controller.dart';
+import 'package:social_media/colors/colors.dart';
 
 class KYCVerificationScreen extends StatelessWidget {
   const KYCVerificationScreen({Key? key}) : super(key: key);
@@ -82,245 +85,705 @@ class KYCVerificationScreen extends StatelessWidget {
                 ],
               ),
             ),
+
+            // Animated content section
             Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 18),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Personal Information',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
-                            ),
+              child: Obx(
+                () => AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 400),
+                  transitionBuilder:
+                      (Widget child, Animation<double> animation) {
+                        final offsetAnimation =
+                            Tween<Offset>(
+                              begin: const Offset(1.0, 0.0),
+                              end: Offset.zero,
+                            ).animate(
+                              CurvedAnimation(
+                                parent: animation,
+                                curve: Curves.easeInOut,
+                              ),
+                            );
+
+                        return SlideTransition(
+                          position: offsetAnimation,
+                          child: FadeTransition(
+                            opacity: animation,
+                            child: child,
                           ),
-                          const SizedBox(height: 20),
-                          _buildTextField(
-                            'Full Name',
-                            controller.fullNameController,
-                            'Enter your full name',
-                          ),
-                          const SizedBox(height: 18),
-                          _buildDropdownField(
-                            'Nationality',
-                            controller.selectedNationality,
-                            controller.nationalityOptions,
-                            controller.changeNationality,
-                          ),
-                          const SizedBox(height: 18),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: _buildDropdownField(
-                                  'Gender',
-                                  controller.selectedGender,
-                                  controller.genderOptions,
-                                  controller.changeGender,
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: _buildDropdownField(
-                                  'Marital Status',
-                                  controller.selectedMaritalStatus,
-                                  controller.maritalStatusOptions,
-                                  controller.changeMaritalStatus,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 18),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: _buildDropdownField(
-                                  'Blood Group',
-                                  controller.selectedBloodGroup,
-                                  controller.bloodGroupOptions,
-                                  controller.changeBloodGroup,
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: _buildDateField(
-                                  'Date of Birth',
-                                  controller.dateOfBirthController,
-                                  () => controller.pickDateOfBirth(context),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 18),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: _buildDropdownField(
-                                  'State',
-                                  controller.selectedState,
-                                  controller.stateOptions,
-                                  controller.changeState,
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: _buildDropdownField(
-                                  'City',
-                                  controller.selectedCity,
-                                  controller.cityOptions,
-                                  controller.changeCity,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 18),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: _buildDropdownField(
-                                  'District',
-                                  controller.selectedDistrict,
-                                  controller.districtOptions,
-                                  controller.changeDistrict,
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: _buildDropdownField(
-                                  'Pin code',
-                                  controller.selectedPincode,
-                                  controller.pincodeOptions,
-                                  controller.changePincode,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 20),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: _buildTextField(
-                                  'Mobile Number',
-                                  controller.mobileNumberController,
-                                  'Enter mobile number',
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: _buildTextField(
-                                  'Another Mobile Number',
-                                  controller.alternateMobileController,
-                                  'Enter alternate number',
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 24),
-                          const Text(
-                            'Professional Details',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: _buildDropdownField(
-                                  'Job Role',
-                                  controller.selectedJobRole,
-                                  controller.jobRoleOptions,
-                                  controller.changeJobRole,
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: _buildDropdownField(
-                                  'User Type',
-                                  controller.selectedUserType,
-                                  controller.userTypeOptions,
-                                  controller.changeUserType,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 24),
-                          const Text(
-                            'Account Details',
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          _buildTextField(
-                            'Full Name',
-                            controller.accountNameController,
-                            'Enter account holder name',
-                          ),
-                          const SizedBox(height: 18),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: _buildTextField(
-                                  'Account Number',
-                                  controller.accountNumberController,
-                                  'Enter account number',
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: _buildTextField(
-                                  'IFSC Code',
-                                  controller.ifscCodeController,
-                                  'Enter IFSC code',
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 24),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 50,
-                            child: ElevatedButton(
-                              onPressed: controller.goToNextStep,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFF00BCD4),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                elevation: 0,
-                              ),
-                              child: const Text(
-                                'Next',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                        ],
-                      ),
-                    ),
-                  ],
+                        );
+                      },
+                  child: _buildStepContent(controller),
                 ),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildStepContent(KYCController controller) {
+    switch (controller.currentStep.value) {
+      case 1:
+        return _buildPersonalInfoStep(controller);
+      case 2:
+        return _buildIDVerificationStep(controller);
+      case 3:
+        return _buildReviewSubmitStep(controller);
+      default:
+        return _buildPersonalInfoStep(controller);
+    }
+  }
+
+  // Step 1: Personal Information
+  Widget _buildPersonalInfoStep(KYCController controller) {
+    return SingleChildScrollView(
+      key: const ValueKey(1),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 18),
+          const Text(
+            'Personal Information',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(height: 20),
+          _buildTextField(
+            'Full Name',
+            controller.fullNameController,
+            'Enter your full name',
+          ),
+          const SizedBox(height: 18),
+          _buildDropdownField(
+            'Nationality',
+            controller.selectedNationality,
+            controller.nationalityOptions,
+            controller.changeNationality,
+          ),
+          const SizedBox(height: 18),
+          Row(
+            children: [
+              Expanded(
+                child: _buildDropdownField(
+                  'Gender',
+                  controller.selectedGender,
+                  controller.genderOptions,
+                  controller.changeGender,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: _buildDropdownField(
+                  'Marital Status',
+                  controller.selectedMaritalStatus,
+                  controller.maritalStatusOptions,
+                  controller.changeMaritalStatus,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 18),
+          Row(
+            children: [
+              Expanded(
+                child: _buildDropdownField(
+                  'Blood Group',
+                  controller.selectedBloodGroup,
+                  controller.bloodGroupOptions,
+                  controller.changeBloodGroup,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: _buildDateField(
+                  'Date of Birth',
+                  controller.dateOfBirthController,
+                  () => controller.pickDateOfBirth(Get.context!),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 18),
+          Row(
+            children: [
+              Expanded(
+                child: _buildDropdownField(
+                  'State',
+                  controller.selectedState,
+                  controller.stateOptions,
+                  controller.changeState,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: _buildDropdownField(
+                  'City',
+                  controller.selectedCity,
+                  controller.cityOptions,
+                  controller.changeCity,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 18),
+          Row(
+            children: [
+              Expanded(
+                child: _buildDropdownField(
+                  'District',
+                  controller.selectedDistrict,
+                  controller.districtOptions,
+                  controller.changeDistrict,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: _buildDropdownField(
+                  'Pin code',
+                  controller.selectedPincode,
+                  controller.pincodeOptions,
+                  controller.changePincode,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              Expanded(
+                child: _buildTextField(
+                  'Mobile Number',
+                  controller.mobileNumberController,
+                  'Enter mobile number',
+                  width: 150, // narrower
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: _buildTextField(
+                  'Another Mobile Number',
+                  controller.alternateMobileController,
+                  'Enter alternate number',
+                  width: 150, // narrower
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 24),
+          const Text(
+            'Professional Details',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              Expanded(
+                child: _buildDropdownField(
+                  'Job Role',
+                  controller.selectedJobRole,
+                  controller.jobRoleOptions,
+                  controller.changeJobRole,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: _buildDropdownField(
+                  'User Type',
+                  controller.selectedUserType,
+                  controller.userTypeOptions,
+                  controller.changeUserType,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          const Text(
+            'Account Details',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(height: 20),
+          _buildTextField(
+            'Full Name',
+            controller.accountNameController,
+            'Enter account holder name',
+          ),
+          const SizedBox(height: 18),
+          Row(
+            children: [
+              Expanded(
+                child: _buildTextField(
+                  'Account Number',
+                  controller.accountNumberController,
+                  'Enter account number',
+                  width: 150,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: _buildTextField(
+                  'IFSC Code',
+                  controller.ifscCodeController,
+                  'Enter IFSC code',
+                  width: 150,
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 24),
+          Center(
+            child: SizedBox(
+              width: 304,
+              height: 30,
+              child: ElevatedButton(
+                onPressed: controller.goToNextStep,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  elevation: 0,
+                ),
+                child: const Text(
+                  'Next',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+        ],
+      ),
+    );
+  }
+
+  // Step 2: ID Verification
+  Widget _buildIDVerificationStep(KYCController controller) {
+    return SingleChildScrollView(
+      key: const ValueKey(2),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 18),
+          const Text(
+            'Upload Documents',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(height: 20),
+          _buildDocumentUpload(
+            'Aadhar Card',
+            'assets/aadhar card.svg',
+            controller.aadharFront,
+            controller.aadharBack,
+            () => controller.pickDocument('aadhar_front'),
+            () => controller.pickDocument('aadhar_back'),
+          ),
+          const SizedBox(height: 20),
+          _buildDocumentUpload(
+            'Pan Card',
+            'assets/pan card.svg',
+            controller.panFront,
+            controller.panBack,
+            () => controller.pickDocument('pan_front'),
+            () => controller.pickDocument('pan_back'),
+          ),
+          const SizedBox(height: 20),
+          _buildDocumentUpload(
+            'Pass Book',
+            'assets/pass book.svg',
+            controller.passbookFront,
+            controller.passbookBack,
+            () => controller.pickDocument('passbook_front'),
+            () => controller.pickDocument('passbook_back'),
+          ),
+
+          const SizedBox(height: 20),
+          _buildSelfieUpload(
+            'Selfie',
+            controller.selfieImage,
+            () => controller.pickDocument('selfie'),
+          ),
+          const SizedBox(height: 30),
+          Center(
+            child: SizedBox(
+              width: 304,
+              height: 30,
+              child: ElevatedButton(
+                onPressed: controller.goToNextStep,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF2196F3),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  elevation: 0,
+                ),
+                child: const Text(
+                  'Next',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildReviewSubmitStep(KYCController controller) {
+    return SingleChildScrollView(
+      key: const ValueKey(3),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 18),
+          const Text(
+            'Personal Information',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(height: 16),
+
+          // Personal Information Card
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                _buildReviewRow(
+                  'Full Name :',
+                  controller.fullNameController.text,
+                ),
+                const SizedBox(height: 12),
+                _buildReviewRow(
+                  'Date of Birth :',
+                  controller.dateOfBirthController.text,
+                ),
+                const SizedBox(height: 12),
+                _buildReviewRow('Gender :', controller.selectedGender.value),
+                const SizedBox(height: 12),
+                _buildReviewRow(
+                  'Blood Group :',
+                  controller.selectedBloodGroup.value,
+                ),
+                const SizedBox(height: 12),
+                _buildReviewRow(
+                  'Marital Status :',
+                  controller.selectedMaritalStatus.value,
+                ),
+                const SizedBox(height: 12),
+                _buildReviewRow(
+                  'Nationality :',
+                  controller.selectedNationality.value,
+                ),
+                const SizedBox(height: 12),
+                _buildReviewRow('State :', controller.selectedState.value),
+                const SizedBox(height: 12),
+                _buildReviewRow(
+                  'District :',
+                  controller.selectedDistrict.value,
+                ),
+                const SizedBox(height: 12),
+                _buildReviewRow('City :', controller.selectedCity.value),
+                const SizedBox(height: 12),
+                _buildReviewRow('Pin code :', controller.selectedPincode.value),
+                const SizedBox(height: 12),
+                _buildReviewRow(
+                  'Mobile Number :',
+                  controller.mobileNumberController.text,
+                ),
+                if (controller.alternateMobileController.text.isNotEmpty) ...[
+                  const SizedBox(height: 12),
+                  _buildReviewRow(
+                    'Another Mobile Number :',
+                    controller.alternateMobileController.text,
+                  ),
+                ],
+                const SizedBox(height: 12),
+                _buildReviewRow('Job Role :', controller.selectedJobRole.value),
+                const SizedBox(height: 12),
+                _buildReviewRow(
+                  'User Type :',
+                  controller.selectedUserType.value,
+                ),
+                const SizedBox(height: 12),
+                _buildReviewRow(
+                  'Account Holder\'s Name :',
+                  controller.accountNameController.text,
+                ),
+                const SizedBox(height: 12),
+                _buildReviewRow(
+                  'Account Number :',
+                  controller.accountNumberController.text,
+                ),
+                const SizedBox(height: 12),
+                _buildReviewRow(
+                  'IFSC Code :',
+                  controller.ifscCodeController.text,
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 24),
+          const Text(
+            'Uploaded Documents',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+            ),
+          ),
+          const SizedBox(height: 16),
+
+          // Documents Grid
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: _buildDocumentPreview(
+                  'Aadhar Card',
+                  controller.aadharFront.value,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _buildDocumentPreview(
+                  'Pan Card',
+                  controller.panFront.value,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: _buildDocumentPreview(
+                  'Pass Book',
+                  controller.passbookFront.value,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _buildDocumentPreview(
+                  'Selfie',
+                  controller.selfieImage.value,
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 24),
+
+          // Checkboxes
+          Obx(
+            () => Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: Checkbox(
+                    value: controller.isChecked.value,
+                    onChanged: controller.toggleCheckbox,
+                    activeColor: AppColors.primary,
+                    side: BorderSide(color: Colors.grey[400]!, width: 1.5),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                const Expanded(
+                  child: Text(
+                    'I confirm my information is correct',
+                    style: TextStyle(fontSize: 12, color: Colors.black87),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 20,
+                width: 20,
+                child: Checkbox(
+                  value: true,
+                  onChanged: (value) {},
+                  activeColor: AppColors.primary,
+                  side: BorderSide(color: Colors.grey[400]!, width: 1.5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              const Expanded(
+                child: Text(
+                  'I agree to T&C and Privacy Policy',
+                  style: TextStyle(fontSize: 12, color: Colors.black87),
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 24),
+          Center(
+            child: SizedBox(
+              width: 304,
+              height: 30,
+              child: ElevatedButton(
+                onPressed: controller.goToNextStep,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  elevation: 0,
+                ),
+                child: const Text(
+                  'Submit',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildReviewRow(String label, String value) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 12,
+            color: Colors.black54,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Text(
+            value,
+            textAlign: TextAlign.right,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Colors.black87,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDocumentPreview(String title, File? image) {
+    return Container(
+      height: 100,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(8),
+              ),
+              child: image != null
+                  ? Image.file(image, fit: BoxFit.cover, width: double.infinity)
+                  : Container(
+                      color: Colors.grey[200],
+                      child: const Center(
+                        child: Icon(Icons.image, color: Colors.grey, size: 32),
+                      ),
+                    ),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 6),
+            decoration: BoxDecoration(
+              color: Colors.grey[100],
+              borderRadius: const BorderRadius.vertical(
+                bottom: Radius.circular(8),
+              ),
+            ),
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 11,
+                color: Colors.black87,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -364,7 +827,6 @@ class KYCVerificationScreen extends StatelessWidget {
                   ),
                 ],
               ),
-
               _buildCircle(number, isActive, isCompleted),
             ],
           ),
@@ -413,8 +875,9 @@ class KYCVerificationScreen extends StatelessWidget {
   Widget _buildTextField(
     String label,
     TextEditingController controller,
-    String hint,
-  ) {
+    String hint, {
+    double width = 335,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -428,7 +891,8 @@ class KYCVerificationScreen extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Container(
-          height: 48,
+          height: 30,
+          width: width,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(6),
@@ -436,15 +900,13 @@ class KYCVerificationScreen extends StatelessWidget {
           ),
           child: TextField(
             controller: controller,
-            style: const TextStyle(fontSize: 14),
+            style: const TextStyle(fontSize: 12),
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 14,
-                vertical: 14,
-              ),
+              isDense: true,
               hintText: hint,
-              hintStyle: TextStyle(color: Colors.grey[600], fontSize: 14),
+              hintStyle: TextStyle(color: Colors.grey[600], fontSize: 10),
+              contentPadding: const EdgeInsets.only(left: 8, top: 5),
             ),
           ),
         ),
@@ -458,6 +920,8 @@ class KYCVerificationScreen extends StatelessWidget {
     List<String> options,
     Function(String?) onChanged,
   ) {
+    double fieldWidth = label == "Nationality" ? 335 : 150;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -472,7 +936,8 @@ class KYCVerificationScreen extends StatelessWidget {
         const SizedBox(height: 8),
         Obx(
           () => Container(
-            height: 48,
+            height: 30,
+            width: fieldWidth,
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: Colors.grey[300]!, width: 1),
@@ -497,7 +962,7 @@ class KYCVerificationScreen extends StatelessWidget {
                         color: value == options.first
                             ? Colors.grey[600]
                             : Colors.black,
-                        fontSize: 14,
+                        fontSize: 12,
                       ),
                     ),
                   );
@@ -531,7 +996,8 @@ class KYCVerificationScreen extends StatelessWidget {
         GestureDetector(
           onTap: onTap,
           child: Container(
-            height: 48,
+            height: 30,
+            width: 150,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(6),
@@ -540,25 +1006,218 @@ class KYCVerificationScreen extends StatelessWidget {
             child: TextField(
               controller: controller,
               enabled: false,
-              style: const TextStyle(fontSize: 14, color: Colors.black),
+              style: const TextStyle(fontSize: 12, color: Colors.black),
               decoration: InputDecoration(
                 border: InputBorder.none,
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 14,
-                  vertical: 14,
-                ),
+
                 hintText: 'DD/MM/YYYY',
-                hintStyle: TextStyle(color: Colors.grey[600], fontSize: 14),
+                hintStyle: TextStyle(color: Colors.grey[600], fontSize: 10),
+                contentPadding: const EdgeInsets.only(left: 8, top: 5),
                 suffixIcon: const Icon(
                   Icons.calendar_today,
                   size: 18,
                   color: Colors.grey,
                 ),
+                isDense: true,
               ),
             ),
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildDocumentUpload(
+    String title,
+    String svgPath,
+    Rx<File?> frontImage,
+    Rx<File?> backImage,
+    VoidCallback onFrontTap,
+    VoidCallback onBackTap,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Obx(
+          () => GestureDetector(
+            onTap: onFrontTap,
+            child: Center(
+              child: Container(
+                height: 120,
+                width: 319,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: frontImage.value == null
+                    ? Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              title,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black87,
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    svgPath,
+                                    height: 65,
+                                    width: 85,
+                                    fit: BoxFit.contain,
+                                  ),
+                                  const SizedBox(width: 20),
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Click or Drag & Drop to upload',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.grey[700],
+                                          ),
+                                        ),
+                                        const SizedBox(height: 2),
+                                        Text(
+                                          'PNG, JPG • Max X MB',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.grey[700],
+                                          ),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        const Text(
+                                          '(Front & Back)',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 11,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          frontImage.value!,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                        ),
+                      ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSelfieUpload(
+    String title,
+    Rx<File?> selfieImage,
+    VoidCallback onTap,
+  ) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Center(
+        child: Container(
+          height: 120,
+          width: 319,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                blurRadius: 4,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Obx(
+            () => selfieImage.value == null
+                ? Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(
+                                'assets/selfie.svg',
+                                height: 70,
+                                width: 70,
+                                fit: BoxFit.contain,
+                              ),
+                              const SizedBox(width: 20),
+                              Expanded(
+                                child: Center(
+                                  child: Text(
+                                    'Spot Selfie',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.grey[700],
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.file(
+                      selfieImage.value!,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    ),
+                  ),
+          ),
+        ),
+      ),
     );
   }
 }
