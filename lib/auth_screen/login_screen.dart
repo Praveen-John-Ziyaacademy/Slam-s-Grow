@@ -251,57 +251,81 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-
-                              const SizedBox(height: 16),
-
-                              // Remember Me + Forgot Password
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Obx(
-                                    () => Row(
-                                      children: [
-                                        Checkbox(
-                                          value: controller.rememberMe.value,
-                                          onChanged:
-                                              controller.toggleRememberMe,
-                                          fillColor: MaterialStateProperty.all(
-                                            Colors.white.withOpacity(0.3),
-                                          ),
-                                          checkColor: Colors.white,
-                                          side: BorderSide(
-                                            color: Colors.white.withOpacity(
-                                              0.5,
+                              const SizedBox(height: 6),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 10,
+                                  right: 10,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Obx(
+                                      () => Row(
+                                        children: [
+                                          const Text(
+                                            'Remember me',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10,
                                             ),
                                           ),
-                                        ),
-                                        const Text(
-                                          'Remember me',
+                                          Transform.scale(
+                                            scale: 0.7,
+                                            child: Checkbox(
+                                              value:
+                                                  controller.rememberMe.value,
+                                              onChanged:
+                                                  controller.toggleRememberMe,
+                                              fillColor:
+                                                  MaterialStateProperty.all(
+                                                    Colors.white.withOpacity(
+                                                      0.3,
+                                                    ),
+                                                  ),
+                                              checkColor: Colors.white,
+                                              side: BorderSide(
+                                                color: Colors.white.withOpacity(
+                                                  0.5,
+                                                ),
+                                              ),
+                                              materialTapTargetSize:
+                                                  MaterialTapTargetSize
+                                                      .shrinkWrap,
+                                              visualDensity: VisualDensity(
+                                                horizontal: -4,
+                                                vertical: -4,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          'Forgot password?',
                                           style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 12,
+                                            fontSize: 10,
                                           ),
+                                        ),
+                                        SizedBox(height: 1),
+                                        Container(
+                                          height: 1,
+                                          color: Colors.white,
+                                          width: 85,
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  TextButton(
-                                    onPressed: controller.forgotPassword,
-                                    child: const Text(
-                                      'Forgot password?',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
 
                               const SizedBox(height: 24),
 
-                              // Glass Login Button
                               GestureDetector(
                                 onTap: controller.login,
                                 child: Padding(

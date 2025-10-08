@@ -68,23 +68,24 @@ class _OnboardingScreenState extends State<OnboardingScreen>
       body: SafeArea(
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: TextButton(
-                  onPressed: () => _navigateToLogin(),
-                  child: Text(
-                    'Skip>>',
-                    style: TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+            if (_currentIndex != onboardingData.length - 1)
+              Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: EdgeInsets.all(20),
+                  child: TextButton(
+                    onPressed: () => _navigateToLogin(),
+                    child: Text(
+                      'Skip>>',
+                      style: TextStyle(
+                        color: AppColors.primary,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
 
             Expanded(
               child: PageView.builder(

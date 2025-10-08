@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:social_media/auth_screen/forgot_password.dart';
-import 'package:social_media/auth_screen/kyc_verification.dart';
+
+import 'package:social_media/auth_screen/login_otp_verification.dart';
 import 'package:social_media/auth_screen/sign_up_screen.dart';
 import 'package:social_media/components/loading.dart';
 
@@ -52,7 +53,7 @@ class LoginController extends GetxController {
 
     hideLoading();
 
-    Get.to(() => KYCVerificationScreen());
+    Get.to(() => LoginOtpVerification());
 
     Get.snackbar(
       'Login',
