@@ -102,72 +102,73 @@ class LoginController extends GetxController {
   }
 
   void login() async {
-    String email = emailController.text.trim();
-    String password = passwordController.text.trim();
+    // String email = emailController.text.trim();
+    // String password = passwordController.text.trim();
 
-    if (email.isEmpty || password.isEmpty) {
-      Get.snackbar(
-        'Error',
-        'Please enter email and password',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.7),
-        colorText: Colors.white,
-      );
-      return;
-    }
+    // if (email.isEmpty || password.isEmpty) {
+    //   Get.snackbar(
+    //     'Error',
+    //     'Please enter email and password',
+    //     snackPosition: SnackPosition.BOTTOM,
+    //     backgroundColor: Colors.red.withOpacity(0.7),
+    //     colorText: Colors.white,
+    //   );
+    //   return;
+    // }
 
-    if (!GetUtils.isEmail(email)) {
-      Get.snackbar(
-        'Error',
-        'Please enter a valid email address',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.7),
-        colorText: Colors.white,
-      );
-      return;
-    }
+    // if (!GetUtils.isEmail(email)) {
+    //   Get.snackbar(
+    //     'Error',
+    //     'Please enter a valid email address',
+    //     snackPosition: SnackPosition.BOTTOM,
+    //     backgroundColor: Colors.red.withOpacity(0.7),
+    //     colorText: Colors.white,
+    //   );
+    //   return;
+    // }
 
-    showLoading();
+    // showLoading();
 
-    try {
-      final result = await ApiService.login(email: email, password: password);
+    // try {
+    //   final result = await ApiService.login(email: email, password: password);
 
-      hideLoading();
+    //   hideLoading();
 
-      if (result['success']) {
-        _saveCredentials();
+    //   if (result['success']) {
+    //     _saveCredentials();
 
-        _saveUserSession(result['data']);
+    //     _saveUserSession(result['data']);
 
-        Get.snackbar(
-          'Success',
-          'Login successful!',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green.withOpacity(0.7),
-          colorText: Colors.white,
-        );
+    //     Get.snackbar(
+    //       'Success',
+    //       'Login successful!',
+    //       snackPosition: SnackPosition.BOTTOM,
+    //       backgroundColor: Colors.green.withOpacity(0.7),
+    //       colorText: Colors.white,
+    //     );
 
-        Get.offAll(() => HomePage());
-      } else {
-        Get.snackbar(
-          'Login Failed',
-          result['message'] ?? 'Invalid credentials',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red.withOpacity(0.7),
-          colorText: Colors.white,
-          duration: const Duration(seconds: 3),
-        );
-      }
-    } catch (e) {
-      hideLoading();
-      Get.snackbar(
-        'Error',
-        'An unexpected error occurred: ${e.toString()}',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.7),
-        colorText: Colors.white,
-      );
-    }
+    //     Get.offAll(() => HomePage());
+    //   } else {
+    //     Get.snackbar(
+    //       'Login Failed',
+    //       result['message'] ?? 'Invalid credentials',
+    //       snackPosition: SnackPosition.BOTTOM,
+    //       backgroundColor: Colors.red.withOpacity(0.7),
+    //       colorText: Colors.white,
+    //       duration: const Duration(seconds: 3),
+    //     );
+    //   }
+    // } catch (e) {
+    //   hideLoading();
+    //   Get.snackbar(
+    //     'Error',
+    //     'An unexpected error occurred: ${e.toString()}',
+    //     snackPosition: SnackPosition.BOTTOM,
+    //     backgroundColor: Colors.red.withOpacity(0.7),
+    //     colorText: Colors.white,
+    //   );
+    // }
+    Get.to(() => HomePage());
   }
 
   void navigateToSignUp() {

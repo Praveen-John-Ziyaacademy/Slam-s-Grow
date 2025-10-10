@@ -3,78 +3,35 @@ import 'package:get/get.dart';
 import 'package:social_media/colors/fonts.dart';
 import 'package:social_media/controller/home_screen_controller.dart';
 import 'package:social_media/models/home_screen_models.dart';
+import 'package:social_media/screens/home/profile_screen.dart';
+import 'package:social_media/screens/home/referral_screen.dart';
+import 'package:social_media/screens/home/task_screen.dart';
+import 'package:social_media/screens/home/wallet_screen.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
   final HomeController controller = Get.put(HomeController());
-  final RxInt selectedIndex = 0.obs;
 
+  final List<Widget> _pages = [
+    HomeTabContent(),
+    TaskPage(),
+    ReferralPage(),
+    WalletPage(),
+    ProfilePage(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[50],
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                _buidTopContainor(),
-                Positioned(
-                  top: 264,
-                  left: 0,
-                  right: 0,
-                  child: _buildStatsCards(),
-                ),
-              ],
-            ),
-            const SizedBox(height: 120),
-            _buildManageNow(),
-            const SizedBox(height: 20),
-            _buildPlans(),
-            const SizedBox(height: 20),
-            _buildTodaysTasks(),
-            const SizedBox(height: 20),
-            _buildRecentActivity(),
-            const SizedBox(height: 40),
-          ],
-        ),
-      ),
+      body: Obx(() => _pages[controller.selectedIndex.value]),
       bottomNavigationBar: Obx(
         () => Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 10,
-                offset: const Offset(0, -2),
-              ),
-            ],
-          ),
+          decoration: BoxDecoration(color: Colors.white),
           child: BottomNavigationBar(
-            currentIndex: selectedIndex.value,
+            currentIndex: controller.selectedIndex.value,
             onTap: (index) {
-              selectedIndex.value = index;
-
-              switch (index) {
-                case 0:
-                  break;
-                case 1:
-                  Get.snackbar('Task', 'Opening Task page');
-                  break;
-                case 2:
-                  Get.snackbar('Referral', 'Opening Referral page');
-                  break;
-                case 3:
-                  Get.snackbar('Wallet', 'Opening Wallet page');
-                  break;
-                case 4:
-                  Get.snackbar('Profile', 'Opening Profile page');
-                  break;
-              }
+              controller.selectedIndex.value = index;
             },
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.white,
@@ -112,6 +69,43 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+// Home Tab Content (your existing home page content)
+class HomeTabContent extends StatelessWidget {
+  final HomeController controller = Get.find<HomeController>();
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              _buidTopContainor(),
+              Positioned(
+                top: 264,
+                left: 0,
+                right: 0,
+                child: _buildStatsCards(),
+              ),
+            ],
+          ),
+          const SizedBox(height: 120),
+          _buildManageNow(),
+          const SizedBox(height: 20),
+          _buildPlans(),
+          const SizedBox(height: 20),
+          _buildTodaysTasks(),
+          const SizedBox(height: 20),
+          _buildRecentActivity(),
+          const SizedBox(height: 40),
+        ],
       ),
     );
   }

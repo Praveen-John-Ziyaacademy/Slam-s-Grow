@@ -10,6 +10,7 @@ class HomeController extends GetxController {
   var rank = 4.obs;
   var daysStreak = 8.obs;
   var notificationCount = 1.obs;
+  final RxInt selectedIndex = 0.obs;
 
   var tasks = <Task>[].obs;
 
