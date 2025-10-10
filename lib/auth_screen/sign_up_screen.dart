@@ -70,25 +70,21 @@ class SignUpScreen extends StatelessWidget {
               const SizedBox(height: 24),
 
               /// Divider
-              Row(
-                children: [
-                  Expanded(
-                    child: Divider(color: Colors.white.withOpacity(0.3)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Text(
-                      "Or",
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.7),
-                        fontSize: 14,
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: Row(
+                  children: [
+                    Expanded(child: Divider(color: Colors.black)),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Text(
+                        "Or",
+                        style: TextStyle(color: Colors.black, fontSize: 14),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: Divider(color: Colors.white.withOpacity(0.3)),
-                  ),
-                ],
+                    Expanded(child: Divider(color: Colors.black)),
+                  ],
+                ),
               ),
               const SizedBox(height: 24),
 
@@ -182,7 +178,6 @@ class SignUpScreen extends StatelessWidget {
 
                     const SizedBox(height: 32),
 
-                    /// Sign Up Button
                     GestureDetector(
                       onTap: controller.signUp,
                       child: Padding(

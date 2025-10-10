@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:social_media/auth_screen/forgot_password.dart';
-
-import 'package:social_media/auth_screen/login_otp_verification.dart';
 import 'package:social_media/auth_screen/sign_up_screen.dart';
 import 'package:social_media/components/loading.dart';
+import 'package:social_media/screens/home/home_screen.dart';
 
 class LoginController extends GetxController {
   final rememberMe = true.obs;
@@ -53,7 +52,7 @@ class LoginController extends GetxController {
 
     hideLoading();
 
-    Get.to(() => LoginOtpVerification());
+    Get.to(() => HomePage());
 
     Get.snackbar(
       'Login',

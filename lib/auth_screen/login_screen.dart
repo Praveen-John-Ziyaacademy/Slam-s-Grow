@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:social_media/components/glass_button.dart';
-
 import 'package:social_media/auth_controller/login_controller.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -105,31 +104,22 @@ class LoginScreen extends StatelessWidget {
 
                               const SizedBox(height: 24),
 
-                              // Divider
                               Row(
                                 children: [
-                                  Expanded(
-                                    child: Divider(
-                                      color: Colors.white.withOpacity(0.3),
-                                    ),
-                                  ),
+                                  Expanded(child: Divider(color: Colors.black)),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
-                                      horizontal: 16,
+                                      horizontal: 12,
                                     ),
                                     child: Text(
                                       'Or',
                                       style: TextStyle(
-                                        color: Colors.white.withOpacity(0.7),
+                                        color: Colors.black,
                                         fontSize: 14,
                                       ),
                                     ),
                                   ),
-                                  Expanded(
-                                    child: Divider(
-                                      color: Colors.white.withOpacity(0.3),
-                                    ),
-                                  ),
+                                  Expanded(child: Divider(color: Colors.black)),
                                 ],
                               ),
 
@@ -204,7 +194,7 @@ class LoginScreen extends StatelessWidget {
                                       color: Colors.white,
                                       fontSize: 10,
                                     ),
-
+                                    keyboardType: TextInputType.streetAddress,
                                     decoration: InputDecoration(
                                       filled: false,
                                       fillColor: Colors.transparent,
@@ -302,23 +292,29 @@ class LoginScreen extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          'Forgot password?',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 10,
-                                          ),
+                                    GestureDetector(
+                                      onTap: controller.forgotPassword,
+                                      child: Container(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              'Forgot password?',
+
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 10,
+                                              ),
+                                            ),
+                                            SizedBox(height: 1),
+                                            Container(
+                                              height: 1,
+                                              color: Colors.white,
+                                              width: 85,
+                                            ),
+                                          ],
                                         ),
-                                        SizedBox(height: 1),
-                                        Container(
-                                          height: 1,
-                                          color: Colors.white,
-                                          width: 85,
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ],
                                 ),
