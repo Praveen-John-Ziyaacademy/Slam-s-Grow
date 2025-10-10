@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:social_media/auth_controller/new_password_controller.dart';
+import 'package:social_media/colors/fonts.dart';
 
 class NewPasswordScreen extends StatelessWidget {
   NewPasswordScreen({Key? key}) : super(key: key);
@@ -30,10 +31,10 @@ class NewPasswordScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 // Title
-                const Center(
+                Center(
                   child: Text(
                     'New Password',
-                    style: TextStyle(
+                    style: AppFonts.primaryFont(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -47,9 +48,12 @@ class NewPasswordScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Enter New Password',
-                        style: TextStyle(fontSize: 14, color: Colors.black87),
+                        style: AppFonts.primaryFont(
+                          fontSize: 14,
+                          color: Colors.black87,
+                        ),
                       ),
                       const SizedBox(height: 8),
                       Obx(
@@ -63,13 +67,13 @@ class NewPasswordScreen extends StatelessWidget {
                           child: TextField(
                             controller: controller.newPasswordController,
                             obscureText: !controller.isNewPasswordVisible.value,
-                            style: const TextStyle(
+                            style: AppFonts.primaryFont(
                               color: Colors.black,
                               fontSize: 10,
                             ),
                             decoration: InputDecoration(
                               hintText: 'At least 8 characters',
-                              hintStyle: TextStyle(
+                              hintStyle: AppFonts.primaryFont(
                                 color: Colors.grey[400],
                                 fontSize: 10,
                               ),
@@ -102,9 +106,12 @@ class NewPasswordScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      const Text(
+                      Text(
                         'Confirm Password',
-                        style: TextStyle(fontSize: 14, color: Colors.black87),
+                        style: AppFonts.primaryFont(
+                          fontSize: 14,
+                          color: Colors.black87,
+                        ),
                       ),
                       const SizedBox(height: 8),
                       Obx(
@@ -119,13 +126,13 @@ class NewPasswordScreen extends StatelessWidget {
                             controller: controller.confirmPasswordController,
                             obscureText:
                                 !controller.isConfirmPasswordVisible.value,
-                            style: const TextStyle(
+                            style: AppFonts.primaryFont(
                               color: Colors.black,
                               fontSize: 10,
                             ),
                             decoration: InputDecoration(
                               hintText: '••••••••',
-                              hintStyle: TextStyle(
+                              hintStyle: AppFonts.primaryFont(
                                 color: Colors.grey[400],
                                 fontSize: 10,
                               ),
@@ -189,9 +196,9 @@ class NewPasswordScreen extends StatelessWidget {
                                   strokeWidth: 2.5,
                                 ),
                               )
-                            : const Text(
+                            : Text(
                                 'Submit',
-                                style: TextStyle(
+                                style: AppFonts.primaryFont(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white,

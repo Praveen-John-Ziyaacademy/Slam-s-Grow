@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:social_media/auth_controller/kyc_controller.dart';
 import 'package:social_media/colors/colors.dart';
+import 'package:social_media/colors/fonts.dart';
 
 class KYCVerificationScreen extends StatelessWidget {
   const KYCVerificationScreen({Key? key}) : super(key: key);
@@ -144,9 +145,9 @@ class KYCVerificationScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 18),
-          const Text(
+          Text(
             'Personal Information',
-            style: TextStyle(
+            style: AppFonts.primaryFont(
               fontSize: 15,
               fontWeight: FontWeight.w600,
               color: Colors.black,
@@ -276,9 +277,9 @@ class KYCVerificationScreen extends StatelessWidget {
           ),
 
           const SizedBox(height: 24),
-          const Text(
+          Text(
             'Professional Details',
-            style: TextStyle(
+            style: AppFonts.primaryFont(
               fontSize: 15,
               fontWeight: FontWeight.w600,
               color: Colors.black,
@@ -307,9 +308,9 @@ class KYCVerificationScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 24),
-          const Text(
+          Text(
             'Account Details',
-            style: TextStyle(
+            style: AppFonts.primaryFont(
               fontSize: 15,
               fontWeight: FontWeight.w600,
               color: Colors.black,
@@ -358,9 +359,9 @@ class KYCVerificationScreen extends StatelessWidget {
                   ),
                   elevation: 0,
                 ),
-                child: const Text(
+                child: Text(
                   'Next',
-                  style: TextStyle(
+                  style: AppFonts.primaryFont(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                     color: Colors.white,
@@ -384,9 +385,9 @@ class KYCVerificationScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 18),
-          const Text(
+          Text(
             'Upload Documents',
-            style: TextStyle(
+            style: AppFonts.primaryFont(
               fontSize: 15,
               fontWeight: FontWeight.w600,
               color: Colors.black,
@@ -440,9 +441,9 @@ class KYCVerificationScreen extends StatelessWidget {
                   ),
                   elevation: 0,
                 ),
-                child: const Text(
+                child: Text(
                   'Next',
-                  style: TextStyle(
+                  style: AppFonts.primaryFont(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                     color: Colors.white,
@@ -465,9 +466,9 @@ class KYCVerificationScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 18),
-          const Text(
+          Text(
             'Personal Information',
-            style: TextStyle(
+            style: AppFonts.primaryFont(
               fontSize: 15,
               fontWeight: FontWeight.w600,
               color: Colors.black,
@@ -568,9 +569,9 @@ class KYCVerificationScreen extends StatelessWidget {
           ),
 
           const SizedBox(height: 24),
-          const Text(
+          Text(
             'Uploaded Documents',
-            style: TextStyle(
+            style: AppFonts.primaryFont(
               fontSize: 15,
               fontWeight: FontWeight.w600,
               color: Colors.black,
@@ -638,10 +639,13 @@ class KYCVerificationScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 8),
-                const Expanded(
+                Expanded(
                   child: Text(
                     'I confirm my information is correct',
-                    style: TextStyle(fontSize: 12, color: Colors.black87),
+                    style: AppFonts.primaryFont(
+                      fontSize: 12,
+                      color: Colors.black87,
+                    ),
                   ),
                 ),
               ],
@@ -665,10 +669,13 @@ class KYCVerificationScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              const Expanded(
+              Expanded(
                 child: Text(
                   'I agree to T&C and Privacy Policy',
-                  style: TextStyle(fontSize: 12, color: Colors.black87),
+                  style: AppFonts.primaryFont(
+                    fontSize: 12,
+                    color: Colors.black87,
+                  ),
                 ),
               ),
             ],
@@ -688,9 +695,9 @@ class KYCVerificationScreen extends StatelessWidget {
                   ),
                   elevation: 0,
                 ),
-                child: const Text(
+                child: Text(
                   'Submit',
-                  style: TextStyle(
+                  style: AppFonts.primaryFont(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                     color: Colors.white,
@@ -711,7 +718,7 @@ class KYCVerificationScreen extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(
+          style: AppFonts.primaryFont(
             fontSize: 12,
             color: Colors.black54,
             fontWeight: FontWeight.w400,
@@ -722,7 +729,7 @@ class KYCVerificationScreen extends StatelessWidget {
           child: Text(
             value,
             textAlign: TextAlign.right,
-            style: const TextStyle(
+            style: AppFonts.primaryFont(
               fontSize: 12,
               color: Colors.black87,
               fontWeight: FontWeight.w500,
@@ -776,7 +783,7 @@ class KYCVerificationScreen extends StatelessWidget {
             child: Text(
               title,
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: AppFonts.primaryFont(
                 fontSize: 11,
                 color: Colors.black87,
                 fontWeight: FontWeight.w500,
@@ -834,7 +841,7 @@ class KYCVerificationScreen extends StatelessWidget {
           Text(
             label,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: AppFonts.primaryFont(
               fontSize: 11,
               color: isActive ? Colors.black87 : Colors.grey[500],
               fontWeight: isActive ? FontWeight.w500 : FontWeight.w400,
@@ -862,7 +869,7 @@ class KYCVerificationScreen extends StatelessWidget {
             ? const Icon(Icons.check, color: Colors.white, size: 16)
             : Text(
                 '$number',
-                style: TextStyle(
+                style: AppFonts.primaryFont(
                   color: isActive ? Colors.white : Colors.grey[500],
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
@@ -883,7 +890,7 @@ class KYCVerificationScreen extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(
+          style: AppFonts.primaryFont(
             fontSize: 13,
             color: Colors.black87,
             fontWeight: FontWeight.w400,
@@ -900,12 +907,15 @@ class KYCVerificationScreen extends StatelessWidget {
           ),
           child: TextField(
             controller: controller,
-            style: const TextStyle(fontSize: 12),
+            style: AppFonts.primaryFont(fontSize: 12),
             decoration: InputDecoration(
               border: InputBorder.none,
               isDense: true,
               hintText: hint,
-              hintStyle: TextStyle(color: Colors.grey[600], fontSize: 10),
+              hintStyle: AppFonts.primaryFont(
+                color: Colors.grey[600],
+                fontSize: 10,
+              ),
               contentPadding: const EdgeInsets.only(left: 8, top: 5),
             ),
           ),
@@ -927,7 +937,7 @@ class KYCVerificationScreen extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(
+          style: AppFonts.primaryFont(
             fontSize: 13,
             color: Colors.black87,
             fontWeight: FontWeight.w400,
@@ -958,7 +968,7 @@ class KYCVerificationScreen extends StatelessWidget {
                     value: value,
                     child: Text(
                       value,
-                      style: TextStyle(
+                      style: AppFonts.primaryFont(
                         color: value == options.first
                             ? Colors.grey[600]
                             : Colors.black,
@@ -986,7 +996,7 @@ class KYCVerificationScreen extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(
+          style: AppFonts.primaryFont(
             fontSize: 13,
             color: Colors.black87,
             fontWeight: FontWeight.w400,
@@ -1006,12 +1016,15 @@ class KYCVerificationScreen extends StatelessWidget {
             child: TextField(
               controller: controller,
               enabled: false,
-              style: const TextStyle(fontSize: 12, color: Colors.black),
+              style: AppFonts.primaryFont(fontSize: 12, color: Colors.black),
               decoration: InputDecoration(
                 border: InputBorder.none,
 
                 hintText: 'DD/MM/YYYY',
-                hintStyle: TextStyle(color: Colors.grey[600], fontSize: 10),
+                hintStyle: AppFonts.primaryFont(
+                  color: Colors.grey[600],
+                  fontSize: 10,
+                ),
                 contentPadding: const EdgeInsets.only(left: 8, top: 5),
                 suffixIcon: const Icon(
                   Icons.calendar_today,
@@ -1064,7 +1077,7 @@ class KYCVerificationScreen extends StatelessWidget {
                           children: [
                             Text(
                               title,
-                              style: const TextStyle(
+                              style: AppFonts.primaryFont(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.black87,
@@ -1092,7 +1105,7 @@ class KYCVerificationScreen extends StatelessWidget {
                                         Text(
                                           'Click or Drag & Drop to upload',
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
+                                          style: AppFonts.primaryFont(
                                             fontSize: 12,
                                             color: Colors.grey[700],
                                           ),
@@ -1101,16 +1114,16 @@ class KYCVerificationScreen extends StatelessWidget {
                                         Text(
                                           'PNG, JPG • Max X MB',
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
+                                          style: AppFonts.primaryFont(
                                             fontSize: 12,
                                             color: Colors.grey[700],
                                           ),
                                         ),
                                         const SizedBox(height: 4),
-                                        const Text(
+                                        Text(
                                           '(Front & Back)',
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
+                                          style: AppFonts.primaryFont(
                                             fontSize: 11,
                                             color: Colors.grey,
                                           ),
@@ -1171,7 +1184,7 @@ class KYCVerificationScreen extends StatelessWidget {
                       children: [
                         Text(
                           title,
-                          style: const TextStyle(
+                          style: AppFonts.primaryFont(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: Colors.black87,
@@ -1193,7 +1206,7 @@ class KYCVerificationScreen extends StatelessWidget {
                                   child: Text(
                                     'Spot Selfie',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
+                                    style: AppFonts.primaryFont(
                                       fontSize: 13,
                                       color: Colors.grey[700],
                                       fontWeight: FontWeight.w400,

@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:social_media/colors/fonts.dart';
 import 'package:social_media/components/glass_button.dart';
 import 'package:social_media/auth_controller/login_controller.dart';
 
@@ -66,10 +67,10 @@ class LoginScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               const SizedBox(height: 24),
-                              const Text(
+                              Text(
                                 'Login to Continue',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: AppFonts.primaryFont(
                                   color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -113,7 +114,7 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                     child: Text(
                                       'Or',
-                                      style: TextStyle(
+                                      style: AppFonts.primaryFont(
                                         color: Colors.black,
                                         fontSize: 14,
                                       ),
@@ -126,9 +127,9 @@ class LoginScreen extends StatelessWidget {
                               const SizedBox(height: 24),
 
                               // Email Input
-                              const Text(
+                              Text(
                                 'Email',
-                                style: TextStyle(
+                                style: AppFonts.primaryFont(
                                   color: Colors.white,
                                   fontSize: 10,
                                 ),
@@ -140,14 +141,14 @@ class LoginScreen extends StatelessWidget {
                                 width: 240,
                                 child: TextField(
                                   controller: controller.emailController,
-                                  style: const TextStyle(
+                                  style: AppFonts.primaryFont(
                                     color: Colors.white,
                                     fontSize: 10,
                                   ),
                                   decoration: InputDecoration(
                                     filled: false,
                                     hintText: 'lorem.ipsum@gmail.com',
-                                    hintStyle: TextStyle(
+                                    hintStyle: AppFonts.primaryFont(
                                       color: Colors.white.withOpacity(0.6),
                                       fontSize: 10,
                                     ),
@@ -174,9 +175,9 @@ class LoginScreen extends StatelessWidget {
                               const SizedBox(height: 16),
 
                               // Password Input
-                              const Text(
+                              Text(
                                 'Password',
-                                style: TextStyle(
+                                style: AppFonts.primaryFont(
                                   color: Colors.white,
                                   fontSize: 10,
                                 ),
@@ -190,7 +191,7 @@ class LoginScreen extends StatelessWidget {
                                     controller: controller.passwordController,
                                     obscureText:
                                         controller.obscurePassword.value,
-                                    style: const TextStyle(
+                                    style: AppFonts.primaryFont(
                                       color: Colors.white,
                                       fontSize: 10,
                                     ),
@@ -199,7 +200,7 @@ class LoginScreen extends StatelessWidget {
                                       filled: false,
                                       fillColor: Colors.transparent,
                                       hintText: '********',
-                                      hintStyle: TextStyle(
+                                      hintStyle: AppFonts.primaryFont(
                                         color: Colors.white.withOpacity(0.6),
                                         fontSize: 10,
                                       ),
@@ -254,9 +255,9 @@ class LoginScreen extends StatelessWidget {
                                     Obx(
                                       () => Row(
                                         children: [
-                                          const Text(
+                                          Text(
                                             'Remember me',
-                                            style: TextStyle(
+                                            style: AppFonts.primaryFont(
                                               color: Colors.white,
                                               fontSize: 10,
                                             ),
@@ -301,7 +302,7 @@ class LoginScreen extends StatelessWidget {
                                             Text(
                                               'Forgot password?',
 
-                                              style: TextStyle(
+                                              style: AppFonts.primaryFont(
                                                 color: Colors.white,
                                                 fontSize: 10,
                                               ),
@@ -362,10 +363,10 @@ class LoginScreen extends StatelessWidget {
                                               ],
                                             ),
                                           ),
-                                          child: const Center(
+                                          child: Center(
                                             child: Text(
                                               "Login",
-                                              style: TextStyle(
+                                              style: AppFonts.primaryFont(
                                                 color: Colors.white,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w500,
@@ -383,18 +384,18 @@ class LoginScreen extends StatelessWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
+                                  Text(
                                     'Don\'t have an account? ',
-                                    style: TextStyle(
+                                    style: AppFonts.primaryFont(
                                       color: Colors.white70,
                                       fontSize: 10,
                                     ),
                                   ),
                                   GestureDetector(
                                     onTap: controller.navigateToSignUp,
-                                    child: const Text(
+                                    child: Text(
                                       'Sign Up',
-                                      style: TextStyle(
+                                      style: AppFonts.primaryFont(
                                         color: Colors.white,
                                         fontSize: 12,
                                         fontWeight: FontWeight.bold,
@@ -404,10 +405,10 @@ class LoginScreen extends StatelessWidget {
                                 ],
                               ),
                               const SizedBox(height: 34),
-                              const Text(
+                              Text(
                                 'By continuing you agree that you have read and accepted our T&C and privacy policy',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: AppFonts.primaryFont(
                                   color: Colors.white,
                                   fontSize: 12,
                                 ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:social_media/auth_screen/login_screen.dart';
 import 'package:social_media/colors/colors.dart';
+import 'package:social_media/colors/fonts.dart';
 import 'package:social_media/models/onboarding_models.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -77,7 +78,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     onPressed: () => _navigateToLogin(),
                     child: Text(
                       'Skip>>',
-                      style: TextStyle(
+                      style: AppFonts.primaryFont(
                         color: AppColors.primary,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -157,7 +158,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                             _currentIndex == onboardingData.length - 1
                                 ? 'Get Started'
                                 : 'Next',
-                            style: TextStyle(
+                            style: AppFonts.primaryFont(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                               color: Colors.white,
@@ -185,7 +186,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           Text(
             data.heading,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: AppFonts.primaryFont(
               fontSize: 20,
               fontWeight: FontWeight.w600,
               color: AppColors.primary,
@@ -207,7 +208,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           Text(
             data.title,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: AppFonts.primaryFont(
               fontSize: 15,
               fontWeight: FontWeight.bold,
               color: AppColors.primaryDark,
@@ -220,7 +221,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           Text(
             data.description,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: AppFonts.primaryFont(
               fontSize: 15,
               color: AppColors.textSecondary,
               height: 1.5,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:social_media/colors/fonts.dart';
 import 'package:social_media/controller/home_screen_controller.dart';
 import 'package:social_media/models/home_screen_models.dart';
 
@@ -140,15 +141,18 @@ class HomePage extends StatelessWidget {
                   Align(
                     alignment: Alignment.center,
                     child: Column(
-                      children: const [
+                      children: [
                         Text(
                           'Welcome Back',
-                          style: TextStyle(color: Colors.white70, fontSize: 16),
+                          style: AppFonts.primaryFont(
+                            color: Colors.white70,
+                            fontSize: 16,
+                          ),
                         ),
                         SizedBox(height: 5),
                         Text(
                           'John Samual',
-                          style: TextStyle(
+                          style: AppFonts.primaryFont(
                             color: Colors.white,
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -180,7 +184,7 @@ class HomePage extends StatelessWidget {
                                 ),
                                 child: Text(
                                   '${controller.notificationCount.value}',
-                                  style: const TextStyle(
+                                  style: AppFonts.primaryFont(
                                     color: Colors.white,
                                     fontSize: 8,
                                   ),
@@ -220,9 +224,9 @@ class HomePage extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Available Balance',
-                            style: TextStyle(
+                            style: AppFonts.primaryFont(
                               color: Colors.white70,
                               fontSize: 12,
                             ),
@@ -230,7 +234,7 @@ class HomePage extends StatelessWidget {
                           const SizedBox(height: 8),
                           Text(
                             '\$${controller.balance.value.toStringAsFixed(2)}',
-                            style: const TextStyle(
+                            style: AppFonts.primaryFont(
                               color: Colors.white,
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
@@ -241,9 +245,9 @@ class HomePage extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          const Text(
+                          Text(
                             'This week',
-                            style: TextStyle(
+                            style: AppFonts.primaryFont(
                               color: Colors.white70,
                               fontSize: 12,
                             ),
@@ -258,7 +262,7 @@ class HomePage extends StatelessWidget {
                               ),
                               Text(
                                 '+\$${controller.weeklyIncrease.value.toStringAsFixed(0)}',
-                                style: const TextStyle(
+                                style: AppFonts.primaryFont(
                                   color: Colors.white,
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
@@ -269,7 +273,7 @@ class HomePage extends StatelessWidget {
                           const SizedBox(height: 10),
                           Text(
                             'View Details >',
-                            style: TextStyle(
+                            style: AppFonts.primaryFont(
                               color: Colors.white.withOpacity(0.8),
                               fontSize: 10,
                             ),
@@ -351,9 +355,15 @@ class HomePage extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             value,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            style: AppFonts.primaryFont(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          Text(label, style: TextStyle(fontSize: 14, color: Colors.grey[600])),
+          Text(
+            label,
+            style: AppFonts.primaryFont(fontSize: 14, color: Colors.grey[600]),
+          ),
         ],
       ),
     );
@@ -365,9 +375,12 @@ class HomePage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Manage Now',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            style: AppFonts.primaryFont(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           const SizedBox(height: 15),
           Row(
@@ -440,7 +453,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(height: 14),
           Text(
             title,
-            style: const TextStyle(
+            style: AppFonts.primaryFont(
               color: Colors.white,
               fontSize: 12,
               fontWeight: FontWeight.bold,
@@ -449,7 +462,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             subtitle,
-            style: const TextStyle(color: Colors.white70, fontSize: 10),
+            style: AppFonts.primaryFont(color: Colors.white70, fontSize: 10),
           ),
         ],
       ),
@@ -460,11 +473,14 @@ class HomePage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
+        Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Text(
             'Plans',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            style: AppFonts.primaryFont(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
         const SizedBox(height: 15),
@@ -526,12 +542,18 @@ class HomePage extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             title,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+            style: AppFonts.primaryFont(
+              fontWeight: FontWeight.bold,
+              fontSize: 13,
+            ),
           ),
           if (subtitle.isNotEmpty)
             Text(
               subtitle,
-              style: TextStyle(fontSize: 11, color: Colors.grey[700]),
+              style: AppFonts.primaryFont(
+                fontSize: 11,
+                color: Colors.grey[700],
+              ),
             ),
         ],
       ),
@@ -547,17 +569,23 @@ class HomePage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Todays Task\'s',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: AppFonts.primaryFont(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               TextButton(
                 onPressed: () {
                   Get.snackbar('View All', 'Opening all tasks');
                 },
-                child: const Text(
+                child: Text(
                   'View All >',
-                  style: TextStyle(fontSize: 10, color: Colors.black),
+                  style: AppFonts.primaryFont(
+                    fontSize: 10,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ],
@@ -604,14 +632,17 @@ class HomePage extends StatelessWidget {
               children: [
                 Text(
                   task.title,
-                  style: const TextStyle(
+                  style: AppFonts.primaryFont(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   'Earn ${task.points} Points',
-                  style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                  style: AppFonts.primaryFont(
+                    fontSize: 12,
+                    color: Colors.grey[600],
+                  ),
                 ),
                 const SizedBox(height: 5),
                 Row(
@@ -627,13 +658,19 @@ class HomePage extends StatelessWidget {
                     const SizedBox(width: 5),
                     Text(
                       task.status,
-                      style: TextStyle(fontSize: 8, color: Colors.grey[700]),
+                      style: AppFonts.primaryFont(
+                        fontSize: 8,
+                        color: Colors.grey[700],
+                      ),
                     ),
                     if (task.timeLeft.isNotEmpty) ...[
                       const SizedBox(width: 10),
                       Text(
                         task.timeLeft,
-                        style: TextStyle(fontSize: 8, color: Colors.grey[600]),
+                        style: AppFonts.primaryFont(
+                          fontSize: 8,
+                          color: Colors.grey[600],
+                        ),
                       ),
                     ],
                   ],
@@ -650,10 +687,13 @@ class HomePage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 color: const Color(0xFF2F88FF),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
                   'Do Task',
-                  style: TextStyle(color: Colors.white, fontSize: 12),
+                  style: AppFonts.primaryFont(
+                    color: Colors.white,
+                    fontSize: 12,
+                  ),
                 ),
               ),
             ),
@@ -672,17 +712,23 @@ class HomePage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Recent Activity',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: AppFonts.primaryFont(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               TextButton(
                 onPressed: () {
                   Get.snackbar('View All', 'Opening all activities');
                 },
-                child: const Text(
+                child: Text(
                   'View All >',
-                  style: TextStyle(fontSize: 10, color: Colors.black),
+                  style: AppFonts.primaryFont(
+                    fontSize: 10,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ],
@@ -762,19 +808,25 @@ class HomePage extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(
+                style: AppFonts.primaryFont(
                   fontSize: 13,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
                 subtitle,
-                style: TextStyle(fontSize: 11, color: Colors.grey[600]),
+                style: AppFonts.primaryFont(
+                  fontSize: 11,
+                  color: Colors.grey[600],
+                ),
               ),
             ],
           ),
         ),
-        Text(timeAgo, style: TextStyle(fontSize: 10, color: Colors.grey[600])),
+        Text(
+          timeAgo,
+          style: AppFonts.primaryFont(fontSize: 10, color: Colors.grey[600]),
+        ),
       ],
     );
   }

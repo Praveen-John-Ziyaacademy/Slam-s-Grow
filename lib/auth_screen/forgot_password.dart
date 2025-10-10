@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:social_media/colors/colors.dart';
 import 'package:social_media/auth_controller/forgot_controller.dart';
+import 'package:social_media/colors/fonts.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
@@ -32,10 +33,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 // Title
-                const Center(
+                Center(
                   child: Text(
                     'Forgot Password',
-                    style: TextStyle(
+                    style: AppFonts.primaryFont(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -49,9 +50,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Enter Email Address',
-                        style: TextStyle(fontSize: 14, color: Colors.black87),
+                        style: AppFonts.primaryFont(
+                          fontSize: 14,
+                          color: Colors.black87,
+                        ),
                       ),
                       const SizedBox(height: 8),
 
@@ -65,13 +69,13 @@ class ForgotPasswordScreen extends StatelessWidget {
                           ),
                           child: TextField(
                             controller: controller.emailController,
-                            style: const TextStyle(
+                            style: AppFonts.primaryFont(
                               color: Colors.black,
                               fontSize: 10,
                             ),
                             decoration: InputDecoration(
                               hintText: 'Enter email',
-                              hintStyle: TextStyle(
+                              hintStyle: AppFonts.primaryFont(
                                 color: Colors.black.withOpacity(0.5),
                                 fontSize: 10,
                               ),
@@ -112,9 +116,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                 Center(
                   child: TextButton(
                     onPressed: controller.goToSignIn,
-                    child: const Text(
+                    child: Text(
                       'Back to sign in',
-                      style: TextStyle(color: Colors.black87, fontSize: 12),
+                      style: AppFonts.primaryFont(
+                        color: Colors.black87,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
                 ),
@@ -148,9 +155,9 @@ class ForgotPasswordScreen extends StatelessWidget {
                                   ),
                                 ),
                               )
-                            : const Text(
+                            : Text(
                                 'Get OTP',
-                                style: TextStyle(
+                                style: AppFonts.primaryFont(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white,
@@ -162,10 +169,13 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 // OR divider
-                const Center(
+                Center(
                   child: Text(
                     'or',
-                    style: TextStyle(fontSize: 14, color: Colors.black54),
+                    style: AppFonts.primaryFont(
+                      fontSize: 14,
+                      color: Colors.black54,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -207,9 +217,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Column(
                     children: [
-                      const Text(
+                      Text(
                         "Don't have an account?",
-                        style: TextStyle(fontSize: 14, color: Colors.black87),
+                        style: AppFonts.primaryFont(
+                          fontSize: 14,
+                          color: Colors.black87,
+                        ),
                       ),
                       const SizedBox(height: 12),
                       Container(
@@ -226,9 +239,9 @@ class ForgotPasswordScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          child: const Text(
+                          child: Text(
                             'Sign up',
-                            style: TextStyle(
+                            style: AppFonts.primaryFont(
                               fontSize: 14,
                               color: Colors.black87,
                             ),

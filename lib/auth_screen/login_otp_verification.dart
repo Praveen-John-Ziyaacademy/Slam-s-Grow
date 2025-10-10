@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:social_media/auth_controller/login_otp_controller.dart';
+import 'package:social_media/colors/fonts.dart';
 
 class LoginOtpVerification extends StatelessWidget {
   const LoginOtpVerification({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class LoginOtpVerification extends StatelessWidget {
                 Center(
                   child: Text(
                     'Verification',
-                    style: TextStyle(
+                    style: AppFonts.primaryFont(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -44,7 +45,7 @@ class LoginOtpVerification extends StatelessWidget {
                     child: RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
-                        style: const TextStyle(
+                        style: AppFonts.primaryFont(
                           fontSize: 14,
                           color: Colors.black87,
                           height: 1.5,
@@ -55,12 +56,16 @@ class LoginOtpVerification extends StatelessWidget {
                           ),
                           TextSpan(
                             text: controller.phoneNumber.value,
-                            style: const TextStyle(fontWeight: FontWeight.w600),
+                            style: AppFonts.primaryFont(
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                           const TextSpan(text: ' or '),
                           TextSpan(
                             text: controller.email.value,
-                            style: const TextStyle(fontWeight: FontWeight.w600),
+                            style: AppFonts.primaryFont(
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ],
                       ),
@@ -84,13 +89,14 @@ class LoginOtpVerification extends StatelessWidget {
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.number,
                         maxLength: 1,
-                        style: const TextStyle(
+                        style: AppFonts.secondaryFont(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: const InputDecoration(
                           counterText: '',
                           border: InputBorder.none,
+                          isDense: true,
                         ),
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
@@ -108,7 +114,7 @@ class LoginOtpVerification extends StatelessWidget {
                     children: [
                       Text(
                         'Wait for ${controller.formatTime(controller.secondsRemaining.value)} ',
-                        style: const TextStyle(
+                        style: AppFonts.primaryFont(
                           fontSize: 14,
                           color: Colors.black87,
                         ),
@@ -119,7 +125,7 @@ class LoginOtpVerification extends StatelessWidget {
                             : null,
                         child: Text(
                           'Resend OTP',
-                          style: TextStyle(
+                          style: AppFonts.primaryFont(
                             fontSize: 14,
                             color: controller.secondsRemaining.value == 0
                                 ? Color(0xFF94C21A)

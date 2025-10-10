@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:social_media/colors/fonts.dart';
 import 'package:social_media/components/glass_button.dart';
 import 'package:social_media/auth_controller/sign_up_controller.dart';
 
@@ -28,20 +29,23 @@ class SignUpScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text(
+              Text(
                 'Sign up your Account',
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: AppFonts.primaryFont(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 8),
-              const Text(
+              Text(
                 'Enter your personal data to create account',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white70, fontSize: 14),
+                style: AppFonts.primaryFont(
+                  color: Colors.white70,
+                  fontSize: 14,
+                ),
               ),
               const SizedBox(height: 32),
 
@@ -79,7 +83,10 @@ class SignUpScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: Text(
                         "Or",
-                        style: TextStyle(color: Colors.black, fontSize: 14),
+                        style: AppFonts.primaryFont(
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                     Expanded(child: Divider(color: Colors.black)),
@@ -208,10 +215,10 @@ class SignUpScreen extends StatelessWidget {
                                     end: Alignment.bottomCenter,
                                   ),
                                 ),
-                                child: const Center(
+                                child: Center(
                                   child: Text(
                                     "Sign Up",
-                                    style: TextStyle(
+                                    style: AppFonts.primaryFont(
                                       color: Colors.white,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,
@@ -233,15 +240,18 @@ class SignUpScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     "Already have an account? ",
-                    style: TextStyle(color: Colors.white70, fontSize: 12),
+                    style: AppFonts.primaryFont(
+                      color: Colors.white70,
+                      fontSize: 12,
+                    ),
                   ),
                   GestureDetector(
                     onTap: controller.navigateToLogin,
-                    child: const Text(
+                    child: Text(
                       "Log in",
-                      style: TextStyle(
+                      style: AppFonts.primaryFont(
                         color: Colors.white,
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -269,7 +279,10 @@ class SignUpScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(color: Colors.white, fontSize: 10)),
+        Text(
+          label,
+          style: AppFonts.primaryFont(color: Colors.white, fontSize: 10),
+        ),
         const SizedBox(height: 6),
 
         // Use GlassContainer here 👇
@@ -280,11 +293,11 @@ class SignUpScreen extends StatelessWidget {
             child: TextField(
               controller: controller,
               obscureText: obscureText,
-              style: const TextStyle(color: Colors.white, fontSize: 10),
+              style: AppFonts.primaryFont(color: Colors.white, fontSize: 10),
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: hint,
-                hintStyle: TextStyle(
+                hintStyle: AppFonts.primaryFont(
                   color: Colors.white.withOpacity(0.6),
                   fontSize: 10,
                 ),
@@ -301,6 +314,7 @@ class SignUpScreen extends StatelessWidget {
                         constraints: const BoxConstraints(),
                       )
                     : null,
+                isDense: true,
               ),
             ),
           ),
