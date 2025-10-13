@@ -1,3 +1,4 @@
+// import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -28,287 +29,365 @@ class WalletPage extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Balance Card
-            Container(
-              margin: EdgeInsets.all(16),
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFF4CAF50), Color(0xFF2196F3)],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
+      body: RefreshIndicator(
+        backgroundColor: Colors.white,
+        color: Color(0xFF4CAF50),
+        onRefresh: () => controller.refreshActivityData(),
+        child: SingleChildScrollView(
+          physics: AlwaysScrollableScrollPhysics(),
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.all(16),
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0xFF4CAF50), Color(0xFF2196F3)],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Total Balance',
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 14,
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Obx(
-                            () => Text(
-                              '\$${controller.balance.value.toStringAsFixed(2)}',
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Total Balance',
                               style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 36,
-                                fontWeight: FontWeight.bold,
+                                color: Colors.white70,
+                                fontSize: 14,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Obx(
+                              () => Text(
+                                '\$${controller.balance.value.toStringAsFixed(2)}',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 36,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(8),
+                          child: CustomPaint(
+                            size: Size(80, 60),
+                            painter: BarChartPainter(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton.icon(
+                            onPressed: () {},
+                            icon: Icon(Icons.download, size: 18),
+                            label: Text('Withdraw Funds'),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white.withOpacity(0.2),
+                              foregroundColor: Colors.white,
+                              elevation: 0,
+                              padding: EdgeInsets.symmetric(vertical: 12),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                      // Growth Chart Icon
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        child: CustomPaint(
-                          size: Size(80, 60),
-                          painter: BarChartPainter(),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton.icon(
-                          onPressed: () {},
-                          icon: Icon(Icons.download, size: 18),
-                          label: Text('Withdraw Funds'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white.withOpacity(0.2),
-                            foregroundColor: Colors.white,
-                            elevation: 0,
-                            padding: EdgeInsets.symmetric(vertical: 12),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: ElevatedButton.icon(
+                            onPressed: () {},
+                            icon: Icon(Icons.history, size: 18),
+                            label: Text('History'),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white.withOpacity(0.2),
+                              foregroundColor: Colors.white,
+                              elevation: 0,
+                              padding: EdgeInsets.symmetric(vertical: 12),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: ElevatedButton.icon(
-                          onPressed: () {},
-                          icon: Icon(Icons.history, size: 18),
-                          label: Text('History'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white.withOpacity(0.2),
-                            foregroundColor: Colors.white,
-                            elevation: 0,
-                            padding: EdgeInsets.symmetric(vertical: 12),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            // App Activity Card
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 16),
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 10,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: Color(0xFF2196F3).withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Icon(
-                          Icons.bar_chart,
-                          color: Color(0xFF2196F3),
-                          size: 20,
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'App Activity',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14,
-                            ),
-                          ),
-                          Text(
-                            'This Week',
-                            style: TextStyle(
-                              color: Colors.grey[600],
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                      Text(
-                        '5/7',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                      SizedBox(width: 8),
-                      Text(
-                        'Days Active',
-                        style: TextStyle(color: Colors.grey[600], fontSize: 12),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16),
-                  // Weekly Activity Chart
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      _buildActivityBar('Mon', 0.7),
-                      _buildActivityBar('Tue', 0.5),
-                      _buildActivityBar('Wed', 0.8),
-                      _buildActivityBar('Thu', 0.6),
-                      _buildActivityBar('Fri', 0.9),
-                      _buildActivityBar('Sat', 0.4),
-                      _buildActivityBar('Sun', 0.3),
-                    ],
-                  ),
-                  SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 12,
-                        height: 12,
-                        decoration: BoxDecoration(
-                          color: Color(0xFF4CAF50),
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      SizedBox(width: 6),
-                      Text(
-                        'Entry Week',
-                        style: TextStyle(fontSize: 11, color: Colors.grey[600]),
-                      ),
-                      SizedBox(width: 16),
-                      Container(
-                        width: 12,
-                        height: 12,
-                        decoration: BoxDecoration(
-                          color: Color(0xFF2196F3),
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      SizedBox(width: 6),
-                      Text(
-                        'Money This Week',
-                        style: TextStyle(fontSize: 11, color: Colors.grey[600]),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            SizedBox(height: 24),
-
-            // Transaction History
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Transaction History',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 16),
-                  // Filter Buttons
-                  Obx(
-                    () => Row(
-                      children: [
-                        _buildFilterChip('All'),
-                        SizedBox(width: 8),
-                        _buildFilterChip('Credit'),
-                        SizedBox(width: 8),
-                        _buildFilterChip('Debit'),
                       ],
                     ),
-                  ),
-                  SizedBox(height: 16),
-                  // Transaction List
-                  Obx(
-                    () => ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: controller.filteredTransactions.length,
-                      itemBuilder: (context, index) {
-                        final transaction =
-                            controller.filteredTransactions[index];
-                        return _buildTransactionItem(transaction);
-                      },
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-          ],
+
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05),
+                      blurRadius: 10,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF2196F3).withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Icon(
+                            Icons.bar_chart,
+                            color: Color(0xFF2196F3),
+                            size: 20,
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'App Activity',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                              ),
+                            ),
+                            Text(
+                              'This Week',
+                              style: TextStyle(
+                                color: Colors.grey[600],
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                        Obx(
+                          () => Text(
+                            '${controller.activeDaysCount}/7',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          'Days Active',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+
+                    Obx(() {
+                      if (controller.isLoadingActivity.value) {
+                        return Container(
+                          height: 150,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: Color(0xFF2196F3),
+                            ),
+                          ),
+                        );
+                      }
+
+                      if (controller.weeklyActivity.isEmpty) {
+                        return Container(
+                          height: 150,
+                          child: Center(
+                            child: Text(
+                              'No activity data available',
+                              style: TextStyle(color: Colors.grey[600]),
+                            ),
+                          ),
+                        );
+                      }
+
+                      final maxEarnings = controller.weeklyActivity
+                          .map((day) => day.earnings)
+                          .reduce((a, b) => a > b ? a : b);
+
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: controller.weeklyActivity
+                            .map(
+                              (activity) => _buildActivityBar(
+                                activity.dayName,
+                                activity.wasActive,
+                                activity.earnings,
+                                maxEarnings > 0
+                                    ? activity.earnings / maxEarnings
+                                    : 0,
+                              ),
+                            )
+                            .toList(),
+                      );
+                    }),
+
+                    SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 12,
+                          height: 12,
+                          decoration: BoxDecoration(
+                            color: Color(0xFF4CAF50),
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        SizedBox(width: 6),
+                        Text(
+                          'Active Day',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                        SizedBox(width: 16),
+                        Container(
+                          width: 12,
+                          height: 12,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        SizedBox(width: 6),
+                        Text(
+                          'Inactive Day',
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 24),
+
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Transaction History',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 16),
+
+                    Obx(
+                      () => Row(
+                        children: [
+                          _buildFilterChip('All'),
+                          SizedBox(width: 8),
+                          _buildFilterChip('Credit'),
+                          SizedBox(width: 8),
+                          _buildFilterChip('Debit'),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 16),
+
+                    Obx(
+                      () => ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: controller.filteredTransactions.length,
+                        itemBuilder: (context, index) {
+                          final transaction =
+                              controller.filteredTransactions[index];
+                          return _buildTransactionItem(transaction);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildActivityBar(String day, double height) {
+  Widget _buildActivityBar(
+    String day,
+    bool isActive,
+    double earnings,
+    double heightRatio,
+  ) {
+    final displayHeight = isActive ? (120 * heightRatio.clamp(0.3, 1.0)) : 20.0;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           width: 32,
-          height: 80 * height,
+          height: displayHeight,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF4CAF50), Color(0xFF2196F3)],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+            gradient: isActive
+                ? LinearGradient(
+                    colors: [Color(0xFF4CAF50), Color(0xFF2196F3)],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  )
+                : null,
+            color: isActive ? null : Colors.grey[300],
             borderRadius: BorderRadius.circular(6),
           ),
+          child: isActive && earnings > 0
+              ? Center(
+                  child: Text(
+                    '\$${earnings.toInt()}',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 9,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
+              : null,
         ),
         SizedBox(height: 6),
-        Text(day, style: TextStyle(fontSize: 10, color: Colors.grey[600])),
+        Text(
+          day,
+          style: TextStyle(
+            fontSize: 10,
+            color: isActive ? Colors.black87 : Colors.grey[400],
+            fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
+          ),
+        ),
       ],
     );
   }
@@ -400,7 +479,6 @@ class WalletPage extends StatelessWidget {
   }
 }
 
-// Custom Painter for Bar Chart
 class BarChartPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -424,7 +502,6 @@ class BarChartPainter extends CustomPainter {
       canvas.drawRRect(rect, paint);
     }
 
-    // Draw arrow
     final arrowPaint = Paint()
       ..color = Colors.white
       ..style = PaintingStyle.stroke

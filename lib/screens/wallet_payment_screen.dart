@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:social_media/controller/wallet_controller.dart';
+import 'package:social_media/controller/wallet_payment_controller.dart';
 
 class WalletPaymentsScreen extends StatelessWidget {
   final WalletController controller = Get.put(WalletController());
@@ -251,7 +251,6 @@ class WalletPaymentsScreen extends StatelessWidget {
   }
 }
 
-// Custom Painter for Trend Line
 class TrendLinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
