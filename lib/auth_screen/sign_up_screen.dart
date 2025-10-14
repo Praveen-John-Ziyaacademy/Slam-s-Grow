@@ -24,202 +24,205 @@ class SignUpScreen extends StatelessWidget {
             colors: [Color(0xFF001D29), Color(0xFF0080B6), Color(0xFF84DAFE)],
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 220),
-              child: Column(
-                children: [
-                  Text(
-                    'Sign up your Account',
-                    textAlign: TextAlign.center,
-                    style: AppFonts.primaryFont(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Enter your personal data to create account',
-                    textAlign: TextAlign.center,
-                    style: AppFonts.primaryFont(
-                      color: Colors.white70,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 32),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 220),
+                child: Column(
                   children: [
-                    GlassButton(
-                      label: "Google",
-                      imagePath: "assets/google-color-svgrepo-com.svg",
-                      onTap: controller.signUpWithGoogle,
+                    Text(
+                      'Sign up your Account',
+                      textAlign: TextAlign.center,
+                      style: AppFonts.primaryFont(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                    const SizedBox(width: 30),
-                    GlassButton(
-                      label: "Facebook",
-                      imagePath: "assets/facebook-svgrepo-com.svg",
-                      onTap: controller.signUpWithFacebook,
+                    const SizedBox(height: 8),
+                    Text(
+                      'Enter your personal data to create account',
+                      textAlign: TextAlign.center,
+                      style: AppFonts.primaryFont(
+                        color: Colors.white70,
+                        fontSize: 14,
+                      ),
                     ),
                   ],
                 ),
-              ],
-            ),
-            const SizedBox(height: 28),
+              ),
+              const SizedBox(height: 40),
 
-            Padding(
-              padding: const EdgeInsets.only(left: 23, right: 23),
-              child: Row(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(child: Divider(color: Colors.black)),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Text(
-                      "Or",
-                      style: AppFonts.primaryFont(
-                        color: Colors.black,
-                        fontSize: 12,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GlassButton(
+                        label: "Google",
+                        imagePath: "assets/google-color-svgrepo-com.svg",
+                        onTap: controller.signUpWithGoogle,
                       ),
-                    ),
+                      const SizedBox(width: 30),
+                      GlassButton(
+                        label: "Facebook",
+                        imagePath: "assets/facebook-svgrepo-com.svg",
+                        onTap: controller.signUpWithFacebook,
+                      ),
+                    ],
                   ),
-                  Expanded(child: Divider(color: Colors.black)),
                 ],
               ),
-            ),
-            const SizedBox(height: 28),
+              const SizedBox(height: 28),
 
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _glassTextField(
-                          label: "First Name",
-                          hint: "Ajmal",
-                          controller: controller.firstNameController,
+              Padding(
+                padding: const EdgeInsets.only(left: 23, right: 23),
+                child: Row(
+                  children: [
+                    Expanded(child: Divider(color: Colors.black)),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Text(
+                        "Or",
+                        style: AppFonts.primaryFont(
+                          color: Colors.black,
+                          fontSize: 12,
                         ),
                       ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: _glassTextField(
-                          label: "Last Name",
-                          hint: "Khan",
-                          controller: controller.lastNameController,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
+                    ),
+                    Expanded(child: Divider(color: Colors.black)),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 28),
 
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _glassTextField(
-                          label: "Email",
-                          hint: "lorem.ipsum@gmail.com",
-                          controller: controller.emailController,
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: _glassTextField(
-                          label: "Phone Number",
-                          hint: "0000000000",
-                          controller: controller.phoneController,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Obx(
-                          () => _glassTextField(
-                            label: "Password",
-                            hint: "",
-                            controller: controller.passwordController,
-                            obscureText: controller.obscurePassword.value,
-                            toggle: controller.togglePasswordVisibility,
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _glassTextField(
+                            label: "First Name",
+                            hint: "Ajmal",
+                            controller: controller.firstNameController,
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Obx(
-                          () => _glassTextField(
-                            label: "Confirm Password",
-                            hint: "",
-                            controller: controller.confirmPasswordController,
-                            obscureText:
-                                controller.obscureConfirmPassword.value,
-                            toggle: controller.toggleConfirmPasswordVisibility,
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: _glassTextField(
+                            label: "Last Name",
+                            hint: "Khan",
+                            controller: controller.lastNameController,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
 
-                  const SizedBox(height: 16),
-
-                  _glassTextField(
-                    label: "Reference Number",
-                    hint: "#########",
-                    controller: controller.referenceController,
-                  ),
-
-                  const SizedBox(height: 25),
-
-                  GestureDetector(
-                    onTap: controller.signUp,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 47, right: 47),
-                      child: Container(
-                        height: 30,
-                        width: 240,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _glassTextField(
+                            label: "Email",
+                            hint: "lorem.ipsum@gmail.com",
+                            controller: controller.emailController,
+                          ),
                         ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: Colors.white.withOpacity(0.25),
-                                  width: 1,
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: _glassTextField(
+                            label: "Phone Number",
+                            hint: "0000000000",
+                            controller: controller.phoneController,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Obx(
+                            () => _glassTextField(
+                              label: "Password",
+                              hint: "********",
+                              controller: controller.passwordController,
+                              obscureText: controller.obscurePassword.value,
+                              toggle: controller.togglePasswordVisibility,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Obx(
+                            () => _glassTextField(
+                              label: "Confirm Password",
+                              hint: "********",
+                              controller: controller.confirmPasswordController,
+                              obscureText:
+                                  controller.obscureConfirmPassword.value,
+                              toggle:
+                                  controller.toggleConfirmPasswordVisibility,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    _glassTextField(
+                      label: "Reference Number",
+                      hint: "#########",
+                      controller: controller.referenceController,
+                    ),
+
+                    const SizedBox(height: 25),
+
+                    GestureDetector(
+                      onTap: controller.signUp,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 47, right: 47),
+                        child: Container(
+                          height: 30,
+                          width: 240,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: Colors.white.withOpacity(0.25),
+                                    width: 1,
+                                  ),
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Colors.white.withOpacity(0.15),
+                                      Colors.white.withOpacity(0.0),
+                                    ],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                  ),
                                 ),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.white.withOpacity(0.15),
-                                    Colors.white.withOpacity(0.0),
-                                  ],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Sign Up",
-                                  style: AppFonts.primaryFont(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
+                                child: Center(
+                                  child: Text(
+                                    "Sign Up",
+                                    style: AppFonts.primaryFont(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -228,39 +231,39 @@ class SignUpScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 16),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Already have an account? ",
+                    style: AppFonts.primaryFont(
+                      color: Colors.white70,
+                      fontSize: 10,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: controller.navigateToLogin,
+                    child: Text(
+                      "Log in",
+                      style: AppFonts.primaryFont(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ],
               ),
-            ),
 
-            const SizedBox(height: 16),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Already have an account? ",
-                  style: AppFonts.primaryFont(
-                    color: Colors.white70,
-                    fontSize: 10,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: controller.navigateToLogin,
-                  child: Text(
-                    "Log in",
-                    style: AppFonts.primaryFont(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 40),
-          ],
+              const SizedBox(height: 40),
+            ],
+          ),
         ),
       ),
     );
