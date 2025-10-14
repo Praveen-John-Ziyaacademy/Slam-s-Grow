@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:social_media/colors/fonts.dart';
 
 class TaskPage extends StatelessWidget {
+  const TaskPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(

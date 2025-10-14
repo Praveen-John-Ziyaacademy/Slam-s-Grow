@@ -6,7 +6,14 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:social_media/controller/wallet/wallet_screen_controller.dart';
 import 'package:social_media/models/wallet_models.dart';
 
-class WalletPage extends StatelessWidget {
+class WalletPage extends StatefulWidget {
+  const WalletPage({super.key});
+
+  @override
+  State<WalletPage> createState() => _WalletPageState();
+}
+
+class _WalletPageState extends State<WalletPage> {
   final WalletController controller = Get.put(WalletController());
 
   @override

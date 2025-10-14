@@ -24,7 +24,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
       heading: "Welcome !",
       title: "Complete simple tasks",
       description: "Complete small tasks and activities to start earnings ",
-      svgPath: "assets/WELCOME.svg",
+      svgPath: "assets/ilu.svg",
     ),
     OnboardingData(
       heading: "Earn !",
@@ -69,11 +69,12 @@ class _OnboardingScreenState extends State<OnboardingScreen>
       body: SafeArea(
         child: Column(
           children: [
-            if (_currentIndex != onboardingData.length - 1)
-              Align(
-                alignment: Alignment.topRight,
-                child: Padding(
-                  padding: EdgeInsets.all(20),
+            Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: EdgeInsets.all(20),
+                child: Opacity(
+                  opacity: _currentIndex != onboardingData.length - 1 ? 1 : 0,
                   child: TextButton(
                     onPressed: () => _navigateToLogin(),
                     child: Text(
@@ -87,6 +88,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   ),
                 ),
               ),
+            ),
 
             Expanded(
               child: PageView.builder(
@@ -111,14 +113,12 @@ class _OnboardingScreenState extends State<OnboardingScreen>
               ),
             ),
 
-            // Bottom Section
             Padding(
               padding: EdgeInsets.all(30),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 60),
                 child: Column(
                   children: [
-                    // Page Indicator
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(

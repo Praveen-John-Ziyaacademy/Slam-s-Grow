@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:social_media/auth_screen/forgot_password.dart';
 import 'package:social_media/auth_screen/sign_up_screen.dart';
 import 'package:social_media/components/barchart.dart';
+import 'package:social_media/components/bottom_bar.dart';
 import 'package:social_media/components/loading.dart';
 import 'package:social_media/screens/home/home_screen.dart';
 

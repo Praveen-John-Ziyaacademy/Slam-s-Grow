@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:social_media/colors/fonts.dart';
 
 class ReferralPage extends StatelessWidget {
+  const ReferralPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(

@@ -5,7 +5,7 @@ import 'package:social_media/auth_controller/new_password_controller.dart';
 import 'package:social_media/colors/fonts.dart';
 
 class NewPasswordScreen extends StatelessWidget {
-  NewPasswordScreen({Key? key}) : super(key: key);
+  NewPasswordScreen({super.key});
 
   final controller = Get.put(NewPasswordController());
 

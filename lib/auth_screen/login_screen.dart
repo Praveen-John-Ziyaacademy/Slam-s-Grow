@@ -6,7 +6,7 @@ import 'package:social_media/components/glass_button.dart';
 import 'package:social_media/auth_controller/login_controller.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -260,13 +260,12 @@ class LoginScreen extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: controller.forgotPassword,
-                                child: Container(
+                                child: IntrinsicWidth(
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
                                         'Forgot password?',
-
                                         style: AppFonts.primaryFont(
                                           color: Colors.white,
                                           fontSize: 10,
@@ -276,7 +275,7 @@ class LoginScreen extends StatelessWidget {
                                       Container(
                                         height: 1,
                                         color: Colors.white,
-                                        width: 73,
+                                        width: double.infinity,
                                       ),
                                     ],
                                   ),

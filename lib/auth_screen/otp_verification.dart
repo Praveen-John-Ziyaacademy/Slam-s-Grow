@@ -5,7 +5,7 @@ import 'package:social_media/auth_controller/otp_controller.dart';
 import 'package:social_media/colors/fonts.dart';
 
 class OTPVerificationScreen extends StatelessWidget {
-  const OTPVerificationScreen({Key? key}) : super(key: key);
+  const OTPVerificationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ import 'package:social_media/auth_controller/login_otp_controller.dart';
 import 'package:social_media/colors/fonts.dart';
 
 class LoginOtpVerification extends StatelessWidget {
-  const LoginOtpVerification({Key? key}) : super(key: key);
+  const LoginOtpVerification({super.key});
 
   @override
   Widget build(BuildContext context) {

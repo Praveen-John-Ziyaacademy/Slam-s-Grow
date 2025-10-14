@@ -8,7 +8,7 @@ import 'package:social_media/auth_controller/forgot_controller.dart';
 import 'package:social_media/colors/fonts.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
-  const ForgotPasswordScreen({Key? key}) : super(key: key);
+  const ForgotPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

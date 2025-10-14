@@ -6,7 +6,7 @@ import 'package:social_media/components/glass_button.dart';
 import 'package:social_media/auth_controller/sign_up_controller.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

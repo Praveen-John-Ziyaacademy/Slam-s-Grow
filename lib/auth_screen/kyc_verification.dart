@@ -7,7 +7,7 @@ import 'package:social_media/colors/colors.dart';
 import 'package:social_media/colors/fonts.dart';
 
 class KYCVerificationScreen extends StatelessWidget {
-  const KYCVerificationScreen({Key? key}) : super(key: key);
+  const KYCVerificationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

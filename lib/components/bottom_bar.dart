@@ -1,40 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:social_media/controller/home_screen_controller.dart';
 import 'package:social_media/screens/home/home_screen.dart';
+import 'package:social_media/screens/home/profile_screen.dart';
+import 'package:social_media/screens/home/referral_screen.dart';
+import 'package:social_media/screens/home/task_screen.dart';
+import 'package:social_media/screens/home/wallet_screen.dart';
 
-class MainBottomNav extends StatelessWidget {
-  MainBottomNav({Key? key}) : super(key: key);
+class HomePage extends StatelessWidget {
+  HomePage({super.key});
 
-  final RxInt selectedIndex = 0.obs;
+  final HomeController controller = Get.put(HomeController());
 
-  final List<Widget> pages = [
-    HomePage(),
-    // const TaskPage(),
-    // const ReferralPage(),
-    // const WalletPage(),
-    // const ProfilePage(),
+  final List<Widget> _pages = [
+    HomeTabContent(),
+    TaskPage(),
+    ReferralPage(),
+    WalletPage(),
+    ProfilePage(),
   ];
-
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
-        body: IndexedStack(index: selectedIndex.value, children: pages),
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 10,
-                offset: const Offset(0, -2),
-              ),
-            ],
-          ),
+    return Scaffold(
+      backgroundColor: Colors.grey[50],
+      body: Obx(() => _pages[controller.selectedIndex.value]),
+      bottomNavigationBar: Obx(
+        () => Container(
+          decoration: BoxDecoration(color: Colors.white),
           child: BottomNavigationBar(
-            currentIndex: selectedIndex.value,
+            currentIndex: controller.selectedIndex.value,
             onTap: (index) {
-              selectedIndex.value = index;
+              controller.selectedIndex.value = index;
             },
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.white,

@@ -3,7 +3,14 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:social_media/controller/wallet_payment_controller.dart';
 
-class WalletPaymentsScreen extends StatelessWidget {
+class WalletPaymentsScreen extends StatefulWidget {
+  const WalletPaymentsScreen({super.key});
+
+  @override
+  State<WalletPaymentsScreen> createState() => _WalletPaymentsScreenState();
+}
+
+class _WalletPaymentsScreenState extends State<WalletPaymentsScreen> {
   final WalletController controller = Get.put(WalletController());
 
   @override

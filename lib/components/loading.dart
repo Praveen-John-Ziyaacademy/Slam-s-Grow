@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 class MultiCircleLoader extends StatefulWidget {
-  const MultiCircleLoader({Key? key}) : super(key: key);
+  const MultiCircleLoader({super.key});
 
   @override
   State<MultiCircleLoader> createState() => _MultiCircleLoaderState();
