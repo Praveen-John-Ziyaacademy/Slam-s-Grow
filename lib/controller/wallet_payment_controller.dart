@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class WalletController extends GetxController {
+class WalletPaymentsScreenController extends GetxController {
   var balance = 5000.00.obs;
   var weeklyIncrease = 250.0.obs;
   var selectedTab = 0.obs;

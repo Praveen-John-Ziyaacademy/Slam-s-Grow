@@ -1,10 +1,12 @@
-// import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:social_media/colors/fonts.dart';
 import 'package:social_media/controller/wallet/wallet_screen_controller.dart';
 import 'package:social_media/models/wallet_models.dart';
+import 'package:social_media/screens/wallet_payment_screen.dart';
 
 class WalletPage extends StatefulWidget {
   const WalletPage({super.key});
@@ -24,289 +26,279 @@ class _WalletPageState extends State<WalletPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios_new, color: Colors.black),
           onPressed: () => Get.back(),
         ),
         title: Text(
           'Wallet & Payments',
-          style: TextStyle(
+          style: AppFonts.primaryFont(
             color: Colors.black,
             fontSize: 18,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
           ),
         ),
+        centerTitle: true,
       ),
       body: RefreshIndicator(
         backgroundColor: Colors.white,
         color: Color(0xFF4CAF50),
         onRefresh: () => controller.refreshActivityData(),
         child: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.all(16),
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xFF4CAF50), Color(0xFF2196F3)],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Column(
+              children: [
+                Container(
+                  height: 218,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF4CAF50), Color(0xFF2196F3)],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black54.withOpacity(0.25),
+                        blurRadius: 2,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
                   ),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'Total Balance',
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Obx(
+                                    () => Text(
+                                      '\$${controller.balance.value.toStringAsFixed(2)}',
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 36,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 35),
+                              child: SvgPicture.asset(
+                                'assets/graph 1.svg',
+                                width: 100,
+                                height: 100,
+                              ),
+                            ),
+                          ],
+                        ),
+
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Total Balance',
-                              style: TextStyle(
-                                color: Colors.white70,
-                                fontSize: 14,
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(() => WalletPaymentsScreen());
+                              },
+                              child: Container(
+                                width: 140,
+                                height: 39,
+                                decoration: BoxDecoration(
+                                  gradient: const LinearGradient(
+                                    colors: [
+                                      Color(0xFF319F43),
+                                      Color(0xFF2070FF),
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black54.withOpacity(0.25),
+                                      blurRadius: 2,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.download,
+                                      size: 14,
+                                      color: Colors.white,
+                                    ),
+                                    SizedBox(width: 6),
+                                    Text(
+                                      'Withdraw Funds',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            SizedBox(height: 8),
-                            Obx(
-                              () => Text(
-                                '\$${controller.balance.value.toStringAsFixed(2)}',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 36,
-                                  fontWeight: FontWeight.bold,
+
+                            const SizedBox(height: 8),
+
+                            // History Button
+                            GestureDetector(
+                              onTap: () {},
+                              child: Container(
+                                width: 140,
+                                height: 39,
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.30),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black54.withOpacity(0.25),
+                                      blurRadius: 2,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: const Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.history,
+                                      size: 14,
+                                      color: Colors.white,
+                                    ),
+                                    SizedBox(width: 6),
+                                    Text(
+                                      'History',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
                           ],
                         ),
-                        Container(
-                          padding: EdgeInsets.all(8),
-                          child: CustomPaint(
-                            size: Size(80, 60),
-                            painter: BarChartPainter(),
-                          ),
-                        ),
                       ],
                     ),
-                    SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton.icon(
-                            onPressed: () {},
-                            icon: Icon(Icons.download, size: 18),
-                            label: Text('Withdraw Funds'),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white.withOpacity(0.2),
-                              foregroundColor: Colors.white,
-                              elevation: 0,
-                              padding: EdgeInsets.symmetric(vertical: 12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: ElevatedButton.icon(
-                            onPressed: () {},
-                            icon: Icon(Icons.history, size: 18),
-                            label: Text('History'),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white.withOpacity(0.2),
-                              foregroundColor: Colors.white,
-                              elevation: 0,
-                              padding: EdgeInsets.symmetric(vertical: 12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 16),
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 10,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Color(0xFF2196F3).withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Icon(
-                            Icons.bar_chart,
-                            color: Color(0xFF2196F3),
-                            size: 20,
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'App Activity',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14,
-                              ),
+                SizedBox(height: 20),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.25),
+                        blurRadius: 2,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Color(0xFF2196F3).withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                            Text(
-                              'This Week',
-                              style: TextStyle(
-                                color: Colors.grey[600],
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Spacer(),
-                        Obx(
-                          () => Text(
-                            '${controller.activeDaysCount}/7',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 8),
-                        Text(
-                          'Days Active',
-                          style: TextStyle(
-                            color: Colors.grey[600],
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 16),
-
-                    Obx(() {
-                      if (controller.isLoadingActivity.value) {
-                        return Container(
-                          height: 150,
-                          child: Center(
-                            child: CircularProgressIndicator(
+                            child: Icon(
+                              Icons.calendar_today,
                               color: Color(0xFF2196F3),
+                              size: 20,
                             ),
                           ),
-                        );
-                      }
-
-                      if (controller.weeklyActivity.isEmpty) {
-                        return Container(
-                          height: 150,
-                          child: Center(
-                            child: Text(
-                              'No activity data available',
-                              style: TextStyle(color: Colors.grey[600]),
-                            ),
-                          ),
-                        );
-                      }
-
-                      final maxEarnings = controller.weeklyActivity
-                          .map((day) => day.earnings)
-                          .reduce((a, b) => a > b ? a : b);
-
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: controller.weeklyActivity
-                            .map(
-                              (activity) => _buildActivityBar(
-                                activity.dayName,
-                                activity.wasActive,
-                                activity.earnings,
-                                maxEarnings > 0
-                                    ? activity.earnings / maxEarnings
-                                    : 0,
+                          SizedBox(width: 10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'App Activity',
+                                style: AppFonts.primaryFont(
+                                  color: const Color(0xFF2070FF),
+                                  fontSize: 12,
+                                ),
                               ),
-                            )
-                            .toList(),
-                      );
-                    }),
-
-                    SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 12,
-                          height: 12,
-                          decoration: BoxDecoration(
-                            color: Color(0xFF4CAF50),
-                            shape: BoxShape.circle,
+                              SizedBox(height: 5),
+                              Text(
+                                'This Week',
+                                style: AppFonts.primaryFont(
+                                  fontSize: 10,
+                                  color: const Color(0xFF00BD4A),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        SizedBox(width: 6),
-                        Text(
-                          'Active Day',
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: Colors.grey[600],
+                          Spacer(),
+                          Column(
+                            children: [
+                              Text(
+                                '5/7',
+                                style: AppFonts.primaryFont(
+                                  fontSize: 16,
+                                  color: const Color(0xFF00BD4A),
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                'Days Active',
+                                style: AppFonts.primaryFont(fontSize: 8),
+                              ),
+                            ],
                           ),
-                        ),
-                        SizedBox(width: 16),
-                        Container(
-                          width: 12,
-                          height: 12,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                        SizedBox(width: 6),
-                        Text(
-                          'Inactive Day',
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                      SizedBox(height: 16),
+                      _buildHeatmapChart(),
+                      SizedBox(height: 12),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _buildLegendItem(Color(0xFF4CAF50), 'Active Day'),
+                          SizedBox(width: 16),
+                          _buildLegendItem(Colors.grey[500]!, 'Inactive Day'),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
 
-              SizedBox(height: 24),
+                SizedBox(height: 16),
 
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Transaction History',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -339,62 +331,100 @@ class _WalletPageState extends State<WalletPage> {
                     ),
                   ],
                 ),
-              ),
-              SizedBox(height: 20),
-            ],
+                SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildActivityBar(
-    String day,
-    bool isActive,
-    double earnings,
-    double heightRatio,
-  ) {
-    final displayHeight = isActive ? (120 * heightRatio.clamp(0.3, 1.0)) : 20.0;
+  Widget _buildHeatmapChart() {
+    final days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    final activityData = [
+      [6, 6, 6, 6, 6, 6, 6, 9, 9, 9, 9, 9, 9],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [6, 6, 6, 6, 6, 6, 6, 9, 9, 9, 9, 9, 9],
+      [6, 6, 6, 6, 6, 6, 6, 9, 9, 9, 9, 9, 9],
+      [6, 6, 6, 6, 6, 6, 6, 9, 9, 9, 9, 9, 9],
+      [6, 6, 6, 6, 6, 6, 6, 9, 9, 9, 9, 9, 9],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ];
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
+    Color getStartColor(int value) {
+      if (value == 0) return Colors.grey[300]!;
+      return const Color(0xFF2070FF);
+    }
+
+    Color getEndColor(int value) {
+      if (value == 0) return Colors.grey[300]!;
+      return const Color(0xFF00BD4A);
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children:
+          List.generate(days.length, (dayIndex) {
+                final columnData = activityData[dayIndex];
+                final isInactive = columnData.every((v) => v == 0);
+
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ...List.generate(columnData.length, (index) {
+                      double t = index / (columnData.length - 1);
+                      Color color = isInactive
+                          ? Colors.grey[300]!
+                          : Color.lerp(
+                              getStartColor(columnData[index]),
+                              getEndColor(columnData[index]),
+                              t,
+                            )!;
+                      return Container(
+                        width: 18,
+                        height: 4,
+                        margin: const EdgeInsets.only(bottom: 4),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(2),
+                          color: color,
+                        ),
+                      );
+                    }).reversed,
+                    const SizedBox(height: 12),
+                    Text(
+                      days[dayIndex],
+                      style: const TextStyle(
+                        fontSize: 8,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                );
+              })
+              .map(
+                (widget) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: widget,
+                ),
+              )
+              .toList(),
+    );
+  }
+
+  Widget _buildLegendItem(Color color, String label) {
+    return Row(
       children: [
         Container(
-          width: 32,
-          height: displayHeight,
+          width: 12,
+          height: 12,
           decoration: BoxDecoration(
-            gradient: isActive
-                ? LinearGradient(
-                    colors: [Color(0xFF4CAF50), Color(0xFF2196F3)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  )
-                : null,
-            color: isActive ? null : Colors.grey[300],
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: isActive && earnings > 0
-              ? Center(
-                  child: Text(
-                    '\$${earnings.toInt()}',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 9,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                )
-              : null,
-        ),
-        SizedBox(height: 6),
-        Text(
-          day,
-          style: TextStyle(
-            fontSize: 10,
-            color: isActive ? Colors.black87 : Colors.grey[400],
-            fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
+            color: color,
+            borderRadius: BorderRadius.circular(2),
           ),
         ),
+        SizedBox(width: 4),
+        Text(label, style: TextStyle(fontSize: 8, color: Colors.grey[600])),
       ],
     );
   }
@@ -406,17 +436,32 @@ class _WalletPageState extends State<WalletPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
-          color: isSelected ? Color(0xFF2196F3) : Colors.white,
-          borderRadius: BorderRadius.circular(20),
+          gradient: isSelected
+              ? LinearGradient(
+                  colors: [Color(0xFF4CAF50), Color(0xFF2196F3)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                )
+              : null,
+          color: isSelected ? null : Colors.white,
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: isSelected ? Color(0xFF2196F3) : Colors.grey[300]!,
+            color: isSelected ? Colors.transparent : Colors.grey[300]!,
           ),
+          boxShadow: [
+            if (isSelected)
+              BoxShadow(
+                color: Colors.blue.withOpacity(0.2),
+                blurRadius: 6,
+                offset: Offset(0, 3),
+              ),
+          ],
         ),
         child: Text(
           label,
           style: TextStyle(
             color: isSelected ? Colors.white : Colors.grey[700],
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),
@@ -484,44 +529,4 @@ class _WalletPageState extends State<WalletPage> {
       ),
     );
   }
-}
-
-class BarChartPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.white.withOpacity(0.3)
-      ..style = PaintingStyle.fill;
-
-    final barWidth = size.width / 6;
-    final heights = [0.4, 0.5, 0.6, 0.7, 0.85, 1.0];
-
-    for (int i = 0; i < heights.length; i++) {
-      final rect = RRect.fromRectAndRadius(
-        Rect.fromLTWH(
-          i * barWidth,
-          size.height * (1 - heights[i]),
-          barWidth * 0.7,
-          size.height * heights[i],
-        ),
-        Radius.circular(3),
-      );
-      canvas.drawRRect(rect, paint);
-    }
-
-    final arrowPaint = Paint()
-      ..color = Colors.white
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2;
-
-    final arrowPath = Path()
-      ..moveTo(size.width * 0.7, size.height * 0.3)
-      ..lineTo(size.width * 0.85, size.height * 0.15)
-      ..lineTo(size.width * 0.95, size.height * 0.25);
-
-    canvas.drawPath(arrowPath, arrowPaint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

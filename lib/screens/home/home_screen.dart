@@ -28,8 +28,6 @@ class HomeTabContent extends StatelessWidget {
           const SizedBox(height: 120),
           _buildManageNow(),
           const SizedBox(height: 20),
-          _buildPlans(),
-          const SizedBox(height: 20),
           _buildTodaysTasks(),
           const SizedBox(height: 20),
           _buildRecentActivity(),
@@ -387,97 +385,6 @@ class HomeTabContent extends StatelessWidget {
             subtitle,
             style: AppFonts.primaryFont(color: Colors.white70, fontSize: 10),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPlans() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Text(
-            'Plans',
-            style: AppFonts.primaryFont(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-        const SizedBox(height: 15),
-        SizedBox(
-          height: 120,
-          child: ListView(
-            clipBehavior: Clip.none,
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            children: [
-              _buildPlanCard(
-                'Starter Plan',
-                'For beginners',
-                const Color(0xFFB4D4FF),
-              ),
-              _buildPlanCard(
-                'Pro Plan',
-                'For active users',
-                const Color(0xFFB4D4FF),
-              ),
-              _buildPlanCard(
-                'Elite Plan',
-                'For professionals',
-                const Color(0xFFB4D4FF),
-              ),
-              _buildPlanCard(
-                'Infinity Plan',
-                'For Unlimited Access',
-                const Color(0xFFB4D4FF),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPlanCard(String title, String subtitle, Color color) {
-    return Container(
-      width: 140,
-      margin: const EdgeInsets.only(right: 15),
-      padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.25),
-            blurRadius: 4,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.workspace_premium, color: Colors.white, size: 20),
-          const SizedBox(height: 10),
-          Text(
-            title,
-            style: AppFonts.primaryFont(
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
-            ),
-          ),
-          if (subtitle.isNotEmpty)
-            Text(
-              subtitle,
-              style: AppFonts.primaryFont(
-                fontSize: 11,
-                color: Colors.grey[700],
-              ),
-            ),
         ],
       ),
     );
