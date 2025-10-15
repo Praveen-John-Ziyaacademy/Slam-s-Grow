@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:social_media/auth_screen/forgot_password.dart';
+import 'package:social_media/auth_screen/kyc_verification.dart';
 import 'package:social_media/auth_screen/sign_up_screen.dart';
 import 'package:social_media/components/bottom_bar.dart';
 import 'package:social_media/components/loading.dart';
@@ -82,8 +83,8 @@ class LoginController extends GetxController {
   void _saveUserSession(Map<String, dynamic> userData) {
     try {
       print('User Data: $userData');
-      if (userData['token'] != null) {
-        storage.write('auth_token', userData['token']);
+      if (userData['access'] != null) {
+        storage.write('access', userData['access']);
       }
       if (userData['user_id'] != null) {
         storage.write('user_id', userData['user_id'].toString());
@@ -102,73 +103,73 @@ class LoginController extends GetxController {
   }
 
   void login() async {
-    // String email = emailController.text.trim();
-    // String password = passwordController.text.trim();
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
 
-    // if (email.isEmpty || password.isEmpty) {
-    //   Get.snackbar(
-    //     'Error',
-    //     'Please enter email and password',
-    //     snackPosition: SnackPosition.BOTTOM,
-    //     backgroundColor: Colors.red.withOpacity(0.7),
-    //     colorText: Colors.white,
-    //   );
-    //   return;
-    // }
+    if (email.isEmpty || password.isEmpty) {
+      Get.snackbar(
+        'Error',
+        'Please enter email and password',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.7),
+        colorText: Colors.white,
+      );
+      return;
+    }
 
-    // if (!GetUtils.isEmail(email)) {
-    //   Get.snackbar(
-    //     'Error',
-    //     'Please enter a valid email address',
-    //     snackPosition: SnackPosition.BOTTOM,
-    //     backgroundColor: Colors.red.withOpacity(0.7),
-    //     colorText: Colors.white,
-    //   );
-    //   return;
-    // }
+    if (!GetUtils.isEmail(email)) {
+      Get.snackbar(
+        'Error',
+        'Please enter a valid email address',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.7),
+        colorText: Colors.white,
+      );
+      return;
+    }
 
-    // showLoading();
+    showLoading();
 
-    // try {
-    //   final result = await ApiService.login(email: email, password: password);
+    try {
+      final result = await ApiService.login(email: email, password: password);
 
-    //   hideLoading();
+      hideLoading();
 
-    //   if (result['success']) {
-    //     _saveCredentials();
+      if (result['success']) {
+        _saveCredentials();
+        _saveUserSession(result['data']);
 
-    //     _saveUserSession(result['data']);
+        Get.snackbar(
+          'Success',
+          'Login successful!',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green.withOpacity(0.7),
+          colorText: Colors.white,
+        );
 
-    //     Get.snackbar(
-    //       'Success',
-    //       'Login successful!',
-    //       snackPosition: SnackPosition.BOTTOM,
-    //       backgroundColor: Colors.green.withOpacity(0.7),
-    //       colorText: Colors.white,
-    //     );
+        final kycSubmitted = storage.read('kyc_submitted') ?? false;
 
-    //     Get.offAll(() => HomePage());
-    //   } else {
-    //     Get.snackbar(
-    //       'Login Failed',
-    //       result['message'] ?? 'Invalid credentials',
-    //       snackPosition: SnackPosition.BOTTOM,
-    //       backgroundColor: Colors.red.withOpacity(0.7),
-    //       colorText: Colors.white,
-    //       duration: const Duration(seconds: 3),
-    //     );
-    //   }
-    // } catch (e) {
-    //   hideLoading();
-    //   Get.snackbar(
-    //     'Error',
-    //     'An unexpected error occurred: ${e.toString()}',
-    //     snackPosition: SnackPosition.BOTTOM,
-    //     backgroundColor: Colors.red.withOpacity(0.7),
-    //     colorText: Colors.white,
-    //   );
-    // }
-    Get.to(() => HomePage());
+        Get.offAll(() => KYCVerificationScreen());
+      } else {
+        Get.snackbar(
+          'Login Failed',
+          result['message'] ?? 'Invalid credentials',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red.withOpacity(0.7),
+          colorText: Colors.white,
+          duration: const Duration(seconds: 3),
+        );
+      }
+    } catch (e) {
+      hideLoading();
+      Get.snackbar(
+        'Error',
+        'An unexpected error occurred: ${e.toString()}',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.7),
+        colorText: Colors.white,
+      );
+    }
   }
 
   void navigateToSignUp() {
@@ -204,7 +205,7 @@ class LoginController extends GetxController {
 }
 
 class ApiService {
-  static const String baseUrl = 'http://192.168.1.3:8000/api';
+  static const String baseUrl = 'http://192.168.1.54:8000/api';
 
   static Future<Map<String, dynamic>> login({
     required String email,

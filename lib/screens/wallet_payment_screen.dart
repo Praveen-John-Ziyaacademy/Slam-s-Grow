@@ -66,7 +66,8 @@ class _WalletPaymentsScreenState extends State<WalletPaymentsScreen> {
                         Text(
                           "Available Balance",
                           style: GoogleFonts.poppins(
-                            color: AppColors.primaryDark,
+                            color: Color(0xFF319F43),
+
                             fontSize: 12,
                           ),
                         ),
@@ -89,7 +90,7 @@ class _WalletPaymentsScreenState extends State<WalletPaymentsScreen> {
                       Text(
                         "This week",
                         style: GoogleFonts.poppins(
-                          color: AppColors.primaryDark,
+                          color: Color(0xFF319F43),
                           fontSize: 12,
                         ),
                       ),
@@ -97,7 +98,8 @@ class _WalletPaymentsScreenState extends State<WalletPaymentsScreen> {
                       Text(
                         "+₹250",
                         style: GoogleFonts.poppins(
-                          color: AppColors.primaryDark,
+                          color: Color(0xFF319F43),
+
                           fontSize: 12,
                         ),
                       ),
@@ -164,46 +166,97 @@ class _WalletPaymentsScreenState extends State<WalletPaymentsScreen> {
                   ),
                   SizedBox(height: 5),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        width: 80,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF6FFFD),
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            width: 0.3,
-                            color: Color(0xFF8CEEB9),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          width: 80,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFF6FFFD),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              width: 0.3,
+                              color: Color(0xFF8CEEB9),
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "₹ 100",
+                              style: AppFonts.primaryFont(fontSize: 16),
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(width: 20),
-                      Container(
-                        width: 80,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF6FFFD),
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            width: 0.3,
-                            color: Color(0xFF8CEEB9),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          width: 80,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFF6FFFD),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              width: 0.3,
+                              color: Color(0xFF8CEEB9),
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "₹ 100",
+                              style: AppFonts.primaryFont(fontSize: 16),
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(width: 20),
-                      Container(
-                        width: 80,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFF6FFFD),
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            width: 0.3,
-                            color: Color(0xFF8CEEB9),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          width: 80,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFF6FFFD),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              width: 0.3,
+                              color: Color(0xFF8CEEB9),
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "₹ 100",
+                              style: AppFonts.primaryFont(fontSize: 16),
+                            ),
                           ),
                         ),
                       ),
                     ],
+                  ),
+                  SizedBox(height: 28),
+                  Container(
+                    width: double.infinity,
+                    height: 40,
+
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(
+                        colors: [Color(0xFF206DFF), Color(0xFF319F43)],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Continue",
+                      style: AppFonts.primaryFont(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ],
               ),

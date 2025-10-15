@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'package:social_media/auth_screen/login_screen.dart';
+import 'package:social_media/components/bottom_bar.dart';
 
 class KYCController extends GetxController {
   final fullNameController = TextEditingController();
   final dateOfBirthController = TextEditingController();
-
   final mobileNumberController = TextEditingController();
   final alternateMobileController = TextEditingController();
-
   final accountNameController = TextEditingController();
   final accountNumberController = TextEditingController();
   final ifscCodeController = TextEditingController();
 
   final isChecked = false.obs;
   final currentStep = 1.obs;
+  final isSubmitting = false.obs;
 
   final selectedNationality = 'Nationality'.obs;
   final selectedGender = 'Gender'.obs;
@@ -25,11 +30,10 @@ class KYCController extends GetxController {
   final selectedCity = 'City'.obs;
   final selectedDistrict = 'District'.obs;
   final selectedPincode = 'Pin code'.obs;
-
   final selectedJobRole = 'Job Role'.obs;
   final selectedUserType = 'User Type'.obs;
 
-  // Document files for ID verification screen
+  // Document files
   final aadharFront = Rx<File?>(null);
   final aadharBack = Rx<File?>(null);
   final panFront = Rx<File?>(null);
@@ -38,6 +42,37 @@ class KYCController extends GetxController {
   final passbookBack = Rx<File?>(null);
   final selfieImage = Rx<File?>(null);
 
+  final storage = GetStorage();
+  final ImagePicker _picker = ImagePicker();
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Verify token exists on initialization
+    _verifyAuthToken();
+  }
+
+  // Verify auth token exists
+  void _verifyAuthToken() {
+    final token = storage.read('access');
+    if (token == null || token.isEmpty) {
+      Get.snackbar(
+        'Authentication Required',
+        'Please login again to continue',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.orange.withOpacity(0.7),
+        colorText: Colors.white,
+      );
+      // Navigate to login after a delay
+      Future.delayed(const Duration(seconds: 2), () {
+        Get.to(() => LoginScreen());
+      });
+    } else {
+      debugPrint('✓ Auth token found: ${token.substring(0, 20)}...');
+    }
+  }
+
+  // Dropdown options lists
   final List<String> nationalityOptions = [
     'Nationality',
     'Indian',
@@ -149,14 +184,13 @@ class KYCController extends GetxController {
 
   final List<String> userTypeOptions = [
     'User Type',
-    'Individual',
-    'Business',
-    'Professional',
-    'Enterprise',
+    'Promoter',
+    'Client',
+    'Admin',
+    'Super Admin',
   ];
 
-  final ImagePicker _picker = ImagePicker();
-
+  // Change handlers
   void changeNationality(String? value) {
     if (value != null) selectedNationality.value = value;
   }
@@ -204,6 +238,7 @@ class KYCController extends GetxController {
     isChecked.value = value ?? false;
   }
 
+  // Date picker
   Future<void> pickDateOfBirth(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -230,7 +265,20 @@ class KYCController extends GetxController {
     }
   }
 
-  // Document picker for ID verification
+  // Convert date format from DD/MM/YYYY to YYYY-MM-DD
+  String _convertDateForAPI(String date) {
+    try {
+      final parts = date.split('/');
+      if (parts.length == 3) {
+        return '${parts[2]}-${parts[1]}-${parts[0]}';
+      }
+      return date;
+    } catch (e) {
+      return date;
+    }
+  }
+
+  // Document picker
   Future<void> pickDocument(String documentType) async {
     try {
       final XFile? image = await _picker.pickImage(
@@ -272,6 +320,7 @@ class KYCController extends GetxController {
     }
   }
 
+  // Validation methods
   bool validateStep1() {
     if (fullNameController.text.trim().isEmpty) {
       _showError('Please enter your full name');
@@ -385,6 +434,7 @@ class KYCController extends GetxController {
     return true;
   }
 
+  // Show messages
   void _showError(String message) {
     Get.snackbar(
       'Error',
@@ -409,38 +459,88 @@ class KYCController extends GetxController {
     );
   }
 
-  void goToNextStep() {
-    if (currentStep.value == 1) {
-      // Validate personal information
-      if (!validateStep1()) {
+  Future<void> submitKYCToBackend() async {
+    try {
+      isSubmitting.value = true;
+
+      final token = storage.read('access');
+      if (token == null || token.isEmpty) {
+        _showError('Authentication token missing. Please login again.');
+        Get.to(() => LoginScreen());
         return;
       }
 
-      // Change step with animation (no navigation)
+      debugPrint('📤 Submitting KYC with token: ${token.substring(0, 20)}...');
+
+      final response = await KYCApiService.submitKYC(
+        fullName: fullNameController.text.trim(),
+        nationality: selectedNationality.value,
+        gender: selectedGender.value,
+        maritalStatus: selectedMaritalStatus.value,
+        bloodGroup: selectedBloodGroup.value,
+        dateOfBirth: _convertDateForAPI(dateOfBirthController.text),
+        state: selectedState.value.toLowerCase(),
+        city: selectedCity.value.toLowerCase(),
+        district: selectedDistrict.value,
+        pinCode: selectedPincode.value,
+        mobileNumber: mobileNumberController.text.trim(),
+        alternateMobile: alternateMobileController.text.trim(),
+        jobRole: selectedJobRole.value,
+        userType: selectedUserType.value.toLowerCase(),
+        accountHolderName: accountNameController.text.trim(),
+        accountNumber: accountNumberController.text.trim(),
+        ifscCode: ifscCodeController.text.trim(),
+        aadharFront: aadharFront.value!,
+        aadharBack: aadharBack.value,
+        panFront: panFront.value!,
+        panBack: panBack.value,
+        passbook: passbookFront.value!,
+        selfie: selfieImage.value!,
+      );
+
+      if (response['success']) {
+        _showSuccess('KYC submitted successfully');
+        storage.write('kyc_submitted', true);
+
+        await Future.delayed(const Duration(seconds: 1));
+        Get.to(() => HomePage());
+      } else {
+        _showError(response['message'] ?? 'Failed to submit KYC');
+
+        if (response['message']?.toLowerCase().contains('login') == true ||
+            response['message']?.toLowerCase().contains('unauthorized') ==
+                true ||
+            response['message']?.toLowerCase().contains('token') == true) {
+          await Future.delayed(const Duration(seconds: 2));
+          Get.to(() => LoginScreen());
+        }
+      }
+    } catch (e) {
+      _showError('Error submitting KYC: $e');
+      debugPrint('❌ KYC Submission Error: $e');
+    } finally {
+      isSubmitting.value = false;
+    }
+  }
+
+  void goToNextStep() {
+    if (currentStep.value == 1) {
+      if (!validateStep1()) return;
       currentStep.value = 2;
       _showSuccess('Personal information saved successfully');
     } else if (currentStep.value == 2) {
-      // Validate documents
-      if (!validateStep2()) {
-        return;
-      }
-
-      // Move to review step
+      if (!validateStep2()) return;
       currentStep.value = 3;
       _showSuccess('Documents uploaded successfully');
     } else if (currentStep.value == 3) {
-      // Submit KYC
-      _showSuccess('KYC submitted successfully');
-      // Add your submission logic here
+      submitKYCToBackend();
     }
   }
 
   void goBack() {
     if (currentStep.value > 1) {
-      // Go to previous step with animation
       currentStep.value--;
     } else {
-      // Exit the KYC screen
       Get.back();
     }
   }
@@ -459,5 +559,167 @@ class KYCController extends GetxController {
     accountNumberController.dispose();
     ifscCodeController.dispose();
     super.onClose();
+  }
+}
+
+class KYCApiService {
+  static const String baseUrl = 'http://192.168.1.54:8000/api';
+
+  static String? getAuthToken() {
+    final storage = GetStorage();
+    return storage.read('access');
+  }
+
+  static Future<Map<String, dynamic>> submitKYC({
+    required String fullName,
+    required String nationality,
+    required String gender,
+    required String maritalStatus,
+    required String bloodGroup,
+    required String dateOfBirth,
+    required String state,
+    required String city,
+    required String district,
+    required String pinCode,
+    required String mobileNumber,
+    required String alternateMobile,
+    required String jobRole,
+    required String userType,
+    required String accountHolderName,
+    required String accountNumber,
+    required String ifscCode,
+    required File aadharFront,
+    File? aadharBack,
+    required File panFront,
+    File? panBack,
+    required File passbook,
+    required File selfie,
+  }) async {
+    try {
+      final token = getAuthToken();
+
+      if (token == null || token.isEmpty) {
+        return {
+          'success': false,
+          'error': 'Authentication token not found',
+          'message': 'Please login again',
+        };
+      }
+
+      var uri = Uri.parse('$baseUrl/kyc/');
+      var request = http.MultipartRequest('POST', uri);
+
+      // Add authorization header
+      request.headers['Authorization'] = 'Bearer $token';
+
+      debugPrint('🔐 Using access: ${token.substring(0, 20)}...');
+      debugPrint('📍 Endpoint: $uri');
+
+      request.fields['full_name'] = fullName;
+      request.fields['nationality'] = nationality;
+      request.fields['gender'] = gender;
+      request.fields['marital_status'] = maritalStatus;
+      request.fields['blood_group'] = bloodGroup;
+      request.fields['date_of_birth'] = dateOfBirth;
+      request.fields['state'] = state;
+      request.fields['city'] = city;
+      request.fields['district'] = district;
+      request.fields['pin_code'] = pinCode;
+      request.fields['mobile_number'] = mobileNumber;
+      request.fields['alternate_mobile_number'] = alternateMobile;
+
+      request.fields['job_role'] = jobRole;
+      request.fields['user_type'] = userType;
+      request.fields['account_holder_name'] = accountHolderName;
+      request.fields['account_number'] = accountNumber;
+      request.fields['ifsc_code'] = ifscCode;
+
+      request.files.add(
+        await http.MultipartFile.fromPath('aadhar_front', aadharFront.path),
+      );
+
+      if (aadharBack != null) {
+        request.files.add(
+          await http.MultipartFile.fromPath('aadhar_back', aadharBack.path),
+        );
+      }
+
+      request.files.add(
+        await http.MultipartFile.fromPath('pan_front', panFront.path),
+      );
+
+      if (panBack != null) {
+        request.files.add(
+          await http.MultipartFile.fromPath('pan_back', panBack.path),
+        );
+      }
+
+      request.files.add(
+        await http.MultipartFile.fromPath('passbook', passbook.path),
+      );
+
+      request.files.add(
+        await http.MultipartFile.fromPath('selfie', selfie.path),
+      );
+
+      debugPrint('📦 Sending ${request.files.length} files');
+
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+
+      debugPrint('📥 Response status: ${response.statusCode}');
+      debugPrint('📥 Response body: ${response.body}');
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return {
+          'success': true,
+          'data': json.decode(response.body),
+          'message': 'KYC submitted successfully',
+        };
+      } else if (response.statusCode == 401) {
+        return {
+          'success': false,
+          'error': 'Unauthorized',
+          'message': 'Session expired. Please login again',
+        };
+      } else {
+        try {
+          final errorData = json.decode(response.body);
+          return {
+            'success': false,
+            'error': errorData,
+            'message': errorData['message'] ?? 'Failed to submit KYC',
+          };
+        } catch (e) {
+          return {
+            'success': false,
+            'error': response.body,
+            'message': 'Failed to submit KYC: ${response.statusCode}',
+          };
+        }
+      }
+    } catch (e) {
+      debugPrint('❌ Exception in submitKYC: $e');
+      return {
+        'success': false,
+        'error': e.toString(),
+        'message': 'An error occurred while submitting KYC',
+      };
+    }
+  }
+
+  static bool isAuthenticated() {
+    final token = getAuthToken();
+    return token != null && token.isNotEmpty;
+  }
+
+  static Map<String, dynamic> getUserInfo() {
+    final storage = GetStorage();
+    return {
+      'user_id': storage.read('user_id'),
+      'email': storage.read('user_email'),
+      'name': storage.read('user_name'),
+      'access': storage.read('access'),
+    };
   }
 }
