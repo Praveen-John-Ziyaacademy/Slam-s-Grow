@@ -37,9 +37,7 @@ class KYCController extends GetxController {
   final aadharFront = Rx<File?>(null);
   final aadharBack = Rx<File?>(null);
   final panFront = Rx<File?>(null);
-  final panBack = Rx<File?>(null);
-  final passbookFront = Rx<File?>(null);
-  final passbookBack = Rx<File?>(null);
+  final passbook_image = Rx<File?>(null);
   final selfieImage = Rx<File?>(null);
 
   final storage = GetStorage();
@@ -299,14 +297,8 @@ class KYCController extends GetxController {
           case 'pan_front':
             panFront.value = file;
             break;
-          case 'pan_back':
-            panBack.value = file;
-            break;
-          case 'passbook_front':
-            passbookFront.value = file;
-            break;
-          case 'passbook_back':
-            passbookBack.value = file;
+          case 'passbook_image':
+            passbook_image.value = file;
             break;
           case 'selfie':
             selfieImage.value = file;
@@ -416,13 +408,18 @@ class KYCController extends GetxController {
       return false;
     }
 
-    if (panFront.value == null) {
-      _showError('Please upload PAN card front');
+    if (aadharBack.value == null) {
+      _showError('Please upload Aadhar card back');
       return false;
     }
 
-    if (passbookFront.value == null) {
-      _showError('Please upload Pass Book front');
+    if (panFront.value == null) {
+      _showError('Please upload PAN card');
+      return false;
+    }
+
+    if (passbook_image.value == null) {
+      _showError('Please upload Pass Book');
       return false;
     }
 
@@ -491,10 +488,9 @@ class KYCController extends GetxController {
         accountNumber: accountNumberController.text.trim(),
         ifscCode: ifscCodeController.text.trim(),
         aadharFront: aadharFront.value!,
-        aadharBack: aadharBack.value,
+        aadharBack: aadharBack.value!,
         panFront: panFront.value!,
-        panBack: panBack.value,
-        passbook: passbookFront.value!,
+        passbook_image: passbook_image.value!,
         selfie: selfieImage.value!,
       );
 
@@ -563,7 +559,7 @@ class KYCController extends GetxController {
 }
 
 class KYCApiService {
-  static const String baseUrl = 'http://192.168.1.54:8000/api';
+  static const String baseUrl = 'http://192.168.1.25:8000/api';
 
   static String? getAuthToken() {
     final storage = GetStorage();
@@ -589,10 +585,9 @@ class KYCApiService {
     required String accountNumber,
     required String ifscCode,
     required File aadharFront,
-    File? aadharBack,
+    required File aadharBack,
     required File panFront,
-    File? panBack,
-    required File passbook,
+    required File passbook_image,
     required File selfie,
   }) async {
     try {
@@ -609,7 +604,6 @@ class KYCApiService {
       var uri = Uri.parse('$baseUrl/kyc/');
       var request = http.MultipartRequest('POST', uri);
 
-      // Add authorization header
       request.headers['Authorization'] = 'Bearer $token';
 
       debugPrint('🔐 Using access: ${token.substring(0, 20)}...');
@@ -638,24 +632,19 @@ class KYCApiService {
         await http.MultipartFile.fromPath('aadhar_front', aadharFront.path),
       );
 
-      if (aadharBack != null) {
-        request.files.add(
-          await http.MultipartFile.fromPath('aadhar_back', aadharBack.path),
-        );
-      }
+      request.files.add(
+        await http.MultipartFile.fromPath('aadhar_back', aadharBack.path),
+      );
 
       request.files.add(
         await http.MultipartFile.fromPath('pan_front', panFront.path),
       );
 
-      if (panBack != null) {
-        request.files.add(
-          await http.MultipartFile.fromPath('pan_back', panBack.path),
-        );
-      }
-
       request.files.add(
-        await http.MultipartFile.fromPath('passbook', passbook.path),
+        await http.MultipartFile.fromPath(
+          'passbook_image',
+          passbook_image.path,
+        ),
       );
 
       request.files.add(

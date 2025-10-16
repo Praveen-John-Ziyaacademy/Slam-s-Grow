@@ -136,7 +136,6 @@ class KYCVerificationScreen extends StatelessWidget {
     }
   }
 
-  // Step 1: Personal Information
   Widget _buildPersonalInfoStep(KYCController controller) {
     return SingleChildScrollView(
       key: const ValueKey(1),
@@ -376,7 +375,8 @@ class KYCVerificationScreen extends StatelessWidget {
     );
   }
 
-  // Step 2: ID Verification
+  // Replace the _buildIDVerificationStep method and add new helper methods:
+
   Widget _buildIDVerificationStep(KYCController controller) {
     return SingleChildScrollView(
       key: const ValueKey(2),
@@ -394,7 +394,8 @@ class KYCVerificationScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          _buildDocumentUpload(
+
+          _buildDocumentUploadDouble(
             'Aadhar Card',
             'assets/aadhar card.svg',
             controller.aadharFront,
@@ -403,30 +404,32 @@ class KYCVerificationScreen extends StatelessWidget {
             () => controller.pickDocument('aadhar_back'),
           ),
           const SizedBox(height: 20),
-          _buildDocumentUpload(
+
+          _buildDocumentUploadSingle(
             'Pan Card',
             'assets/pan card.svg',
             controller.panFront,
-            controller.panBack,
             () => controller.pickDocument('pan_front'),
-            () => controller.pickDocument('pan_back'),
           ),
           const SizedBox(height: 20),
-          _buildDocumentUpload(
+
+          // Pass Book - Front Only
+          _buildDocumentUploadSingle(
             'Pass Book',
             'assets/pass book.svg',
-            controller.passbookFront,
-            controller.passbookBack,
-            () => controller.pickDocument('passbook_front'),
-            () => controller.pickDocument('passbook_back'),
+            controller.passbook_image,
+            () => controller.pickDocument('passbook_image'),
           ),
 
           const SizedBox(height: 20),
+
+          // Selfie
           _buildSelfieUpload(
             'Selfie',
             controller.selfieImage,
             () => controller.pickDocument('selfie'),
           ),
+
           const SizedBox(height: 30),
           Center(
             child: SizedBox(
@@ -454,6 +457,343 @@ class KYCVerificationScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
         ],
+      ),
+    );
+  }
+
+  Widget _buildDocumentUploadDouble(
+    String title,
+    String svgPath,
+    Rx<File?> frontImage,
+    Rx<File?> backImage,
+    VoidCallback onFrontTap,
+    VoidCallback onBackTap,
+  ) {
+    return Obx(() {
+      bool hasFront = frontImage.value != null;
+      bool hasBack = backImage.value != null;
+
+      if (hasFront && hasBack) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: onFrontTap,
+                    child: Container(
+                      height: 120,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          frontImage.value!,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: onBackTap,
+                    child: Container(
+                      height: 120,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          backImage.value!,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      }
+
+      if (hasFront && !hasBack) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: onFrontTap,
+                    child: Container(
+                      height: 120,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          frontImage.value!,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: onBackTap,
+                    child: Container(
+                      height: 120,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: Colors.grey[300]!,
+                          width: 1.5,
+                          style: BorderStyle.solid,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add_photo_alternate_outlined,
+                            size: 40,
+                            color: Colors.grey[400],
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'Upload Back',
+                            style: AppFonts.primaryFont(
+                              fontSize: 11,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      }
+
+      return GestureDetector(
+        onTap: onFrontTap,
+        child: Center(
+          child: Container(
+            height: 120,
+            width: 319,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: AppFonts.primaryFont(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                          svgPath,
+                          height: 65,
+                          width: 85,
+                          fit: BoxFit.contain,
+                        ),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Click or Drag & Drop to upload',
+                                textAlign: TextAlign.center,
+                                style: AppFonts.primaryFont(
+                                  fontSize: 12,
+                                  color: Colors.grey[700],
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                'PNG, JPG • Max X MB',
+                                textAlign: TextAlign.center,
+                                style: AppFonts.primaryFont(
+                                  fontSize: 12,
+                                  color: Colors.grey[700],
+                                ),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                '(Front & Back)',
+                                textAlign: TextAlign.center,
+                                style: AppFonts.primaryFont(
+                                  fontSize: 11,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+  }
+
+  Widget _buildDocumentUploadSingle(
+    String title,
+    String svgPath,
+    Rx<File?> frontImage,
+    VoidCallback onTap,
+  ) {
+    return Obx(
+      () => GestureDetector(
+        onTap: onTap,
+        child: Center(
+          child: Container(
+            height: 120,
+            width: 319,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: frontImage.value == null
+                ? Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: AppFonts.primaryFont(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(
+                                svgPath,
+                                height: 65,
+                                width: 85,
+                                fit: BoxFit.contain,
+                              ),
+                              const SizedBox(width: 20),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Click or Drag & Drop to upload',
+                                      textAlign: TextAlign.center,
+                                      style: AppFonts.primaryFont(
+                                        fontSize: 12,
+                                        color: Colors.grey[700],
+                                      ),
+                                    ),
+                                    const SizedBox(height: 2),
+                                    Text(
+                                      'PNG, JPG • Max X MB',
+                                      textAlign: TextAlign.center,
+                                      style: AppFonts.primaryFont(
+                                        fontSize: 12,
+                                        color: Colors.grey[700],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.file(
+                      frontImage.value!,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    ),
+                  ),
+          ),
+        ),
       ),
     );
   }
@@ -605,7 +945,7 @@ class KYCVerificationScreen extends StatelessWidget {
               Expanded(
                 child: _buildDocumentPreview(
                   'Pass Book',
-                  controller.passbookFront.value,
+                  controller.passbook_image.value,
                 ),
               ),
               const SizedBox(width: 12),
@@ -1032,119 +1372,6 @@ class KYCVerificationScreen extends StatelessWidget {
                   color: Colors.grey,
                 ),
                 isDense: true,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildDocumentUpload(
-    String title,
-    String svgPath,
-    Rx<File?> frontImage,
-    Rx<File?> backImage,
-    VoidCallback onFrontTap,
-    VoidCallback onBackTap,
-  ) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Obx(
-          () => GestureDetector(
-            onTap: onFrontTap,
-            child: Center(
-              child: Container(
-                height: 120,
-                width: 319,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      blurRadius: 4,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: frontImage.value == null
-                    ? Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              title,
-                              style: AppFonts.primaryFont(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black87,
-                              ),
-                            ),
-                            const SizedBox(height: 6),
-
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    svgPath,
-                                    height: 65,
-                                    width: 85,
-                                    fit: BoxFit.contain,
-                                  ),
-                                  const SizedBox(width: 20),
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Click or Drag & Drop to upload',
-                                          textAlign: TextAlign.center,
-                                          style: AppFonts.primaryFont(
-                                            fontSize: 12,
-                                            color: Colors.grey[700],
-                                          ),
-                                        ),
-                                        const SizedBox(height: 2),
-                                        Text(
-                                          'PNG, JPG • Max X MB',
-                                          textAlign: TextAlign.center,
-                                          style: AppFonts.primaryFont(
-                                            fontSize: 12,
-                                            color: Colors.grey[700],
-                                          ),
-                                        ),
-                                        const SizedBox(height: 4),
-                                        Text(
-                                          '(Front & Back)',
-                                          textAlign: TextAlign.center,
-                                          style: AppFonts.primaryFont(
-                                            fontSize: 11,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.file(
-                          frontImage.value!,
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                        ),
-                      ),
               ),
             ),
           ),

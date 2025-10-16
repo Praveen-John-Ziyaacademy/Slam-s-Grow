@@ -79,7 +79,7 @@ class SignUpController extends GetxController {
     final password = passwordController.text.trim();
     final confirmPassword = confirmPasswordController.text.trim();
 
-    final url = Uri.parse('http://192.168.1.3:8000/api/register/');
+    final url = Uri.parse('http://192.168.1.25:8000/api/register/');
     print('📤 Sending sign-up request to: $url');
     print('Request body:');
     print(

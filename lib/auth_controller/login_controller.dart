@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 import 'package:social_media/auth_screen/forgot_password.dart';
 import 'package:social_media/auth_screen/kyc_verification.dart';
 import 'package:social_media/auth_screen/sign_up_screen.dart';
-import 'package:social_media/components/bottom_bar.dart';
 import 'package:social_media/components/loading.dart';
 
 class LoginController extends GetxController {
@@ -147,7 +146,7 @@ class LoginController extends GetxController {
           colorText: Colors.white,
         );
 
-        final kycSubmitted = storage.read('kyc_submitted') ?? false;
+        // final kycSubmitted = storage.read('kyc_submitted') ?? false;
 
         Get.offAll(() => KYCVerificationScreen());
       } else {
@@ -205,7 +204,7 @@ class LoginController extends GetxController {
 }
 
 class ApiService {
-  static const String baseUrl = 'http://192.168.1.54:8000/api';
+  static const String baseUrl = 'http://192.168.1.25:8000/api';
 
   static Future<Map<String, dynamic>> login({
     required String email,
