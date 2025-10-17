@@ -45,39 +45,6 @@ class OTPVerificationScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
-
-              Obx(
-                () => Center(
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      style: AppFonts.primaryFont(
-                        fontSize: 14,
-                        color: Colors.black87,
-                        height: 1.5,
-                      ),
-                      children: [
-                        const TextSpan(
-                          text: 'An 4 digit OTP has been sent to\n',
-                        ),
-                        TextSpan(
-                          text: controller.phoneNumber.value,
-                          style: AppFonts.primaryFont(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const TextSpan(text: ' or '),
-                        TextSpan(
-                          text: controller.email.value,
-                          style: AppFonts.primaryFont(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
               const SizedBox(height: 82),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

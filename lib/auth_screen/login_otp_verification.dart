@@ -55,13 +55,6 @@ class LoginOtpVerification extends StatelessWidget {
                             text: 'An 4 digit OTP has been sent to\n',
                           ),
                           TextSpan(
-                            text: controller.phoneNumber.value,
-                            style: AppFonts.primaryFont(
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const TextSpan(text: ' or '),
-                          TextSpan(
                             text: controller.email.value,
                             style: AppFonts.primaryFont(
                               fontWeight: FontWeight.w600,

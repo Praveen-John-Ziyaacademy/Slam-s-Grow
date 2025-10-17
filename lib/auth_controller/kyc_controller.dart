@@ -276,11 +276,15 @@ class KYCController extends GetxController {
     }
   }
 
-  // Document picker
+  // Document picker (Updated)
   Future<void> pickDocument(String documentType) async {
     try {
+      final ImageSource source = documentType == 'selfie'
+          ? ImageSource.camera
+          : ImageSource.gallery;
+
       final XFile? image = await _picker.pickImage(
-        source: ImageSource.gallery,
+        source: source,
         imageQuality: 80,
       );
 
@@ -705,7 +709,7 @@ class KYCApiService {
   static Map<String, dynamic> getUserInfo() {
     final storage = GetStorage();
     return {
-      'user_id': storage.read('user_id'),
+      'id': storage.read('id'),
       'email': storage.read('user_email'),
       'name': storage.read('user_name'),
       'access': storage.read('access'),

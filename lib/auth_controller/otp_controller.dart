@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:async';
-
 import 'package:social_media/auth_screen/new_password.dart';
 
 class OTPController extends GetxController {
@@ -9,14 +8,9 @@ class OTPController extends GetxController {
     4,
     (index) => TextEditingController(),
   );
-
   final List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
-
   final secondsRemaining = 52.obs;
   Timer? _timer;
-
-  final phoneNumber = '91**********'.obs;
-  final email = 'reddit@gmail.com'.obs;
 
   @override
   void onInit() {
@@ -48,27 +42,23 @@ class OTPController extends GetxController {
   }
 
   void resendOTP() {
-    // if (secondsRemaining.value == 0) {
-    //   secondsRemaining.value = 52;
-    //   startTimer();
-
-    //   for (var controller in controllers) {
-    //     controller.clear();
-    //   }
-
-    //   if (focusNodes.isNotEmpty) {
-    //     focusNodes[0].requestFocus();
-    //   }
-
-    //   Get.snackbar(
-    //     'OTP Resent',
-    //     'A new OTP has been sent to your phone and email',
-    //     snackPosition: SnackPosition.BOTTOM,
-    //     backgroundColor: Colors.green.withOpacity(0.7),
-    //     colorText: Colors.white,
-    //   );
-    // }
-    Get.to(() => NewPasswordScreen);
+    if (secondsRemaining.value == 0) {
+      secondsRemaining.value = 52;
+      startTimer();
+      for (var controller in controllers) {
+        controller.clear();
+      }
+      if (focusNodes.isNotEmpty) {
+        focusNodes[0].requestFocus();
+      }
+      Get.snackbar(
+        'OTP Resent',
+        'A new OTP has been sent to your email',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green.withOpacity(0.7),
+        colorText: Colors.white,
+      );
+    }
   }
 
   String formatTime(int seconds) {
@@ -84,6 +74,7 @@ class OTPController extends GetxController {
       focusNodes[index - 1].requestFocus();
     }
 
+    // Check if all 4 fields are filled
     if (index == 3 && value.isNotEmpty) {
       checkIfOTPComplete();
     }
@@ -92,7 +83,8 @@ class OTPController extends GetxController {
   void checkIfOTPComplete() {
     String otp = getOTP();
     if (otp.length == 4) {
-      verifyOTP();
+      // Auto navigate to new password screen when all 4 digits are filled
+      Get.to(() => NewPasswordScreen());
     }
   }
 
@@ -100,37 +92,7 @@ class OTPController extends GetxController {
     return controllers.map((controller) => controller.text).join();
   }
 
-  void verifyOTP() {
-    String otp = getOTP();
-
-    if (otp.length != 4) {
-      Get.snackbar(
-        'Error',
-        'Please enter all 4 digits',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red.withOpacity(0.7),
-        colorText: Colors.white,
-      );
-      return;
-    }
-
-    Get.snackbar(
-      'Verifying',
-      'Verifying OTP: $otp',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.blue.withOpacity(0.7),
-      colorText: Colors.white,
-    );
-
-    // Get.offAllNamed('/home');
-  }
-
   void goBack() {
     Get.back();
-  }
-
-  void setContactInfo({String? phone, String? emailAddress}) {
-    if (phone != null) phoneNumber.value = phone;
-    if (emailAddress != null) email.value = emailAddress;
   }
 }

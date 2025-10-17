@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:social_media/auth_screen/new_password.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:social_media/auth_screen/otp_verification.dart';
 
 class ForgotPasswordController extends GetxController {
   final emailController = TextEditingController();
   final isLoading = false.obs;
   final emailError = ''.obs;
+
+  // Store email for use in subsequent screens
+  static String userEmail = '';
 
   @override
   void onClose() {
@@ -28,38 +32,54 @@ class ForgotPasswordController extends GetxController {
   }
 
   Future<void> getOTP() async {
-    // if (!validateEmail(emailController.text)) {
-    //   return;
-    // }
+    if (!validateEmail(emailController.text)) {
+      return;
+    }
 
-    // isLoading.value = true;
-    // try {
-    //   // Simulate API call
-    //   await Future.delayed(const Duration(seconds: 2));
+    isLoading.value = true;
 
-    //   // Navigate to OTP screen or show success message
-    //   Get.snackbar(
-    //     'Success',
-    //     'OTP sent to ${emailController.text}',
-    //     snackPosition: SnackPosition.BOTTOM,
-    //     backgroundColor: Colors.green,
-    //     colorText: Colors.white,
-    //   );
+    try {
+      final response = await http.post(
+        Uri.parse('http://192.168.1.25:8000/api/forgot-password/send-otp/'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'email': emailController.text}),
+      );
 
-    //   // Navigate to OTP verification screen
-    //   // Get.to(() => OtpVerificationScreen());
-    // } catch (e) {
-    //   Get.snackbar(
-    //     'Error',
-    //     'Failed to send OTP. Please try again.',
-    //     snackPosition: SnackPosition.BOTTOM,
-    //     backgroundColor: Colors.red,
-    //     colorText: Colors.white,
-    //   );
-    // } finally {
-    //   isLoading.value = false;
-    // }
-    Get.to(() => OTPVerificationScreen());
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // Store email for later use
+        userEmail = emailController.text;
+
+        Get.snackbar(
+          'Success',
+          'OTP sent to ${emailController.text}',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
+
+        // Navigate to OTP verification screen
+        Get.to(() => const OTPVerificationScreen());
+      } else {
+        final errorData = jsonDecode(response.body);
+        Get.snackbar(
+          'Error',
+          errorData['message'] ?? 'Failed to send OTP. Please try again.',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Network error. Please check your connection.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   void loginWithGoogle() {
@@ -68,7 +88,6 @@ class ForgotPasswordController extends GetxController {
       'Google authentication initiated',
       snackPosition: SnackPosition.BOTTOM,
     );
-    // Implement Google login
   }
 
   void loginWithApple() {
@@ -77,7 +96,6 @@ class ForgotPasswordController extends GetxController {
       'Apple authentication initiated',
       snackPosition: SnackPosition.BOTTOM,
     );
-    // Implement Apple login
   }
 
   void loginWithFacebook() {
@@ -86,7 +104,6 @@ class ForgotPasswordController extends GetxController {
       'Facebook authentication initiated',
       snackPosition: SnackPosition.BOTTOM,
     );
-    // Implement Facebook login
   }
 
   void goToSignIn() {
@@ -94,11 +111,11 @@ class ForgotPasswordController extends GetxController {
   }
 
   void goToSignUp() {
-    Get.to(() => NewPasswordScreen());
-    // Get.snackbar(
-    //   'Sign Up',
-    //   'Navigate to Sign Up screen',
-    //   snackPosition: SnackPosition.BOTTOM,
-    // );
+    // Navigate to sign up screen (implement your sign up screen navigation)
+    Get.snackbar(
+      'Sign Up',
+      'Navigate to Sign Up screen',
+      snackPosition: SnackPosition.BOTTOM,
+    );
   }
 }

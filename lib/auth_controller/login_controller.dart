@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:social_media/auth_screen/forgot_password.dart';
-import 'package:social_media/auth_screen/kyc_verification.dart';
+import 'package:social_media/auth_screen/login_otp_verification.dart';
 import 'package:social_media/auth_screen/sign_up_screen.dart';
 import 'package:social_media/components/loading.dart';
 
@@ -79,23 +79,56 @@ class LoginController extends GetxController {
     }
   }
 
-  void _saveUserSession(Map<String, dynamic> userData) {
+  void _saveUserSession(Map<String, dynamic> responseData) {
     try {
-      print('User Data: $userData');
-      if (userData['access'] != null) {
-        storage.write('access', userData['access']);
+      print('Full Response Data: $responseData');
+
+      if (responseData['access'] != null) {
+        storage.write('access', responseData['access']);
+        print('Access Token Saved: ${responseData['access']}');
       }
-      if (userData['user_id'] != null) {
-        storage.write('user_id', userData['user_id'].toString());
+
+      if (responseData['refresh'] != null) {
+        storage.write('refresh', responseData['refresh']);
+        print('Refresh Token Saved');
       }
-      if (userData['email'] != null) {
-        storage.write('user_email', userData['email']);
-      }
-      if (userData['name'] != null) {
-        storage.write('user_name', userData['name']);
+
+      if (responseData['user'] != null) {
+        final userData = responseData['user'];
+
+        if (userData['id'] != null) {
+          storage.write('id', userData['id'].toString());
+          print('User ID Saved: ${userData['id']}');
+        }
+
+        if (userData['email'] != null) {
+          storage.write('email', userData['email']);
+          print('Email Saved: ${userData['email']}');
+        }
+
+        if (userData['first_name'] != null) {
+          storage.write('first_name', userData['first_name']);
+          print('First Name Saved: ${userData['first_name']}');
+        }
+
+        if (userData['last_name'] != null) {
+          storage.write('last_name', userData['last_name']);
+          print('Last Name Saved: ${userData['last_name']}');
+        }
+
+        if (userData['phone_number'] != null) {
+          storage.write('phone_number', userData['phone_number']);
+          print('Phone Number Saved: ${userData['phone_number']}');
+        }
+
+        if (userData['role'] != null) {
+          storage.write('role', userData['role']);
+          print('Role Saved: ${userData['role']}');
+        }
       }
 
       storage.write('is_logged_in', true);
+      print('Session saved successfully');
     } catch (e) {
       debugPrint('Error saving user session: $e');
     }
@@ -128,11 +161,8 @@ class LoginController extends GetxController {
     }
 
     showLoading();
-
     try {
       final result = await ApiService.login(email: email, password: password);
-
-      hideLoading();
 
       if (result['success']) {
         _saveCredentials();
@@ -144,12 +174,16 @@ class LoginController extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.green.withOpacity(0.7),
           colorText: Colors.white,
+          duration: const Duration(seconds: 1),
         );
 
-        // final kycSubmitted = storage.read('kyc_submitted') ?? false;
+        await Future.delayed(const Duration(milliseconds: 500));
+        Get.offAll(() => LoginOtpVerification());
 
-        Get.offAll(() => KYCVerificationScreen());
+        await Future.delayed(const Duration(milliseconds: 500));
+        hideLoading();
       } else {
+        hideLoading();
         Get.snackbar(
           'Login Failed',
           result['message'] ?? 'Invalid credentials',
@@ -218,6 +252,9 @@ class ApiService {
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'email': email, 'password': password}),
       );
+
+      print('Login Response Status: ${response.statusCode}');
+      print('Login Response Body: ${response.body}');
 
       if (response.statusCode == 200) {
         return {'success': true, 'data': jsonDecode(response.body)};
