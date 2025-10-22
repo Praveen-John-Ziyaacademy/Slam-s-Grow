@@ -3,11 +3,12 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:social_media/auth_screen/otp_verification.dart';
+import 'package:social_media/auth_screen/sign_up_screen.dart';
 
 class ForgotPasswordController extends GetxController {
   final emailController = TextEditingController();
   final isLoading = false.obs;
-  final emailError = ''.obs;
+  final emailError = RxnString(); // Changed to RxnString for nullable string
 
   // Store email for use in subsequent screens
   static String userEmail = '';
@@ -27,8 +28,12 @@ class ForgotPasswordController extends GetxController {
       emailError.value = 'Please enter a valid email';
       return false;
     }
-    emailError.value = '';
+    emailError.value = null; // Clear error
     return true;
+  }
+
+  void clearEmailError() {
+    emailError.value = null;
   }
 
   Future<void> getOTP() async {
@@ -111,11 +116,6 @@ class ForgotPasswordController extends GetxController {
   }
 
   void goToSignUp() {
-    // Navigate to sign up screen (implement your sign up screen navigation)
-    Get.snackbar(
-      'Sign Up',
-      'Navigate to Sign Up screen',
-      snackPosition: SnackPosition.BOTTOM,
-    );
+    Get.to(() => SignUpScreen());
   }
 }

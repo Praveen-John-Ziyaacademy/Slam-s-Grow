@@ -62,49 +62,67 @@ class ForgotPasswordScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
 
-                  Obx(
-                    () => Container(
-                      width: 304,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.white,
+                  // Text Field
+                  Container(
+                    width: 304,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white,
+                    ),
+                    child: TextField(
+                      controller: controller.emailController,
+                      style: AppFonts.primaryFont(
+                        color: Colors.black,
+                        fontSize: 10,
                       ),
-                      child: TextField(
-                        controller: controller.emailController,
-                        style: AppFonts.primaryFont(
-                          color: Colors.black,
+                      decoration: InputDecoration(
+                        hintText: 'Enter email',
+                        hintStyle: AppFonts.primaryFont(
+                          color: Colors.black.withOpacity(0.5),
                           fontSize: 10,
                         ),
-                        decoration: InputDecoration(
-                          hintText: 'Enter email',
-                          hintStyle: AppFonts.primaryFont(
-                            color: Colors.black.withOpacity(0.5),
-                            fontSize: 10,
-                          ),
-
-                          isDense: true,
-
-                          errorText: controller.emailError.value.isEmpty
-                              ? null
-                              : controller.emailError.value,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(color: Color(0xFF94C21A)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(color: Colors.blue),
-                          ),
+                        isDense: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide(color: Color(0xFF94C21A)),
                         ),
-                        keyboardType: TextInputType.emailAddress,
-                        onChanged: (value) {
-                          if (controller.emailError.value.isNotEmpty) {
-                            controller.validateEmail(value);
-                          }
-                        },
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: const BorderSide(color: Colors.blue),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: const BorderSide(color: Colors.red),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: const BorderSide(color: Colors.red),
+                        ),
                       ),
+                      keyboardType: TextInputType.emailAddress,
+                      onChanged: (value) {
+                        if (controller.emailError.value != null) {
+                          controller.clearEmailError();
+                        }
+                      },
                     ),
+                  ),
+
+                  // Error message outside the text box
+                  Obx(
+                    () => controller.emailError.value != null
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 6.0, left: 4.0),
+                            child: Text(
+                              controller.emailError.value!,
+                              style: AppFonts.primaryFont(
+                                color: Colors.red,
+                                fontSize: 11,
+                              ),
+                            ),
+                          )
+                        : const SizedBox.shrink(),
                   ),
                 ],
               ),
@@ -135,7 +153,6 @@ class ForgotPasswordScreen extends StatelessWidget {
                         : controller.getOTP,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
-
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),

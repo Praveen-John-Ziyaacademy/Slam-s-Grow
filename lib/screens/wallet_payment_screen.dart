@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:social_media/colors/colors.dart';
 import 'package:social_media/colors/fonts.dart';
 import 'package:social_media/controller/wallet_payment_controller.dart';
+import 'package:social_media/screens/wallet/wallet_payment_method_screen.dart';
 
 class WalletPaymentsScreen extends StatefulWidget {
   const WalletPaymentsScreen({super.key});
@@ -236,25 +237,30 @@ class _WalletPaymentsScreenState extends State<WalletPaymentsScreen> {
                     ],
                   ),
                   SizedBox(height: 28),
-                  Container(
-                    width: double.infinity,
-                    height: 40,
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => PaymentMethodScreen());
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 40,
 
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: LinearGradient(
-                        colors: [Color(0xFF206DFF), Color(0xFF319F43)],
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                      ),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Continue",
-                      style: AppFonts.primaryFont(
-                        fontSize: 16,
+                      decoration: BoxDecoration(
                         color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        gradient: LinearGradient(
+                          colors: [Color(0xFF206DFF), Color(0xFF319F43)],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Continue",
+                        style: AppFonts.primaryFont(
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
