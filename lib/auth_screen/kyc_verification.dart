@@ -375,8 +375,6 @@ class KYCVerificationScreen extends StatelessWidget {
     );
   }
 
-  // Replace the _buildIDVerificationStep method and add new helper methods:
-
   Widget _buildIDVerificationStep(KYCController controller) {
     return SingleChildScrollView(
       key: const ValueKey(2),
@@ -1308,6 +1306,9 @@ class KYCVerificationScreen extends StatelessWidget {
                     value: value,
                     child: Text(
                       value,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
                       style: AppFonts.primaryFont(
                         color: value == options.first
                             ? Colors.grey[600]

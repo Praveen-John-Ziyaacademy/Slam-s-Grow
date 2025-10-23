@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:social_media/controller/home_screen_controller.dart';
 import 'package:social_media/screens/home/home_screen.dart';
-import 'package:social_media/screens/home/profile_screen.dart';
+import 'package:social_media/screens/more/settings_screen.dart';
 import 'package:social_media/screens/home/referral_screen.dart';
 import 'package:social_media/screens/home/task_screen.dart';
 import 'package:social_media/screens/home/wallet_screen.dart';
@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
     TaskPage(),
     ReferralPage(),
     WalletPage(),
-    ProfilePage(),
+    SettingsScreen(),
   ];
   @override
   Widget build(BuildContext context) {

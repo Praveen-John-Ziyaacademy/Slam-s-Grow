@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:social_media/colors/fonts.dart';
 import 'package:social_media/controller/home_screen_controller.dart';
+import 'package:social_media/l10n/app_localizations.dart';
 import 'package:social_media/models/home_screen_models.dart';
 
 class HomeTabContent extends StatelessWidget {
@@ -16,7 +17,7 @@ class HomeTabContent extends StatelessWidget {
           Stack(
             clipBehavior: Clip.none,
             children: [
-              _buidTopContainor(),
+              _buidTopContainor(context),
               Positioned(
                 top: 264,
                 left: 0,
@@ -37,7 +38,7 @@ class HomeTabContent extends StatelessWidget {
     );
   }
 
-  Widget _buidTopContainor() {
+  Widget _buidTopContainor(BuildContext context) {
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         bottomLeft: Radius.circular(25),
@@ -64,7 +65,7 @@ class HomeTabContent extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          'Welcome Back',
+                          AppLocalizations.of(context)!.title,
                           style: AppFonts.primaryFont(
                             color: Colors.white70,
                             fontSize: 16,

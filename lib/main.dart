@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:social_media/components/bottom_bar.dart';
+import 'package:social_media/l10n/app_localizations.dart';
+import 'package:social_media/l10n/app_localizations_en.dart';
 import 'package:social_media/screens/onboarding/onboarding_screens.dart';
 
 void main() async {
@@ -21,6 +24,15 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Social Media App',
       debugShowCheckedModeBanner: false,
+      locale: Locale('en'),
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [Locale('en'), Locale('es')],
+
       home: HomePage(),
     );
   }
