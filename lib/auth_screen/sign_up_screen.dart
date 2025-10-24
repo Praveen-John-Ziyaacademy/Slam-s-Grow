@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:social_media/colors/fonts.dart';
 import 'package:social_media/components/glass_button.dart';
 import 'package:social_media/auth_controller/sign_up_controller.dart';
+import 'package:social_media/l10n/app_localizations.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -33,7 +34,7 @@ class SignUpScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'Sign up your Account',
+                      AppLocalizations.of(context)!.onboard_sign_up,
                       textAlign: TextAlign.center,
                       style: AppFonts.primaryFont(
                         color: Colors.white,
@@ -43,7 +44,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Enter your personal data to create account',
+                      AppLocalizations.of(context)!.onboard_personal_data,
                       textAlign: TextAlign.center,
                       style: AppFonts.primaryFont(
                         color: Colors.white70,
@@ -86,7 +87,7 @@ class SignUpScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: Text(
-                        "Or",
+                        AppLocalizations.of(context)!.onboard_or,
                         style: AppFonts.primaryFont(
                           color: Colors.black,
                           fontSize: 12,
@@ -107,7 +108,9 @@ class SignUpScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: _glassTextField(
-                            label: "First Name",
+                            label: AppLocalizations.of(
+                              context,
+                            )!.onboard_first_name,
                             hint: "Ajmal",
                             controller: controller.firstNameController,
                           ),
@@ -115,7 +118,9 @@ class SignUpScreen extends StatelessWidget {
                         const SizedBox(width: 16),
                         Expanded(
                           child: _glassTextField(
-                            label: "Last Name",
+                            label: AppLocalizations.of(
+                              context,
+                            )!.onboard_last_name,
                             hint: "Khan",
                             controller: controller.lastNameController,
                           ),
@@ -128,7 +133,7 @@ class SignUpScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: _glassTextField(
-                            label: "Email",
+                            label: AppLocalizations.of(context)!.onboard_email,
                             hint: "lorem.ipsum@gmail.com",
                             controller: controller.emailController,
                           ),
@@ -136,7 +141,7 @@ class SignUpScreen extends StatelessWidget {
                         const SizedBox(width: 16),
                         Expanded(
                           child: _glassTextField(
-                            label: "Phone Number",
+                            label: AppLocalizations.of(context)!.onboard_phone,
                             hint: "0000000000",
                             controller: controller.phoneController,
                           ),
@@ -150,7 +155,9 @@ class SignUpScreen extends StatelessWidget {
                         Expanded(
                           child: Obx(
                             () => _glassTextField(
-                              label: "Password",
+                              label: AppLocalizations.of(
+                                context,
+                              )!.onboard_password,
                               hint: "********",
                               controller: controller.passwordController,
                               obscureText: controller.obscurePassword.value,
@@ -162,7 +169,9 @@ class SignUpScreen extends StatelessWidget {
                         Expanded(
                           child: Obx(
                             () => _glassTextField(
-                              label: "Confirm Password",
+                              label: AppLocalizations.of(
+                                context,
+                              )!.onboard_confirm_password,
                               hint: "********",
                               controller: controller.confirmPasswordController,
                               obscureText:
@@ -178,7 +187,9 @@ class SignUpScreen extends StatelessWidget {
                     const SizedBox(height: 16),
 
                     _glassTextField(
-                      label: "Reference Number",
+                      label: AppLocalizations.of(
+                        context,
+                      )!.onboard_reference_number,
                       hint: "#########",
                       controller: controller.referenceController,
                     ),
@@ -217,7 +228,9 @@ class SignUpScreen extends StatelessWidget {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    "Sign Up",
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.onboard_signup_button,
                                     style: AppFonts.primaryFont(
                                       color: Colors.white,
                                       fontSize: 14,
@@ -241,7 +254,7 @@ class SignUpScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Already have an account? ",
+                    AppLocalizations.of(context)!.onboard_have_account,
                     style: AppFonts.primaryFont(
                       color: Colors.white70,
                       fontSize: 10,
@@ -250,7 +263,7 @@ class SignUpScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: controller.navigateToLogin,
                     child: Text(
-                      "Log in",
+                      AppLocalizations.of(context)!.onboard_login_button,
                       style: AppFonts.primaryFont(
                         color: Colors.white,
                         fontSize: 12,

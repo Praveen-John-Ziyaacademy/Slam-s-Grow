@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:social_media/colors/fonts.dart';
 import 'package:social_media/components/glass_button.dart';
 import 'package:social_media/auth_controller/login_controller.dart';
+import 'package:social_media/l10n/app_localizations.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -55,7 +56,7 @@ class LoginScreen extends StatelessWidget {
 
                   const SizedBox(height: 28),
                   Text(
-                    'Login to Continue',
+                    AppLocalizations.of(context)!.onboard_login,
                     textAlign: TextAlign.center,
                     style: AppFonts.primaryFont(
                       color: Colors.white,
@@ -92,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: Text(
-                            'Or',
+                            AppLocalizations.of(context)!.onboard_or,
                             style: AppFonts.primaryFont(
                               color: Colors.black,
                               fontSize: 12,
@@ -112,7 +113,7 @@ class LoginScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Email',
+                          AppLocalizations.of(context)!.onboard_email,
                           style: AppFonts.primaryFont(
                             color: Colors.white,
                             fontSize: 10,
@@ -158,7 +159,7 @@ class LoginScreen extends StatelessWidget {
 
                         // Password Input
                         Text(
-                          'Password',
+                          AppLocalizations.of(context)!.onboard_password,
                           style: AppFonts.primaryFont(
                             color: Colors.white,
                             fontSize: 10,
@@ -229,7 +230,9 @@ class LoginScreen extends StatelessWidget {
                                 () => Row(
                                   children: [
                                     Text(
-                                      'Remember me',
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.onboard_remember_me,
                                       style: AppFonts.primaryFont(
                                         color: Colors.white,
                                         fontSize: 10,
@@ -265,7 +268,9 @@ class LoginScreen extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
-                                        'Forgot password?',
+                                        AppLocalizations.of(
+                                          context,
+                                        )!.onboard_forgot_password,
                                         style: AppFonts.primaryFont(
                                           color: Colors.white,
                                           fontSize: 10,
@@ -321,7 +326,9 @@ class LoginScreen extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(
-                                  "Login",
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.onboard_login_button,
                                   style: AppFonts.primaryFont(
                                     color: Colors.white,
                                     fontSize: 14,
@@ -341,7 +348,7 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Don\'t have an account? ',
+                        AppLocalizations.of(context)!.onboard_dont_h_account,
                         style: AppFonts.primaryFont(
                           color: Colors.white70,
                           fontSize: 10,
@@ -350,7 +357,7 @@ class LoginScreen extends StatelessWidget {
                       GestureDetector(
                         onTap: controller.navigateToSignUp,
                         child: Text(
-                          'Sign Up',
+                          AppLocalizations.of(context)!.onboard_signup_button,
                           style: AppFonts.primaryFont(
                             color: Colors.white,
                             fontSize: 12,
@@ -364,7 +371,7 @@ class LoginScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     child: Text(
-                      'By continuing you agree that you have read and accepted our T&C and privacy policy',
+                      AppLocalizations.of(context)!.onboard_privacy_policy,
                       textAlign: TextAlign.center,
                       style: AppFonts.primaryFont(
                         color: Colors.white,

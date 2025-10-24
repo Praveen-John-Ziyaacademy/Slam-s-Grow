@@ -1,0 +1,37 @@
+{
+  "onboard_skip": "தவிர்க்கவும் >>",
+  "onboard_get_started": "தொடங்கவும்",
+  "onboard_next": "அடுத்து",
+
+  "onboard_heading1": "வரவேற்கிறோம் !",
+  "onboard_title1": "எளிய பணிகளை முடிக்கவும்",
+  "onboard_desc1": "சிறிய பணிகள் மற்றும் செயல்பாடுகளை முடித்து வருமானத்தைத் தொடங்குங்கள்",
+
+  "onboard_heading2": "வருமானம் பெறுங்கள் !",
+  "onboard_title2": "உண்மையான பரிசுகள் மற்றும் பணம்.",
+  "onboard_desc2": "நீங்கள் முடிக்கும் பணிகளுக்கும் ஈடுபடும் சலுகைகளுக்கும் பணமாக சம்பாதிக்கவும்.",
+
+  "onboard_heading3": "சேருங்கள் !",
+  "onboard_title3": "எங்கள் சமூகத்தில் இணைந்து வளருங்கள்.",
+  "onboard_desc3": "பிற பயனர்களுடன் இணைந்து உங்கள் நிலையை உயர்த்துங்கள்",
+
+  "onboard_login": "தொடர தொடர உள்நுழையவும்",
+  "onboard_or": "அல்லது",
+  "onboard_email": "மின்னஞ்சல்",
+  "onboard_password": "கடவுச்சொல்",
+  "onboard_remember_me": "என்னை நினைவில் வைக்கவும்",
+  "onboard_forgot_password": "கடவுச்சொல் மறந்துவிட்டீர்களா",
+  "onboard_login_button": "உள்நுழையவும்",
+  "onboard_dont_h_account": "கணக்கு இல்லையா? ",
+  "onboard_signup_button": "பதிவு செய்யவும்",
+  "onboard_privacy_policy": "தொடரும்போது, நீங்கள் எங்கள் விதிமுறைகள் மற்றும் தனியுரிமைக் கொள்கையை படித்து ஏற்றுக்கொண்டீர்கள்",
+  
+  "onboard_sign_up": "உங்கள் கணக்கை பதிவு செய்யவும்",
+  "onboard_personal_data": "கணக்கு உருவாக்க உங்கள் தனிப்பட்ட தகவல்களை உள்ளிடவும்",
+  "onboard_have_account": "ஏற்கனவே ஒரு கணக்கு உள்ளதா? ",
+  "onboard_first_name": "முதல் பெயர்",
+  "onboard_last_name": "கடைசி பெயர்",
+  "onboard_phone": "தொலைபேசி எண்",
+  "onboard_confirm_password": "கடவுச்சொல்லை உறுதிப்படுத்தவும்",
+  "onboard_reference_number": "குறிப்பு எண்"
+}

@@ -24,16 +24,21 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Social Media App',
       debugShowCheckedModeBanner: false,
-      locale: Locale('en'),
+      locale: Locale('hi'),
       localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [Locale('en'), Locale('es')],
+      supportedLocales: [
+        Locale('en'),
+        Locale('hi'),
+        Locale('ml'),
+        Locale('ta'),
+      ],
 
-      home: HomePage(),
+      home: OnboardingScreen(),
     );
   }
 }

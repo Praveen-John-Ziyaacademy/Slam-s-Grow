@@ -1,0 +1,37 @@
+{
+ "onboard_skip": "छोड़ें >>",
+  "onboard_get_started": "शुरू करें",
+  "onboard_next": "अगला",
+
+  "onboard_heading1": "स्वागत है !",
+  "onboard_title1": "सरल कार्य पूरे करें",
+  "onboard_desc1": "छोटे कार्य और गतिविधियाँ पूरी करें और कमाई शुरू करें",
+
+  "onboard_heading2": "कमाई करें !",
+  "onboard_title2": "वास्तविक इनाम और नकद।",
+  "onboard_desc2": "आपके द्वारा किए गए कार्यों और ऑफ़रों पर नकद भुगतान प्राप्त करें।",
+
+  "onboard_heading3": "शामिल हों !",
+  "onboard_title3": "हमारे समुदाय से जुड़ें और बढ़ें।",
+  "onboard_desc3": "अन्य उपयोगकर्ताओं से जुड़ें और अपना स्तर बढ़ाएँ",
+
+  "onboard_login": "जारी रखने के लिए लॉगिन करें",
+  "onboard_or": "या",
+  "onboard_email": "ईमेल",
+  "onboard_password": "पासवर्ड",
+  "onboard_remember_me": "मुझे याद रखें",
+  "onboard_forgot_password": "पासवर्ड भूल गए?",
+  "onboard_login_button": "लॉगिन",
+  "onboard_dont_h_account": "खाता नहीं है? ",
+  "onboard_signup_button": "साइन अप",
+  "onboard_privacy_policy": "जारी रखते समय, आप सहमत हैं कि आपने हमारी टी&सी और गोपनीयता नीति पढ़ ली है और स्वीकार कर लिया है",
+
+  "onboard_sign_up": "अपना खाता साइन अप करें",
+  "onboard_personal_data": "खाता बनाने के लिए अपनी व्यक्तिगत जानकारी दर्ज करें",
+  "onboard_have_account": "पहले से एक खाता है? ",
+  "onboard_first_name": "प्रथम नाम",
+  "onboard_last_name": "अंतिम नाम",
+  "onboard_phone": "फोन नंबर",
+  "onboard_confirm_password": "पासवर्ड की पुष्टि करें",
+  "onboard_reference_number": "संदर्भ संख्या"
+}

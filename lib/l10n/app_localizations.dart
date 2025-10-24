@@ -6,7 +6,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
-import 'app_localizations_es.dart';
+import 'app_localizations_hi.dart';
+import 'app_localizations_ml.dart';
+import 'app_localizations_ta.dart';
 
 // ignore_for_file: type=lint
 
@@ -95,14 +97,190 @@ abstract class AppLocalizations {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
-    Locale('es'),
+    Locale('hi'),
+    Locale('ml'),
+    Locale('ta'),
   ];
 
-  /// No description provided for @title.
+  /// No description provided for @onboard_skip.
   ///
   /// In en, this message translates to:
-  /// **'Welcome Back'**
-  String get title;
+  /// **'Skip >>'**
+  String get onboard_skip;
+
+  /// No description provided for @onboard_get_started.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get onboard_get_started;
+
+  /// No description provided for @onboard_next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onboard_next;
+
+  /// No description provided for @onboard_heading1.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome !'**
+  String get onboard_heading1;
+
+  /// No description provided for @onboard_title1.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete simple tasks'**
+  String get onboard_title1;
+
+  /// No description provided for @onboard_desc1.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete small tasks and activities to start earnings'**
+  String get onboard_desc1;
+
+  /// No description provided for @onboard_heading2.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn !'**
+  String get onboard_heading2;
+
+  /// No description provided for @onboard_title2.
+  ///
+  /// In en, this message translates to:
+  /// **'Real rewards and cash.'**
+  String get onboard_title2;
+
+  /// No description provided for @onboard_desc2.
+  ///
+  /// In en, this message translates to:
+  /// **'Get paid in cash for the tasks you complete and offers you engage with.'**
+  String get onboard_desc2;
+
+  /// No description provided for @onboard_heading3.
+  ///
+  /// In en, this message translates to:
+  /// **'Join !'**
+  String get onboard_heading3;
+
+  /// No description provided for @onboard_title3.
+  ///
+  /// In en, this message translates to:
+  /// **'Our community and grow.'**
+  String get onboard_title3;
+
+  /// No description provided for @onboard_desc3.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect with other users and elevate your user level'**
+  String get onboard_desc3;
+
+  /// No description provided for @onboard_login.
+  ///
+  /// In en, this message translates to:
+  /// **'Login to Continue'**
+  String get onboard_login;
+
+  /// No description provided for @onboard_or.
+  ///
+  /// In en, this message translates to:
+  /// **'Or'**
+  String get onboard_or;
+
+  /// No description provided for @onboard_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get onboard_email;
+
+  /// No description provided for @onboard_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get onboard_password;
+
+  /// No description provided for @onboard_remember_me.
+  ///
+  /// In en, this message translates to:
+  /// **'Remember me'**
+  String get onboard_remember_me;
+
+  /// No description provided for @onboard_forgot_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password'**
+  String get onboard_forgot_password;
+
+  /// No description provided for @onboard_login_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get onboard_login_button;
+
+  /// No description provided for @onboard_dont_h_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account? '**
+  String get onboard_dont_h_account;
+
+  /// No description provided for @onboard_signup_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get onboard_signup_button;
+
+  /// No description provided for @onboard_privacy_policy.
+  ///
+  /// In en, this message translates to:
+  /// **'By continuing you agree that you have read and accepted our T&C and privacy policy'**
+  String get onboard_privacy_policy;
+
+  /// No description provided for @onboard_sign_up.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up your Account'**
+  String get onboard_sign_up;
+
+  /// No description provided for @onboard_personal_data.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your personal data to create account'**
+  String get onboard_personal_data;
+
+  /// No description provided for @onboard_have_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account? '**
+  String get onboard_have_account;
+
+  /// No description provided for @onboard_first_name.
+  ///
+  /// In en, this message translates to:
+  /// **'First Name'**
+  String get onboard_first_name;
+
+  /// No description provided for @onboard_last_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Name'**
+  String get onboard_last_name;
+
+  /// No description provided for @onboard_phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get onboard_phone;
+
+  /// No description provided for @onboard_confirm_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get onboard_confirm_password;
+
+  /// No description provided for @onboard_reference_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Reference Number'**
+  String get onboard_reference_number;
 }
 
 class _AppLocalizationsDelegate
@@ -116,7 +294,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['en', 'es'].contains(locale.languageCode);
+      <String>['en', 'hi', 'ml', 'ta'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -127,8 +305,12 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   switch (locale.languageCode) {
     case 'en':
       return AppLocalizationsEn();
-    case 'es':
-      return AppLocalizationsEs();
+    case 'hi':
+      return AppLocalizationsHi();
+    case 'ml':
+      return AppLocalizationsMl();
+    case 'ta':
+      return AppLocalizationsTa();
   }
 
   throw FlutterError(

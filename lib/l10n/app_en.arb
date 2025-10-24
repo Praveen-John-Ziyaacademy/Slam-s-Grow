@@ -1,3 +1,37 @@
 {
-  "title": "Welcome Back"
+  "onboard_skip": "Skip >>",
+  "onboard_get_started": "Get Started",
+  "onboard_next": "Next",
+
+  "onboard_heading1": "Welcome !",
+  "onboard_title1": "Complete simple tasks",
+  "onboard_desc1": "Complete small tasks and activities to start earnings",
+
+  "onboard_heading2": "Earn !",
+  "onboard_title2": "Real rewards and cash.",
+  "onboard_desc2": "Get paid in cash for the tasks you complete and offers you engage with.",
+
+  "onboard_heading3": "Join !",
+  "onboard_title3": "Our community and grow.",
+  "onboard_desc3": "Connect with other users and elevate your user level",
+
+  "onboard_login":"Login to Continue",
+  "onboard_or":"Or",
+  "onboard_email":"Email",
+  "onboard_password":"Password",
+  "onboard_remember_me":"Remember me",
+  "onboard_forgot_password":"Forgot password",
+  "onboard_login_button":"Login",
+  "onboard_dont_h_account":"Don't have an account? ",
+  "onboard_signup_button":"Sign Up",
+  "onboard_privacy_policy":"By continuing you agree that you have read and accepted our T&C and privacy policy",
+
+  "onboard_sign_up":"Sign up your Account",
+  "onboard_personal_data":"Enter your personal data to create account",
+  "onboard_have_account":"Already have an account? ",
+  "onboard_first_name":"First Name",
+  "onboard_last_name":"Last Name",
+  "onboard_phone":"Phone Number",
+  "onboard_confirm_password":"Confirm Password",
+  "onboard_reference_number":"Reference Number"
 }

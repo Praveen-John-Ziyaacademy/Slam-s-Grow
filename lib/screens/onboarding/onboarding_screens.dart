@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:social_media/auth_screen/login_screen.dart';
 import 'package:social_media/colors/colors.dart';
 import 'package:social_media/colors/fonts.dart';
+import 'package:social_media/l10n/app_localizations.dart';
 import 'package:social_media/models/onboarding_models.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -18,28 +19,31 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
-
-  final List<OnboardingData> onboardingData = [
-    OnboardingData(
-      heading: "Welcome !",
-      title: "Complete simple tasks",
-      description: "Complete small tasks and activities to start earnings ",
-      svgPath: "assets/ilu.svg",
-    ),
-    OnboardingData(
-      heading: "Earn !",
-      title: " Real rewards and cash.",
-      description:
-          "Get paid in cash for the tasks you complete and offers you engage with.",
-      svgPath: "assets/EARN.svg",
-    ),
-    OnboardingData(
-      heading: "Join !",
-      title: "Our community and grow.",
-      description: "Connect with other users and elevate your user level",
-      svgPath: "assets/JOIN.svg",
-    ),
-  ];
+  late List<OnboardingData> onboardingData;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    onboardingData = [
+      OnboardingData(
+        heading: AppLocalizations.of(context)!.onboard_heading1,
+        title: AppLocalizations.of(context)!.onboard_title1,
+        description: AppLocalizations.of(context)!.onboard_desc1,
+        svgPath: "assets/ilu.svg",
+      ),
+      OnboardingData(
+        heading: AppLocalizations.of(context)!.onboard_heading2,
+        title: AppLocalizations.of(context)!.onboard_title2,
+        description: AppLocalizations.of(context)!.onboard_desc2,
+        svgPath: "assets/EARN.svg",
+      ),
+      OnboardingData(
+        heading: AppLocalizations.of(context)!.onboard_heading3,
+        title: AppLocalizations.of(context)!.onboard_title3,
+        description: AppLocalizations.of(context)!.onboard_desc3,
+        svgPath: "assets/JOIN.svg",
+      ),
+    ];
+  }
 
   @override
   void initState() {
@@ -78,7 +82,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   child: TextButton(
                     onPressed: () => _navigateToLogin(),
                     child: Text(
-                      'Skip>>',
+                      AppLocalizations.of(context)!.onboard_skip,
                       style: AppFonts.primaryFont(
                         color: AppColors.primary,
                         fontSize: 16,
@@ -156,8 +160,10 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                           ),
                           child: Text(
                             _currentIndex == onboardingData.length - 1
-                                ? 'Get Started'
-                                : 'Next',
+                                ? AppLocalizations.of(
+                                    context,
+                                  )!.onboard_get_started
+                                : AppLocalizations.of(context)!.onboard_next,
                             style: AppFonts.primaryFont(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,

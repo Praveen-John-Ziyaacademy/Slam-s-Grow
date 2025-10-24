@@ -65,7 +65,7 @@ class HomeTabContent extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          AppLocalizations.of(context)!.title,
+                          AppLocalizations.of(context)!.localeName,
                           style: AppFonts.primaryFont(
                             color: Colors.white70,
                             fontSize: 16,
