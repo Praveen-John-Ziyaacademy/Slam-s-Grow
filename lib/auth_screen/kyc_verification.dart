@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:social_media/auth_controller/kyc_controller.dart';
 import 'package:social_media/colors/colors.dart';
 import 'package:social_media/colors/fonts.dart';
+import 'package:social_media/l10n/app_localizations.dart';
 
 class KYCVerificationScreen extends StatelessWidget {
   const KYCVerificationScreen({super.key});
@@ -35,12 +36,12 @@ class KYCVerificationScreen extends StatelessWidget {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Icon(Icons.lock_outline, size: 14, color: Colors.black54),
                       SizedBox(width: 6),
                       Text(
-                        'KYC Verification',
-                        style: TextStyle(
+                        AppLocalizations.of(context)!.onboard_kyc_title,
+                        style: AppFonts.primaryFont(
                           color: Colors.black,
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -49,39 +50,83 @@ class KYCVerificationScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 12),
-                  const Text(
-                    'Your information is securely stored & encrypted',
-                    style: TextStyle(fontSize: 11, color: Colors.grey),
+                  Text(
+                    AppLocalizations.of(context)!.onboard_kyc_subtitle,
+                    style: AppFonts.primaryFont(
+                      fontSize: 11,
+                      color: Colors.grey,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 12),
                   Obx(
-                    () => Row(
+                    () => Column(
                       children: [
-                        _buildStepWithConnector(
-                          1,
-                          'Personal info',
-                          controller.currentStep.value >= 1,
-                          controller.currentStep.value > 1,
-                          controller.currentStep.value > 1,
+                        // Lines and circles layer
+                        SizedBox(
+                          height: 24,
+                          child: Row(
+                            children: [
+                              _buildCircleWithLines(
+                                1,
+                                controller.currentStep.value >= 1,
+                                controller.currentStep.value > 1,
+                                showLeftLine: false,
+                                showRightLine: true,
+                                rightLineActive:
+                                    controller.currentStep.value > 1,
+                              ),
+                              _buildCircleWithLines(
+                                2,
+                                controller.currentStep.value >= 2,
+                                controller.currentStep.value > 2,
+                                showLeftLine: true,
+                                showRightLine: true,
+                                leftLineActive:
+                                    controller.currentStep.value > 1,
+                                rightLineActive:
+                                    controller.currentStep.value > 2,
+                              ),
+                              _buildCircleWithLines(
+                                3,
+                                controller.currentStep.value >= 3,
+                                controller.currentStep.value > 3,
+                                showLeftLine: true,
+                                showRightLine: false,
+                                leftLineActive:
+                                    controller.currentStep.value > 2,
+                              ),
+                            ],
+                          ),
                         ),
-                        _buildStepWithConnector(
-                          2,
-                          'ID Verification',
-                          controller.currentStep.value >= 2,
-                          controller.currentStep.value > 2,
-                          controller.currentStep.value > 2,
-                        ),
-                        _buildStepWithConnector(
-                          3,
-                          'Review & Submit',
-                          controller.currentStep.value >= 3,
-                          controller.currentStep.value > 3,
-                          false,
+                        const SizedBox(height: 8),
+                        // Labels layer
+                        Row(
+                          children: [
+                            _buildStepLabel(
+                              AppLocalizations.of(
+                                context,
+                              )!.onboard_personal_info,
+                              controller.currentStep.value >= 1,
+                            ),
+                            _buildStepLabel(
+                              AppLocalizations.of(
+                                context,
+                              )!.onboard_id_verification,
+                              controller.currentStep.value >= 2,
+                            ),
+                            _buildStepLabel(
+                              AppLocalizations.of(
+                                context,
+                              )!.onboard_review_submit,
+                              controller.currentStep.value >= 3,
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
+                  const SizedBox(height: 10),
                   const SizedBox(height: 10),
                 ],
               ),
@@ -113,7 +158,7 @@ class KYCVerificationScreen extends StatelessWidget {
                           ),
                         );
                       },
-                  child: _buildStepContent(controller),
+                  child: _buildStepContent(controller, context),
                 ),
               ),
             ),
@@ -123,20 +168,20 @@ class KYCVerificationScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildStepContent(KYCController controller) {
+  Widget _buildStepContent(KYCController controller, BuildContext context) {
     switch (controller.currentStep.value) {
       case 1:
-        return _buildPersonalInfoStep(controller);
+        return _buildPersonalInfoStep(controller, context);
       case 2:
-        return _buildIDVerificationStep(controller);
+        return _buildIDVerificationStep(controller, context);
       case 3:
-        return _buildReviewSubmitStep(controller);
+        return _buildReviewSubmitStep(controller, context);
       default:
-        return _buildPersonalInfoStep(controller);
+        return _buildPersonalInfoStep(controller, context);
     }
   }
 
-  Widget _buildPersonalInfoStep(KYCController controller) {
+  Widget _buildPersonalInfoStep(KYCController controller, context) {
     return SingleChildScrollView(
       key: const ValueKey(1),
       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -145,7 +190,7 @@ class KYCVerificationScreen extends StatelessWidget {
         children: [
           const SizedBox(height: 18),
           Text(
-            'Personal Information',
+            AppLocalizations.of(context)!.onboard_personal_information,
             style: AppFonts.primaryFont(
               fontSize: 15,
               fontWeight: FontWeight.w600,
@@ -154,13 +199,13 @@ class KYCVerificationScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           _buildTextField(
-            'Full Name',
+            AppLocalizations.of(context)!.onboard_full_name,
             controller.fullNameController,
             'Enter your full name',
           ),
           const SizedBox(height: 18),
           _buildDropdownField(
-            'Nationality',
+            AppLocalizations.of(context)!.onboard_nationality,
             controller.selectedNationality,
             controller.nationalityOptions,
             controller.changeNationality,
@@ -170,7 +215,7 @@ class KYCVerificationScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildDropdownField(
-                  'Gender',
+                  AppLocalizations.of(context)!.onboard_gender,
                   controller.selectedGender,
                   controller.genderOptions,
                   controller.changeGender,
@@ -179,7 +224,7 @@ class KYCVerificationScreen extends StatelessWidget {
               const SizedBox(width: 16),
               Expanded(
                 child: _buildDropdownField(
-                  'Marital Status',
+                  AppLocalizations.of(context)!.onboard_marital_status,
                   controller.selectedMaritalStatus,
                   controller.maritalStatusOptions,
                   controller.changeMaritalStatus,
@@ -192,7 +237,7 @@ class KYCVerificationScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildDropdownField(
-                  'Blood Group',
+                  AppLocalizations.of(context)!.onboard_blood_group,
                   controller.selectedBloodGroup,
                   controller.bloodGroupOptions,
                   controller.changeBloodGroup,
@@ -201,7 +246,7 @@ class KYCVerificationScreen extends StatelessWidget {
               const SizedBox(width: 16),
               Expanded(
                 child: _buildDateField(
-                  'Date of Birth',
+                  AppLocalizations.of(context)!.onboard_date_of_birth,
                   controller.dateOfBirthController,
                   () => controller.pickDateOfBirth(Get.context!),
                 ),
@@ -213,7 +258,7 @@ class KYCVerificationScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildDropdownField(
-                  'State',
+                  AppLocalizations.of(context)!.onboard_state,
                   controller.selectedState,
                   controller.stateOptions,
                   controller.changeState,
@@ -222,7 +267,7 @@ class KYCVerificationScreen extends StatelessWidget {
               const SizedBox(width: 16),
               Expanded(
                 child: _buildDropdownField(
-                  'City',
+                  AppLocalizations.of(context)!.onboard_city,
                   controller.selectedCity,
                   controller.cityOptions,
                   controller.changeCity,
@@ -235,7 +280,7 @@ class KYCVerificationScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildDropdownField(
-                  'District',
+                  AppLocalizations.of(context)!.onboard_district,
                   controller.selectedDistrict,
                   controller.districtOptions,
                   controller.changeDistrict,
@@ -244,7 +289,7 @@ class KYCVerificationScreen extends StatelessWidget {
               const SizedBox(width: 16),
               Expanded(
                 child: _buildDropdownField(
-                  'Pin code',
+                  AppLocalizations.of(context)!.onboard_pin_code,
                   controller.selectedPincode,
                   controller.pincodeOptions,
                   controller.changePincode,
@@ -257,19 +302,19 @@ class KYCVerificationScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildTextField(
-                  'Mobile Number',
+                  AppLocalizations.of(context)!.onboard_mobile_number,
                   controller.mobileNumberController,
                   'Enter mobile number',
-                  width: 150, // narrower
+                  width: double.infinity,
                 ),
               ),
               const SizedBox(width: 16),
               Expanded(
                 child: _buildTextField(
-                  'Another Mobile Number',
+                  AppLocalizations.of(context)!.onboard_another_mobile_number,
                   controller.alternateMobileController,
                   'Enter alternate number',
-                  width: 150, // narrower
+                  width: double.infinity,
                 ),
               ),
             ],
@@ -277,7 +322,7 @@ class KYCVerificationScreen extends StatelessWidget {
 
           const SizedBox(height: 24),
           Text(
-            'Professional Details',
+            AppLocalizations.of(context)!.onboard_professional_details,
             style: AppFonts.primaryFont(
               fontSize: 15,
               fontWeight: FontWeight.w600,
@@ -289,7 +334,7 @@ class KYCVerificationScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildDropdownField(
-                  'Job Role',
+                  AppLocalizations.of(context)!.onboard_job_role,
                   controller.selectedJobRole,
                   controller.jobRoleOptions,
                   controller.changeJobRole,
@@ -298,7 +343,7 @@ class KYCVerificationScreen extends StatelessWidget {
               const SizedBox(width: 16),
               Expanded(
                 child: _buildDropdownField(
-                  'User Type',
+                  AppLocalizations.of(context)!.onboard_user_type,
                   controller.selectedUserType,
                   controller.userTypeOptions,
                   controller.changeUserType,
@@ -308,7 +353,7 @@ class KYCVerificationScreen extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           Text(
-            'Account Details',
+            AppLocalizations.of(context)!.onboard_account_details,
             style: AppFonts.primaryFont(
               fontSize: 15,
               fontWeight: FontWeight.w600,
@@ -317,7 +362,7 @@ class KYCVerificationScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           _buildTextField(
-            'Full Name',
+            AppLocalizations.of(context)!.onboard_full_name,
             controller.accountNameController,
             'Enter account holder name',
           ),
@@ -326,19 +371,19 @@ class KYCVerificationScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildTextField(
-                  'Account Number',
+                  AppLocalizations.of(context)!.onboard_account_number,
                   controller.accountNumberController,
                   'Enter account number',
-                  width: 150,
+                  width: double.infinity,
                 ),
               ),
               const SizedBox(width: 16),
               Expanded(
                 child: _buildTextField(
-                  'IFSC Code',
+                  AppLocalizations.of(context)!.onboard_ifsc_code,
                   controller.ifscCodeController,
                   'Enter IFSC code',
-                  width: 150,
+                  width: double.infinity,
                 ),
               ),
             ],
@@ -359,7 +404,7 @@ class KYCVerificationScreen extends StatelessWidget {
                   elevation: 0,
                 ),
                 child: Text(
-                  'Next',
+                  AppLocalizations.of(context)!.onboard_next,
                   style: AppFonts.primaryFont(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
@@ -375,7 +420,7 @@ class KYCVerificationScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildIDVerificationStep(KYCController controller) {
+  Widget _buildIDVerificationStep(KYCController controller, context) {
     return SingleChildScrollView(
       key: const ValueKey(2),
       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -384,7 +429,7 @@ class KYCVerificationScreen extends StatelessWidget {
         children: [
           const SizedBox(height: 18),
           Text(
-            'Upload Documents',
+            AppLocalizations.of(context)!.onboard_upload_documents,
             style: AppFonts.primaryFont(
               fontSize: 15,
               fontWeight: FontWeight.w600,
@@ -394,17 +439,18 @@ class KYCVerificationScreen extends StatelessWidget {
           const SizedBox(height: 20),
 
           _buildDocumentUploadDouble(
-            'Aadhar Card',
+            AppLocalizations.of(context)!.onboard_aadhar_card,
             'assets/aadhar card.svg',
             controller.aadharFront,
             controller.aadharBack,
             () => controller.pickDocument('aadhar_front'),
             () => controller.pickDocument('aadhar_back'),
+            context,
           ),
           const SizedBox(height: 20),
 
           _buildDocumentUploadSingle(
-            'Pan Card',
+            AppLocalizations.of(context)!.onboard_pan_card,
             'assets/pan card.svg',
             controller.panFront,
             () => controller.pickDocument('pan_front'),
@@ -413,7 +459,7 @@ class KYCVerificationScreen extends StatelessWidget {
 
           // Pass Book - Front Only
           _buildDocumentUploadSingle(
-            'Pass Book',
+            AppLocalizations.of(context)!.onboard_pass_book,
             'assets/pass book.svg',
             controller.passbook_image,
             () => controller.pickDocument('passbook_image'),
@@ -423,7 +469,7 @@ class KYCVerificationScreen extends StatelessWidget {
 
           // Selfie
           _buildSelfieUpload(
-            'Selfie',
+            AppLocalizations.of(context)!.onboard_selfie,
             controller.selfieImage,
             () => controller.pickDocument('selfie'),
           ),
@@ -443,7 +489,7 @@ class KYCVerificationScreen extends StatelessWidget {
                   elevation: 0,
                 ),
                 child: Text(
-                  'Next',
+                  AppLocalizations.of(context)!.onboard_next,
                   style: AppFonts.primaryFont(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
@@ -466,6 +512,7 @@ class KYCVerificationScreen extends StatelessWidget {
     Rx<File?> backImage,
     VoidCallback onFrontTap,
     VoidCallback onBackTap,
+    BuildContext context,
   ) {
     return Obx(() {
       bool hasFront = frontImage.value != null;
@@ -598,7 +645,7 @@ class KYCVerificationScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'Upload Back',
+                            AppLocalizations.of(context)!.onboard_upload_back,
                             style: AppFonts.primaryFont(
                               fontSize: 11,
                               color: Colors.grey[600],
@@ -796,7 +843,7 @@ class KYCVerificationScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildReviewSubmitStep(KYCController controller) {
+  Widget _buildReviewSubmitStep(KYCController controller, context) {
     return SingleChildScrollView(
       key: const ValueKey(3),
       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -805,7 +852,7 @@ class KYCVerificationScreen extends StatelessWidget {
         children: [
           const SizedBox(height: 18),
           Text(
-            'Personal Information',
+            AppLocalizations.of(context)!.onboard_personal_information,
             style: AppFonts.primaryFont(
               fontSize: 15,
               fontWeight: FontWeight.w600,
@@ -908,7 +955,7 @@ class KYCVerificationScreen extends StatelessWidget {
 
           const SizedBox(height: 24),
           Text(
-            'Uploaded Documents',
+            AppLocalizations.of(context)!.onboard_upload_documents,
             style: AppFonts.primaryFont(
               fontSize: 15,
               fontWeight: FontWeight.w600,
@@ -923,14 +970,14 @@ class KYCVerificationScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildDocumentPreview(
-                  'Aadhar Card',
+                  AppLocalizations.of(context)!.onboard_aadhar_card,
                   controller.aadharFront.value,
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: _buildDocumentPreview(
-                  'Pan Card',
+                  AppLocalizations.of(context)!.onboard_pan_card,
                   controller.panFront.value,
                 ),
               ),
@@ -942,14 +989,14 @@ class KYCVerificationScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildDocumentPreview(
-                  'Pass Book',
+                  AppLocalizations.of(context)!.onboard_pass_book,
                   controller.passbook_image.value,
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: _buildDocumentPreview(
-                  'Selfie',
+                  AppLocalizations.of(context)!.onboard_selfie,
                   controller.selfieImage.value,
                 ),
               ),
@@ -979,7 +1026,7 @@ class KYCVerificationScreen extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    'I confirm my information is correct',
+                    AppLocalizations.of(context)!.onboard_confirm_information,
                     style: AppFonts.primaryFont(
                       fontSize: 12,
                       color: Colors.black87,
@@ -1009,7 +1056,7 @@ class KYCVerificationScreen extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  'I agree to T&C and Privacy Policy',
+                  AppLocalizations.of(context)!.onboard_agree_terms,
                   style: AppFonts.primaryFont(
                     fontSize: 12,
                     color: Colors.black87,
@@ -1034,7 +1081,7 @@ class KYCVerificationScreen extends StatelessWidget {
                   elevation: 0,
                 ),
                 child: Text(
-                  'Submit',
+                  AppLocalizations.of(context)!.onboard_submit,
                   style: AppFonts.primaryFont(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
@@ -1133,59 +1180,67 @@ class KYCVerificationScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildStepWithConnector(
+  Widget _buildCircleWithLines(
     int number,
-    String label,
     bool isActive,
-    bool isCompleted,
-    bool isNextActive,
-  ) {
+    bool isCompleted, {
+    required bool showLeftLine,
+    required bool showRightLine,
+    bool leftLineActive = false,
+    bool rightLineActive = false,
+  }) {
     return Expanded(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      child: Stack(
+        alignment: Alignment.center,
         children: [
-          Stack(
-            alignment: Alignment.center,
+          Row(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 2,
-                      color: number == 1
-                          ? Colors.transparent
-                          : (isActive
-                                ? const Color(0xFF00A0E3)
-                                : Colors.grey[300]),
-                    ),
-                  ),
-                  const SizedBox(width: 30),
-                  Expanded(
-                    child: Container(
-                      height: 2,
-                      color: number == 3
-                          ? Colors.transparent
-                          : (isNextActive
-                                ? const Color(0xFF00A0E3)
-                                : Colors.grey[300]),
-                    ),
-                  ),
-                ],
+              Expanded(
+                child: Container(
+                  height: 2,
+                  color: showLeftLine
+                      ? (leftLineActive
+                            ? const Color(0xFF00A0E3)
+                            : Colors.grey[300])
+                      : Colors.transparent,
+                ),
               ),
-              _buildCircle(number, isActive, isCompleted),
+              const SizedBox(width: 24),
+              Expanded(
+                child: Container(
+                  height: 2,
+                  color: showRightLine
+                      ? (rightLineActive
+                            ? const Color(0xFF00A0E3)
+                            : Colors.grey[300])
+                      : Colors.transparent,
+                ),
+              ),
             ],
           ),
-          const SizedBox(height: 6),
-          Text(
-            label,
-            textAlign: TextAlign.center,
-            style: AppFonts.primaryFont(
-              fontSize: 11,
-              color: isActive ? Colors.black87 : Colors.grey[500],
-              fontWeight: isActive ? FontWeight.w500 : FontWeight.w400,
-            ),
-          ),
+          _buildCircle(number, isActive, isCompleted),
         ],
+      ),
+    );
+  }
+
+  Widget _buildStepLabel(String label, bool isActive) {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        child: Text(
+          label,
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          softWrap: true,
+          overflow: TextOverflow.ellipsis,
+          style: AppFonts.primaryFont(
+            fontSize: 11,
+            color: isActive ? Colors.black87 : Colors.grey[500],
+            fontWeight: isActive ? FontWeight.w500 : FontWeight.w400,
+            height: 1.3,
+          ),
+        ),
       ),
     );
   }
@@ -1221,7 +1276,7 @@ class KYCVerificationScreen extends StatelessWidget {
     String label,
     TextEditingController controller,
     String hint, {
-    double width = 335,
+    double width = double.infinity,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1268,8 +1323,6 @@ class KYCVerificationScreen extends StatelessWidget {
     List<String> options,
     Function(String?) onChanged,
   ) {
-    double fieldWidth = label == "Nationality" ? 335 : 150;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1285,7 +1338,7 @@ class KYCVerificationScreen extends StatelessWidget {
         Obx(
           () => Container(
             height: 30,
-            width: fieldWidth,
+            width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: Colors.grey[300]!, width: 1),
@@ -1348,7 +1401,7 @@ class KYCVerificationScreen extends StatelessWidget {
           onTap: onTap,
           child: Container(
             height: 30,
-            width: 150,
+            width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(6),

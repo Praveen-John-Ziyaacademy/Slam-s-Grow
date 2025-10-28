@@ -101,4 +101,112 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get onboard_reference_number => 'संदर्भ संख्या';
+
+  @override
+  String get onboard_kyc_title => 'केवाईसी सत्यापन';
+
+  @override
+  String get onboard_kyc_subtitle =>
+      'आपकी जानकारी सुरक्षित रूप से संग्रहीत और एन्क्रिप्ट की गई है';
+
+  @override
+  String get onboard_personal_info => 'व्यक्तिगत जानकारी';
+
+  @override
+  String get onboard_id_verification => 'पहचान सत्यापन';
+
+  @override
+  String get onboard_review_submit => 'समीक्षा करें और सबमिट करें';
+
+  @override
+  String get onboard_personal_information => 'व्यक्तिगत जानकारी';
+
+  @override
+  String get onboard_full_name => 'पूरा नाम';
+
+  @override
+  String get onboard_nationality => 'राष्ट्रीयता';
+
+  @override
+  String get onboard_gender => 'लिंग';
+
+  @override
+  String get onboard_marital_status => 'वैवाहिक स्थिति';
+
+  @override
+  String get onboard_blood_group => 'रक्त समूह';
+
+  @override
+  String get onboard_date_of_birth => 'जन्म तिथि';
+
+  @override
+  String get onboard_state => 'राज्य';
+
+  @override
+  String get onboard_city => 'शहर';
+
+  @override
+  String get onboard_district => 'जिला';
+
+  @override
+  String get onboard_pin_code => 'पिन कोड';
+
+  @override
+  String get onboard_mobile_number => 'मोबाइल नंबर';
+
+  @override
+  String get onboard_another_mobile_number => 'अन्य मोबाइल नंबर';
+
+  @override
+  String get onboard_professional_details => 'व्यावसायिक विवरण';
+
+  @override
+  String get onboard_job_role => 'कार्य भूमिका';
+
+  @override
+  String get onboard_user_type => 'उपयोगकर्ता प्रकार';
+
+  @override
+  String get onboard_account_details => 'खाता विवरण';
+
+  @override
+  String get onboard_account_number => 'खाता संख्या';
+
+  @override
+  String get onboard_ifsc_code => 'आईएफएससी कोड';
+
+  @override
+  String get onboard_upload_documents => 'दस्तावेज़ अपलोड करें';
+
+  @override
+  String get onboard_aadhar_card => 'आधार कार्ड';
+
+  @override
+  String get onboard_pan_card => 'पैन कार्ड';
+
+  @override
+  String get onboard_pass_book => 'पासबुक';
+
+  @override
+  String get onboard_selfie => 'सेल्फी';
+
+  @override
+  String get onboard_upload_back => 'पीछे का भाग अपलोड करें';
+
+  @override
+  String get onboard_spot_selfie => 'स्पॉट सेल्फी';
+
+  @override
+  String get onboard_uploaded_documents => 'अपलोड किए गए दस्तावेज़';
+
+  @override
+  String get onboard_confirm_information =>
+      'मैं पुष्टि करता हूँ कि मेरी जानकारी सही है';
+
+  @override
+  String get onboard_agree_terms =>
+      'मैं नियम एवं शर्तों और गोपनीयता नीति से सहमत हूँ';
+
+  @override
+  String get onboard_submit => 'सबमिट करें';
 }

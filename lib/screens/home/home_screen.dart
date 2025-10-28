@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:social_media/colors/fonts.dart';
+import 'package:social_media/components/bottom_bar.dart';
 import 'package:social_media/controller/home_screen_controller.dart';
 import 'package:social_media/l10n/app_localizations.dart';
 import 'package:social_media/models/home_screen_models.dart';
+import 'package:social_media/screens/quick_task/add_sharing_screen.dart';
+import 'package:social_media/screens/quick_task/post_screen.dart';
+import 'package:social_media/screens/quick_task/survey_screen.dart';
 
 class HomeTabContent extends StatelessWidget {
   final HomeController controller = Get.find<HomeController>();
@@ -29,9 +34,12 @@ class HomeTabContent extends StatelessWidget {
           const SizedBox(height: 120),
           _buildManageNow(),
           const SizedBox(height: 20),
+          _buildQuickTask(context),
+          const SizedBox(height: 20),
           _buildTodaysTasks(),
           const SizedBox(height: 20),
           _buildRecentActivity(),
+
           const SizedBox(height: 40),
         ],
       ),
@@ -327,6 +335,114 @@ class HomeTabContent extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuickTask(BuildContext context) {
+    final quickTasks = [
+      {
+        'icon': 'assets/advertisiment-stroke-rounded 1.svg',
+        'label': 'Ad Sharing',
+        'route': AdSharingTasksPage(),
+      },
+      {
+        'icon': 'assets/aids-stroke-rounded 1.svg',
+        'label': 'Social',
+        'route': PostScreen(),
+      },
+      {
+        'icon': 'assets/add-to-list-stroke-rounded 1.svg',
+        'label': 'Survey',
+        'route': SurveyHomePage(),
+      },
+    ];
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Quick Task',
+            style: AppFonts.primaryFont(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: 15),
+          Container(
+            height: 157,
+            width: double.infinity,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF6FFFD),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.black, width: .4),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.25),
+                  blurRadius: 2,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: quickTasks.map((task) {
+                return InkWell(
+                  borderRadius: BorderRadius.circular(10),
+                  onTap: () {
+                    Get.to(
+                      () => task['route'] as Widget,
+                      transition: Transition.fadeIn,
+                      duration: const Duration(milliseconds: 300),
+                    );
+                  },
+                  child: Container(
+                    height: 110,
+                    width: 90,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: [Color(0xFF00BD4A), Color(0xFF2070FF)],
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.25),
+                          blurRadius: 2,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          task['icon'] as String,
+                          height: 25,
+                          width: 25,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          task['label'] as String,
+                          textAlign: TextAlign.center,
+                          style: AppFonts.primaryFont(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
           ),
         ],
       ),

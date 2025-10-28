@@ -281,6 +281,216 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reference Number'**
   String get onboard_reference_number;
+
+  /// No description provided for @onboard_kyc_title.
+  ///
+  /// In en, this message translates to:
+  /// **'KYC Verification'**
+  String get onboard_kyc_title;
+
+  /// No description provided for @onboard_kyc_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your information is securely stored & encrypted'**
+  String get onboard_kyc_subtitle;
+
+  /// No description provided for @onboard_personal_info.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Info'**
+  String get onboard_personal_info;
+
+  /// No description provided for @onboard_id_verification.
+  ///
+  /// In en, this message translates to:
+  /// **'ID Verification'**
+  String get onboard_id_verification;
+
+  /// No description provided for @onboard_review_submit.
+  ///
+  /// In en, this message translates to:
+  /// **'Review & Submit'**
+  String get onboard_review_submit;
+
+  /// No description provided for @onboard_personal_information.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Information'**
+  String get onboard_personal_information;
+
+  /// No description provided for @onboard_full_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Name'**
+  String get onboard_full_name;
+
+  /// No description provided for @onboard_nationality.
+  ///
+  /// In en, this message translates to:
+  /// **'Nationality'**
+  String get onboard_nationality;
+
+  /// No description provided for @onboard_gender.
+  ///
+  /// In en, this message translates to:
+  /// **'Gender'**
+  String get onboard_gender;
+
+  /// No description provided for @onboard_marital_status.
+  ///
+  /// In en, this message translates to:
+  /// **'Marital Status'**
+  String get onboard_marital_status;
+
+  /// No description provided for @onboard_blood_group.
+  ///
+  /// In en, this message translates to:
+  /// **'\'Blood Group'**
+  String get onboard_blood_group;
+
+  /// No description provided for @onboard_date_of_birth.
+  ///
+  /// In en, this message translates to:
+  /// **'Date of Birth'**
+  String get onboard_date_of_birth;
+
+  /// No description provided for @onboard_state.
+  ///
+  /// In en, this message translates to:
+  /// **'State'**
+  String get onboard_state;
+
+  /// No description provided for @onboard_city.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get onboard_city;
+
+  /// No description provided for @onboard_district.
+  ///
+  /// In en, this message translates to:
+  /// **'District'**
+  String get onboard_district;
+
+  /// No description provided for @onboard_pin_code.
+  ///
+  /// In en, this message translates to:
+  /// **'Pin code'**
+  String get onboard_pin_code;
+
+  /// No description provided for @onboard_mobile_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile Number'**
+  String get onboard_mobile_number;
+
+  /// No description provided for @onboard_another_mobile_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Another Mobile Number'**
+  String get onboard_another_mobile_number;
+
+  /// No description provided for @onboard_professional_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Professional Details'**
+  String get onboard_professional_details;
+
+  /// No description provided for @onboard_job_role.
+  ///
+  /// In en, this message translates to:
+  /// **'Job Role'**
+  String get onboard_job_role;
+
+  /// No description provided for @onboard_user_type.
+  ///
+  /// In en, this message translates to:
+  /// **'User Type'**
+  String get onboard_user_type;
+
+  /// No description provided for @onboard_account_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Details'**
+  String get onboard_account_details;
+
+  /// No description provided for @onboard_account_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Number'**
+  String get onboard_account_number;
+
+  /// No description provided for @onboard_ifsc_code.
+  ///
+  /// In en, this message translates to:
+  /// **'IFSC Code'**
+  String get onboard_ifsc_code;
+
+  /// No description provided for @onboard_upload_documents.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Documents'**
+  String get onboard_upload_documents;
+
+  /// No description provided for @onboard_aadhar_card.
+  ///
+  /// In en, this message translates to:
+  /// **'Aadhar Card'**
+  String get onboard_aadhar_card;
+
+  /// No description provided for @onboard_pan_card.
+  ///
+  /// In en, this message translates to:
+  /// **'Pan Card'**
+  String get onboard_pan_card;
+
+  /// No description provided for @onboard_pass_book.
+  ///
+  /// In en, this message translates to:
+  /// **'Pass Book'**
+  String get onboard_pass_book;
+
+  /// No description provided for @onboard_selfie.
+  ///
+  /// In en, this message translates to:
+  /// **'Selfie'**
+  String get onboard_selfie;
+
+  /// No description provided for @onboard_upload_back.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Back'**
+  String get onboard_upload_back;
+
+  /// No description provided for @onboard_spot_selfie.
+  ///
+  /// In en, this message translates to:
+  /// **'Spot Selfie'**
+  String get onboard_spot_selfie;
+
+  /// No description provided for @onboard_uploaded_documents.
+  ///
+  /// In en, this message translates to:
+  /// **'Uploaded Documents'**
+  String get onboard_uploaded_documents;
+
+  /// No description provided for @onboard_confirm_information.
+  ///
+  /// In en, this message translates to:
+  /// **'I confirm my information is correct'**
+  String get onboard_confirm_information;
+
+  /// No description provided for @onboard_agree_terms.
+  ///
+  /// In en, this message translates to:
+  /// **'I agree to T&C and Privacy Policy'**
+  String get onboard_agree_terms;
+
+  /// No description provided for @onboard_submit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get onboard_submit;
 }
 
 class _AppLocalizationsDelegate

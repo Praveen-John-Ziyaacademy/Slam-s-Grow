@@ -102,4 +102,112 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get onboard_reference_number => 'റഫറൻസ് നമ്പർ';
+
+  @override
+  String get onboard_kyc_title => 'കെവൈസി പരിശോധന';
+
+  @override
+  String get onboard_kyc_subtitle =>
+      'നിങ്ങളുടെ വിവരങ്ങൾ സുരക്ഷിതമായി സൂക്ഷിച്ചിരിക്കുന്നു';
+
+  @override
+  String get onboard_personal_info => 'വ്യക്തിഗത വിവരങ്ങൾ';
+
+  @override
+  String get onboard_id_verification => 'ഐഡി സ്ഥിരീകരണം';
+
+  @override
+  String get onboard_review_submit => 'പരിശോധിച്ച് സമർപ്പിക്കുക';
+
+  @override
+  String get onboard_personal_information => 'വ്യക്തിഗത വിവരങ്ങൾ';
+
+  @override
+  String get onboard_full_name => 'പൂർണ്ണ നാമം';
+
+  @override
+  String get onboard_nationality => 'ദേശീയത';
+
+  @override
+  String get onboard_gender => 'ലിംഗം';
+
+  @override
+  String get onboard_marital_status => 'വൈവാഹിക സ്ഥിതി';
+
+  @override
+  String get onboard_blood_group => 'രക്ത ഗ്രൂപ്പ്';
+
+  @override
+  String get onboard_date_of_birth => 'ജനനതീയതി';
+
+  @override
+  String get onboard_state => 'സംസ്ഥാനം';
+
+  @override
+  String get onboard_city => 'നഗരം';
+
+  @override
+  String get onboard_district => 'ജില്ല';
+
+  @override
+  String get onboard_pin_code => 'പിൻ കോഡ്';
+
+  @override
+  String get onboard_mobile_number => 'മൊബൈൽ നമ്പർ';
+
+  @override
+  String get onboard_another_mobile_number => 'മറ്റൊരു നമ്പർ';
+
+  @override
+  String get onboard_professional_details => 'പ്രൊഫഷണൽ വിശദാംശങ്ങൾ';
+
+  @override
+  String get onboard_job_role => 'ജോലി സ്ഥാനം';
+
+  @override
+  String get onboard_user_type => 'ഉപയോക്തൃ തരം';
+
+  @override
+  String get onboard_account_details => 'അക്കൗണ്ട് വിശദാംശങ്ങൾ';
+
+  @override
+  String get onboard_account_number => 'അക്കൗണ്ട് നമ്പർ';
+
+  @override
+  String get onboard_ifsc_code => 'IFSC കോഡ്';
+
+  @override
+  String get onboard_upload_documents => 'ഡോക്യുമെന്റുകൾ അപ്‌ലോഡ് ചെയ്യുക';
+
+  @override
+  String get onboard_aadhar_card => 'ആധാർ കാർഡ്';
+
+  @override
+  String get onboard_pan_card => 'പാൻ കാർഡ്';
+
+  @override
+  String get onboard_pass_book => 'പാസ്‌ബുക്ക്';
+
+  @override
+  String get onboard_selfie => 'സെൽഫി';
+
+  @override
+  String get onboard_upload_back => 'പിന്നിൽ അപ്‌ലോഡ് ചെയ്യുക';
+
+  @override
+  String get onboard_spot_selfie => 'സ്പോട്ട് സെൽഫി';
+
+  @override
+  String get onboard_uploaded_documents => 'അപ്‌ലോഡ് ചെയ്ത രേഖകൾ';
+
+  @override
+  String get onboard_confirm_information =>
+      'എന്റെ വിവരങ്ങൾ ശരിയാണെന്ന് ഞാൻ സ്ഥിരീകരിക്കുന്നു';
+
+  @override
+  String get onboard_agree_terms =>
+      'ഞാൻ നിബന്ധനകൾക്കും സ്വകാര്യതാ നയത്തിനും സമ്മതിക്കുന്നു';
+
+  @override
+  String get onboard_submit => 'സമർപ്പിക്കുക';
 }

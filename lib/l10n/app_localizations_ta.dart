@@ -102,4 +102,112 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get onboard_reference_number => 'குறிப்பு எண்';
+
+  @override
+  String get onboard_kyc_title => 'KYC சரிபார்ப்பு';
+
+  @override
+  String get onboard_kyc_subtitle =>
+      'உங்கள் தகவல் பாதுகாப்பாக சேமிக்கப்பட்டு குறியாக்கப்பட்டுள்ளது';
+
+  @override
+  String get onboard_personal_info => 'தனிப்பட்ட தகவல்';
+
+  @override
+  String get onboard_id_verification => 'அடையாளச் சரிபார்ப்பு';
+
+  @override
+  String get onboard_review_submit => 'மதிப்பாய்வு செய்து சமர்ப்பிக்கவும்';
+
+  @override
+  String get onboard_personal_information => 'தனிப்பட்ட தகவல்';
+
+  @override
+  String get onboard_full_name => 'முழு பெயர்';
+
+  @override
+  String get onboard_nationality => 'தேசத்துவம்';
+
+  @override
+  String get onboard_gender => 'பாலினம்';
+
+  @override
+  String get onboard_marital_status => 'திருமண நிலை';
+
+  @override
+  String get onboard_blood_group => 'இரத்த வகை';
+
+  @override
+  String get onboard_date_of_birth => 'பிறந்த தேதி';
+
+  @override
+  String get onboard_state => 'மாநிலம்';
+
+  @override
+  String get onboard_city => 'நகரம்';
+
+  @override
+  String get onboard_district => 'மாவட்டம்';
+
+  @override
+  String get onboard_pin_code => 'அஞ்சல் குறியீடு';
+
+  @override
+  String get onboard_mobile_number => 'மொபைல் எண்';
+
+  @override
+  String get onboard_another_mobile_number => 'மற்றொரு எண்';
+
+  @override
+  String get onboard_professional_details => 'தொழில்முறை விவரங்கள்';
+
+  @override
+  String get onboard_job_role => 'வேலை வகை';
+
+  @override
+  String get onboard_user_type => 'பயனர் வகை';
+
+  @override
+  String get onboard_account_details => 'கணக்கு விவரங்கள்';
+
+  @override
+  String get onboard_account_number => 'கணக்கு எண்';
+
+  @override
+  String get onboard_ifsc_code => 'IFSC குறியீடு';
+
+  @override
+  String get onboard_upload_documents => 'ஆவணங்களை பதிவேற்றவும்';
+
+  @override
+  String get onboard_aadhar_card => 'ஆதார் அட்டை';
+
+  @override
+  String get onboard_pan_card => 'பான் அட்டை';
+
+  @override
+  String get onboard_pass_book => 'பாஸ்புக்';
+
+  @override
+  String get onboard_selfie => 'செல்ஃபி';
+
+  @override
+  String get onboard_upload_back => 'பின்புறத்தை பதிவேற்றவும்';
+
+  @override
+  String get onboard_spot_selfie => 'இடத்திலேயே செல்ஃபி';
+
+  @override
+  String get onboard_uploaded_documents => 'பதிவேற்றிய ஆவணங்கள்';
+
+  @override
+  String get onboard_confirm_information =>
+      'எனது தகவல் சரியானது என்பதை உறுதிப்படுத்துகிறேன்';
+
+  @override
+  String get onboard_agree_terms =>
+      'நான் விதிமுறைகள் மற்றும் தனியுரிமைக் கொள்கைக்கு ஒப்புக்கொள்கிறேன்';
+
+  @override
+  String get onboard_submit => 'சமர்ப்பிக்கவும்';
 }
