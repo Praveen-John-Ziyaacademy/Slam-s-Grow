@@ -209,4 +209,100 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboard_submit => 'Submit';
+
+  @override
+  String get onboard_forgot_title => 'Forgot Password';
+
+  @override
+  String get onboard_email_adress => 'Enter Email Address';
+
+  @override
+  String get onboard_back_sign_in => 'Back to sign in';
+
+  @override
+  String get onboard_get_otp => 'Get OTP';
+
+  @override
+  String get onboard_verification => 'Verification';
+
+  @override
+  String get onboard_4_digit => 'An 4 digit OTP has been sent to\n';
+
+  @override
+  String get onboard_wait_for => 'Wait for';
+
+  @override
+  String get onboard_resend_otp => 'Resend OTP';
+
+  @override
+  String get onboard_new_password => 'New Password';
+
+  @override
+  String get onboard_enter_new_password => 'Enter New Password';
+
+  @override
+  String get onboard_welcome_back => 'Welcome Back';
+
+  @override
+  String get onboard_home_title => 'John Samual';
+
+  @override
+  String get onboard_available_bal => 'Available Balance';
+
+  @override
+  String get onboard_view_details => 'View Details >';
+
+  @override
+  String get onboard_tasks_h1 => 'Tasks';
+
+  @override
+  String get onboard_rank_h1 => 'Rank';
+
+  @override
+  String get onboard_days_h1 => 'Days';
+
+  @override
+  String get onboard_manage_now => 'Manage Now';
+
+  @override
+  String get onboard_my_wallet => 'My Wallet';
+
+  @override
+  String get onboard_view_transactions => 'View Transactions';
+
+  @override
+  String get onboard_leaderboard => 'Leaderboard';
+
+  @override
+  String get onboard_check_your_rank => 'Check your Rank';
+
+  @override
+  String get onboard_ad_sharing => 'Ad Sharing';
+
+  @override
+  String get onboard_social => 'Social';
+
+  @override
+  String get onboard_survey => 'Survey';
+
+  @override
+  String get onboard_todays_task => 'Todays Task\'s';
+
+  @override
+  String get onboard_view_all => 'View All >';
+
+  @override
+  String get onboard_do_task => 'Do Task';
+
+  @override
+  String get onboard_recent_activity => 'Recent Activity';
+
+  @override
+  String get onboard_quick_task => 'Quick Task';
+
+  @override
+  String get onboard_earn => 'Earn';
+
+  @override
+  String get onboard_points => 'Points';
 }

@@ -462,6 +462,7 @@ class _WalletPageState extends State<WalletPage> {
           style: TextStyle(
             color: isSelected ? Colors.white : Colors.grey[700],
             fontWeight: FontWeight.w600,
+            fontSize: 16,
           ),
         ),
       ),

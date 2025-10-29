@@ -27,18 +27,18 @@ class HomeTabContent extends StatelessWidget {
                 top: 264,
                 left: 0,
                 right: 0,
-                child: _buildStatsCards(),
+                child: _buildStatsCards(context),
               ),
             ],
           ),
           const SizedBox(height: 120),
-          _buildManageNow(),
+          _buildManageNow(context),
           const SizedBox(height: 20),
           _buildQuickTask(context),
           const SizedBox(height: 20),
-          _buildTodaysTasks(),
+          _buildTodaysTasks(context),
           const SizedBox(height: 20),
-          _buildRecentActivity(),
+          _buildRecentActivity(context),
 
           const SizedBox(height: 40),
         ],
@@ -73,7 +73,7 @@ class HomeTabContent extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          AppLocalizations.of(context)!.localeName,
+                          AppLocalizations.of(context)!.onboard_welcome_back,
                           style: AppFonts.primaryFont(
                             color: Colors.white70,
                             fontSize: 16,
@@ -81,7 +81,7 @@ class HomeTabContent extends StatelessWidget {
                         ),
                         SizedBox(height: 5),
                         Text(
-                          'John Samual',
+                          AppLocalizations.of(context)!.onboard_home_title,
                           style: AppFonts.primaryFont(
                             color: Colors.white,
                             fontSize: 24,
@@ -127,7 +127,7 @@ class HomeTabContent extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 23),
               Obx(
                 () => Container(
                   height: 100,
@@ -155,7 +155,7 @@ class HomeTabContent extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Available Balance',
+                            AppLocalizations.of(context)!.onboard_available_bal,
                             style: AppFonts.primaryFont(
                               color: Colors.white70,
                               fontSize: 12,
@@ -202,7 +202,7 @@ class HomeTabContent extends StatelessWidget {
                           ),
                           const SizedBox(height: 10),
                           Text(
-                            'View Details >',
+                            AppLocalizations.of(context)!.onboard_view_details,
                             style: AppFonts.primaryFont(
                               color: Colors.white.withOpacity(0.8),
                               fontSize: 10,
@@ -221,30 +221,40 @@ class HomeTabContent extends StatelessWidget {
     );
   }
 
-  Widget _buildStatsCards() {
+  Widget _buildStatsCards(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final cardWidth =
+        (screenWidth - 60) / 3; // 20px padding + spacing between 3 cards
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Obx(
         () => Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _buildStatCard(
+              context,
               Icons.task_alt,
               '${controller.tasksCount.value}',
-              'Tasks',
+              AppLocalizations.of(context)!.onboard_tasks_h1,
               Colors.blue,
+              cardWidth,
             ),
             _buildStatCard(
+              context,
               Icons.emoji_events,
               '#${controller.rank.value}',
-              'Rank',
+              AppLocalizations.of(context)!.onboard_rank_h1,
               Colors.blue,
+              cardWidth,
             ),
             _buildStatCard(
+              context,
               Icons.bolt,
               '${controller.daysStreak.value}',
-              'Days',
+              AppLocalizations.of(context)!.onboard_days_h1,
               Colors.blue,
+              cardWidth,
             ),
           ],
         ),
@@ -253,60 +263,70 @@ class HomeTabContent extends StatelessWidget {
   }
 
   Widget _buildStatCard(
+    BuildContext context,
     IconData icon,
     String value,
     String label,
     Color color,
+    double width,
   ) {
     return Container(
-      width: 100,
-      padding: const EdgeInsets.all(15),
+      width: width,
+      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.25),
+            color: Colors.black.withOpacity(0.1),
             blurRadius: 4,
-            offset: const Offset(0, 4),
+            offset: const Offset(0, 2),
           ),
         ],
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: color.withOpacity(0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(icon, color: color, size: 20),
           ),
-          const SizedBox(height: 10),
-          Text(
-            value,
-            style: AppFonts.primaryFont(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
+          const SizedBox(height: 8),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              value,
+              style: AppFonts.primaryFont(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
+          const SizedBox(height: 2),
           Text(
             label,
-            style: AppFonts.primaryFont(fontSize: 14, color: Colors.grey[600]),
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: AppFonts.primaryFont(fontSize: 13, color: Colors.grey[600]),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildManageNow() {
+  Widget _buildManageNow(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Manage Now',
+            AppLocalizations.of(context)!.onboard_manage_now,
             style: AppFonts.primaryFont(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -318,20 +338,26 @@ class HomeTabContent extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () => controller.viewTransactions(),
-                  child: _buildManageCard('My Wallet', 'View Transactions', [
-                    const Color(0xFF2070FF),
-                    const Color(0xFF134399),
-                  ], Icons.account_balance_wallet),
+                  child: _buildManageCard(
+                    context,
+                    AppLocalizations.of(context)!.onboard_my_wallet,
+                    AppLocalizations.of(context)!.onboard_view_transactions,
+                    [const Color(0xFF2070FF), const Color(0xFF134399)],
+                    Icons.account_balance_wallet,
+                  ),
                 ),
               ),
               const SizedBox(width: 15),
               Expanded(
                 child: GestureDetector(
                   onTap: () => controller.viewLeaderboard(),
-                  child: _buildManageCard('Leaderboard', 'Check your Rank', [
-                    const Color(0xFF00BD4A),
-                    const Color(0xFF005722),
-                  ], Icons.leaderboard),
+                  child: _buildManageCard(
+                    context,
+                    AppLocalizations.of(context)!.onboard_leaderboard,
+                    AppLocalizations.of(context)!.onboard_check_your_rank,
+                    [const Color(0xFF00BD4A), const Color(0xFF005722)],
+                    Icons.leaderboard,
+                  ),
                 ),
               ),
             ],
@@ -345,28 +371,34 @@ class HomeTabContent extends StatelessWidget {
     final quickTasks = [
       {
         'icon': 'assets/advertisiment-stroke-rounded 1.svg',
-        'label': 'Ad Sharing',
+        'label': AppLocalizations.of(context)!.onboard_ad_sharing,
         'route': AdSharingTasksPage(),
       },
       {
         'icon': 'assets/aids-stroke-rounded 1.svg',
-        'label': 'Social',
+        'label': AppLocalizations.of(context)!.onboard_social,
         'route': PostScreen(),
       },
       {
         'icon': 'assets/add-to-list-stroke-rounded 1.svg',
-        'label': 'Survey',
+        'label': AppLocalizations.of(context)!.onboard_survey,
         'route': SurveyHomePage(),
       },
     ];
+
+    final screenWidth = MediaQuery.of(context).size.width;
+    final cardWidth = (screenWidth - 100) / 3;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // ✅ Title text with ellipsis
           Text(
-            'Quick Task',
+            AppLocalizations.of(context)!.onboard_quick_task,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: AppFonts.primaryFont(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -374,13 +406,15 @@ class HomeTabContent extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           Container(
-            height: 157,
             width: double.infinity,
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: const Color(0xFFF6FFFD),
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.black, width: .4),
+              border: Border.all(
+                color: Colors.black.withOpacity(0.2),
+                width: .4,
+              ),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.25),
@@ -389,59 +423,70 @@ class HomeTabContent extends StatelessWidget {
                 ),
               ],
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: quickTasks.map((task) {
-                return InkWell(
-                  borderRadius: BorderRadius.circular(10),
-                  onTap: () {
-                    Get.to(
-                      () => task['route'] as Widget,
-                      transition: Transition.fadeIn,
-                      duration: const Duration(milliseconds: 300),
-                    );
-                  },
-                  child: Container(
-                    height: 110,
-                    width: 90,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        colors: [Color(0xFF00BD4A), Color(0xFF2070FF)],
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.25),
-                          blurRadius: 2,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          task['icon'] as String,
-                          height: 25,
-                          width: 25,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          task['label'] as String,
-                          textAlign: TextAlign.center,
-                          style: AppFonts.primaryFont(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return Wrap(
+                  alignment: WrapAlignment.spaceBetween,
+                  runSpacing: 12,
+                  spacing: 12,
+                  children: quickTasks.map((task) {
+                    return GestureDetector(
+                      onTap: () {
+                        Get.to(
+                          () => task['route'] as Widget,
+                          transition: Transition.fadeIn,
+                          duration: const Duration(milliseconds: 300),
+                        );
+                      },
+                      child: Container(
+                        width: cardWidth,
+                        height: 110,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [Color(0xFF00BD4A), Color(0xFF2070FF)],
                           ),
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.25),
+                              blurRadius: 2,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              task['icon'] as String,
+                              height: 25,
+                              width: 25,
+                            ),
+                            const SizedBox(height: 8),
+                            Flexible(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  task['label'] as String,
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: AppFonts.primaryFont(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }).toList(),
                 );
-              }).toList(),
+              },
             ),
           ),
         ],
@@ -450,14 +495,17 @@ class HomeTabContent extends StatelessWidget {
   }
 
   Widget _buildManageCard(
+    BuildContext context,
     String title,
     String subtitle,
     List<Color> gradientColors,
     IconData icon,
   ) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isSmallScreen = screenWidth < 360;
+
     return Container(
-      width: 160,
-      height: 100,
+      height: isSmallScreen ? 90 : 100,
       padding: const EdgeInsets.only(left: 16, right: 16, top: 19, bottom: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -489,25 +537,37 @@ class HomeTabContent extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 14),
-          Text(
-            title,
-            style: AppFonts.primaryFont(
-              color: Colors.white,
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
+          Flexible(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerLeft,
+              child: Text(
+                title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppFonts.primaryFont(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 4),
-          Text(
-            subtitle,
-            style: AppFonts.primaryFont(color: Colors.white70, fontSize: 10),
+          Flexible(
+            child: Text(
+              subtitle,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: AppFonts.primaryFont(color: Colors.white70, fontSize: 10),
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildTodaysTasks() {
+  Widget _buildTodaysTasks(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -516,11 +576,15 @@ class HomeTabContent extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Todays Task\'s',
-                style: AppFonts.primaryFont(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+              Expanded(
+                child: Text(
+                  AppLocalizations.of(context)!.onboard_todays_task,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppFonts.primaryFont(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
               TextButton(
@@ -528,7 +592,7 @@ class HomeTabContent extends StatelessWidget {
                   Get.snackbar('View All', 'Opening all tasks');
                 },
                 child: Text(
-                  'View All >',
+                  AppLocalizations.of(context)!.onboard_view_all,
                   style: AppFonts.primaryFont(
                     fontSize: 10,
                     color: Colors.black,
@@ -537,6 +601,7 @@ class HomeTabContent extends StatelessWidget {
               ),
             ],
           ),
+
           const SizedBox(height: 10),
           Obx(
             () => Column(
@@ -544,7 +609,11 @@ class HomeTabContent extends StatelessWidget {
                 controller.tasks.length,
                 (index) => Padding(
                   padding: const EdgeInsets.only(bottom: 5),
-                  child: _buildTaskCard(controller.tasks[index], index),
+                  child: _buildTaskCard(
+                    context,
+                    controller.tasks[index],
+                    index,
+                  ),
                 ),
               ),
             ),
@@ -554,10 +623,14 @@ class HomeTabContent extends StatelessWidget {
     );
   }
 
-  Widget _buildTaskCard(Task task, int index) {
+  Widget _buildTaskCard(BuildContext context, Task task, int index) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isSmallScreen = screenWidth < 360;
+    final buttonWidth = screenWidth * 0.23;
+
     return Container(
       width: double.infinity,
-      height: 79,
+      margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -571,27 +644,35 @@ class HomeTabContent extends StatelessWidget {
         ],
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   task.title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: AppFonts.primaryFont(
-                    fontSize: 14,
+                    fontSize: isSmallScreen ? 13 : 14,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                const SizedBox(height: 4),
+
                 Text(
-                  'Earn ${task.points} Points',
+                  '${AppLocalizations.of(context)!.onboard_earn} ${task.points} ${AppLocalizations.of(context)!.onboard_points}',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: AppFonts.primaryFont(
-                    fontSize: 12,
+                    fontSize: isSmallScreen ? 11 : 12,
                     color: Colors.grey[600],
                   ),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 6),
+
                 Row(
                   children: [
                     Container(
@@ -603,20 +684,30 @@ class HomeTabContent extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 5),
-                    Text(
-                      task.status,
-                      style: AppFonts.primaryFont(
-                        fontSize: 8,
-                        color: Colors.grey[700],
+
+                    Expanded(
+                      child: Text(
+                        task.status,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppFonts.primaryFont(
+                          fontSize: isSmallScreen ? 9 : 10,
+                          color: Colors.grey[700],
+                        ),
                       ),
                     ),
+
                     if (task.timeLeft.isNotEmpty) ...[
-                      const SizedBox(width: 10),
-                      Text(
-                        task.timeLeft,
-                        style: AppFonts.primaryFont(
-                          fontSize: 8,
-                          color: Colors.grey[600],
+                      const SizedBox(width: 8),
+                      Flexible(
+                        child: Text(
+                          task.timeLeft,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppFonts.primaryFont(
+                            fontSize: isSmallScreen ? 9 : 10,
+                            color: Colors.grey[600],
+                          ),
                         ),
                       ),
                     ],
@@ -625,21 +716,27 @@ class HomeTabContent extends StatelessWidget {
               ],
             ),
           ),
+
+          SizedBox(width: isSmallScreen ? 8 : 12),
           GestureDetector(
             onTap: () => controller.doTask(index),
             child: Container(
-              width: 65,
-              height: 35,
+              width: buttonWidth.clamp(60, 90),
+              height: isSmallScreen ? 33 : 36,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: const Color(0xFF2F88FF),
               ),
               child: Center(
                 child: Text(
-                  'Do Task',
+                  AppLocalizations.of(context)!.onboard_do_task,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
                   style: AppFonts.primaryFont(
                     color: Colors.white,
-                    fontSize: 12,
+                    fontSize: isSmallScreen ? 11 : 12,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
@@ -650,41 +747,58 @@ class HomeTabContent extends StatelessWidget {
     );
   }
 
-  Widget _buildRecentActivity() {
+  Widget _buildRecentActivity(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isSmallScreen = screenWidth < 360;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 12 : 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Recent Activity',
-                style: AppFonts.primaryFont(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+              Expanded(
+                child: Text(
+                  AppLocalizations.of(context)!.onboard_recent_activity,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                  style: AppFonts.primaryFont(
+                    fontSize: isSmallScreen ? 14 : 16,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
+              const SizedBox(width: 8),
               TextButton(
-                onPressed: () {
-                  Get.snackbar('View All', 'Opening all activities');
-                },
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  minimumSize: const Size(40, 20),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                onPressed: () {},
                 child: Text(
-                  'View All >',
+                  AppLocalizations.of(context)!.onboard_view_all,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
                   style: AppFonts.primaryFont(
                     fontSize: 10,
                     color: Colors.black,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 10),
+
           Container(
             width: double.infinity,
-            height: 161,
-            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+            padding: EdgeInsets.symmetric(
+              vertical: isSmallScreen ? 10 : 15,
+              horizontal: isSmallScreen ? 10 : 15,
+            ),
             decoration: BoxDecoration(
               color: const Color(0xFFEFF7FA),
               borderRadius: BorderRadius.circular(10),

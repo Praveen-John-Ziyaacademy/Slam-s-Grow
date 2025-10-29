@@ -70,6 +70,42 @@
   "onboard_uploaded_documents": "അപ്‌ലോഡ് ചെയ്ത രേഖകൾ",
   "onboard_confirm_information": "എന്റെ വിവരങ്ങൾ ശരിയാണെന്ന് ഞാൻ സ്ഥിരീകരിക്കുന്നു",
   "onboard_agree_terms": "ഞാൻ നിബന്ധനകൾക്കും സ്വകാര്യതാ നയത്തിനും സമ്മതിക്കുന്നു",
-  "onboard_submit": "സമർപ്പിക്കുക"
+  "onboard_submit": "സമർപ്പിക്കുക",
 
+  "onboard_forgot_title": "പാസ്‌വേഡ് മറന്നോ",
+  "onboard_email_adress": "ഇമെയിൽ വിലാസം നൽകുക",
+  "onboard_back_sign_in": "സൈൻ ഇൻ ലേക്ക് മടങ്ങുക",
+  "onboard_get_otp": "OTP നേടുക",
+
+  "onboard_verification": "സ്ഥിരീകരണം",
+  "onboard_4_digit": "ഒരു 4 അക്ക OTP അയച്ചിരിക്കുന്നു\n",
+  "onboard_wait_for": "കാത്തിരിക്കുക",
+  "onboard_resend_otp": "വീണ്ടും അയയ്ക്കുക",
+
+  "onboard_new_password": "പുതിയ പാസ്‌വേഡ്",
+  "onboard_enter_new_password": "പുതിയ പാസ്‌വേഡ് നൽകുക",
+  "onboard_confirm_password": "പാസ്‌വേഡ് സ്ഥിരീകരിക്കുക",
+
+  "onboard_welcome_back": "തിരികെ വരവേൽപ്പ്",
+  "onboard_home_title": "ജോൺ സാമുവൽ",
+  "onboard_available_bal": "ലഭ്യമായ ബാലൻസ്",
+  "onboard_view_details": "വിശദാംശങ്ങൾ കാണുക >",
+  "onboard_tasks_h1": "ടാസ്കുകൾ",
+  "onboard_rank_h1": "റാങ്ക്",
+  "onboard_days_h1": "ദിവസങ്ങൾ",
+  "onboard_manage_now": "ഇപ്പോൾ നിയന്ത്രിക്കുക",
+  "onboard_my_wallet": "എന്റെ വാലറ്റ്",
+  "onboard_view_transactions": "ഇടപാടുകൾ കാണുക",
+  "onboard_leaderboard": "ലീഡർബോർഡ്",
+  "onboard_check_your_rank": "നിങ്ങളുടെ റാങ്ക് പരിശോധിക്കുക",
+  "onboard_ad_sharing": "അഡ്സ് ഷെയറിംഗ്",
+  "onboard_social": "സോഷ്യൽ",
+  "onboard_survey": "സർവേ",
+  "onboard_todays_task": "ഇന്നത്തെ ടാസ്കുകൾ",
+  "onboard_view_all": "എല്ലാം കാണുക >",
+  "onboard_do_task": "ടാസ്ക് ചെയ്യുക",
+  "onboard_recent_activity": "സമീപകാല പ്രവർത്തനം",
+  "onboard_quick_task": "വേഗത്തിലുള്ള ടാസ്ക്",
+  "onboard_earn": "സമ്പാദിക്കുക",
+  "onboard_points": "പോയിന്റുകൾ"
 }

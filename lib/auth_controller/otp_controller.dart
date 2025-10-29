@@ -10,11 +10,14 @@ class OTPController extends GetxController {
   );
   final List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
   final secondsRemaining = 52.obs;
+  final email = ''.obs; // Add observable email
   Timer? _timer;
 
   @override
   void onInit() {
     super.onInit();
+    // Get email from arguments passed during navigation
+    email.value = Get.arguments ?? '';
     startTimer();
   }
 

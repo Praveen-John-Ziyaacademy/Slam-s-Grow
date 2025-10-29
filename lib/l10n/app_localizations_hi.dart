@@ -209,4 +209,100 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get onboard_submit => 'सबमिट करें';
+
+  @override
+  String get onboard_forgot_title => 'पासवर्ड भूल गए';
+
+  @override
+  String get onboard_email_adress => 'ईमेल पता दर्ज करें';
+
+  @override
+  String get onboard_back_sign_in => 'साइन इन पर वापस जाएं';
+
+  @override
+  String get onboard_get_otp => 'ओटीपी प्राप्त करें';
+
+  @override
+  String get onboard_verification => 'सत्यापन';
+
+  @override
+  String get onboard_4_digit => 'एक 4 अंकों का ओटीपी भेजा गया है\n';
+
+  @override
+  String get onboard_wait_for => 'प्रतीक्षा करें';
+
+  @override
+  String get onboard_resend_otp => 'ओटीपी दोबारा भेजें';
+
+  @override
+  String get onboard_new_password => 'नया पासवर्ड';
+
+  @override
+  String get onboard_enter_new_password => 'नया पासवर्ड दर्ज करें';
+
+  @override
+  String get onboard_welcome_back => 'वापसी पर स्वागत है';
+
+  @override
+  String get onboard_home_title => 'जॉन सैमुअल';
+
+  @override
+  String get onboard_available_bal => 'उपलब्ध शेष राशि';
+
+  @override
+  String get onboard_view_details => 'विवरण देखें >';
+
+  @override
+  String get onboard_tasks_h1 => 'कार्य';
+
+  @override
+  String get onboard_rank_h1 => 'रैंक';
+
+  @override
+  String get onboard_days_h1 => 'दिन';
+
+  @override
+  String get onboard_manage_now => 'अभी प्रबंधित करें';
+
+  @override
+  String get onboard_my_wallet => 'मेरा वॉलेट';
+
+  @override
+  String get onboard_view_transactions => 'लेन-देन देखें';
+
+  @override
+  String get onboard_leaderboard => 'लीडरबोर्ड';
+
+  @override
+  String get onboard_check_your_rank => 'अपनी रैंक जांचें';
+
+  @override
+  String get onboard_ad_sharing => 'विज्ञापन साझा करना';
+
+  @override
+  String get onboard_social => 'सोशल';
+
+  @override
+  String get onboard_survey => 'सर्वेक्षण';
+
+  @override
+  String get onboard_todays_task => 'आज के कार्य';
+
+  @override
+  String get onboard_view_all => 'सभी देखें >';
+
+  @override
+  String get onboard_do_task => 'कार्य करें';
+
+  @override
+  String get onboard_recent_activity => 'हाल की गतिविधि';
+
+  @override
+  String get onboard_quick_task => 'त्वरित कार्य';
+
+  @override
+  String get onboard_earn => 'कमाएं';
+
+  @override
+  String get onboard_points => 'अंक';
 }

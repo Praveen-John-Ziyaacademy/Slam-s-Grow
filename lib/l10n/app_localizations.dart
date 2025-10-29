@@ -491,6 +491,198 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Submit'**
   String get onboard_submit;
+
+  /// No description provided for @onboard_forgot_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot Password'**
+  String get onboard_forgot_title;
+
+  /// No description provided for @onboard_email_adress.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Email Address'**
+  String get onboard_email_adress;
+
+  /// No description provided for @onboard_back_sign_in.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to sign in'**
+  String get onboard_back_sign_in;
+
+  /// No description provided for @onboard_get_otp.
+  ///
+  /// In en, this message translates to:
+  /// **'Get OTP'**
+  String get onboard_get_otp;
+
+  /// No description provided for @onboard_verification.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification'**
+  String get onboard_verification;
+
+  /// No description provided for @onboard_4_digit.
+  ///
+  /// In en, this message translates to:
+  /// **'An 4 digit OTP has been sent to\n'**
+  String get onboard_4_digit;
+
+  /// No description provided for @onboard_wait_for.
+  ///
+  /// In en, this message translates to:
+  /// **'Wait for'**
+  String get onboard_wait_for;
+
+  /// No description provided for @onboard_resend_otp.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend OTP'**
+  String get onboard_resend_otp;
+
+  /// No description provided for @onboard_new_password.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get onboard_new_password;
+
+  /// No description provided for @onboard_enter_new_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter New Password'**
+  String get onboard_enter_new_password;
+
+  /// No description provided for @onboard_welcome_back.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome Back'**
+  String get onboard_welcome_back;
+
+  /// No description provided for @onboard_home_title.
+  ///
+  /// In en, this message translates to:
+  /// **'John Samual'**
+  String get onboard_home_title;
+
+  /// No description provided for @onboard_available_bal.
+  ///
+  /// In en, this message translates to:
+  /// **'Available Balance'**
+  String get onboard_available_bal;
+
+  /// No description provided for @onboard_view_details.
+  ///
+  /// In en, this message translates to:
+  /// **'View Details >'**
+  String get onboard_view_details;
+
+  /// No description provided for @onboard_tasks_h1.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks'**
+  String get onboard_tasks_h1;
+
+  /// No description provided for @onboard_rank_h1.
+  ///
+  /// In en, this message translates to:
+  /// **'Rank'**
+  String get onboard_rank_h1;
+
+  /// No description provided for @onboard_days_h1.
+  ///
+  /// In en, this message translates to:
+  /// **'Days'**
+  String get onboard_days_h1;
+
+  /// No description provided for @onboard_manage_now.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Now'**
+  String get onboard_manage_now;
+
+  /// No description provided for @onboard_my_wallet.
+  ///
+  /// In en, this message translates to:
+  /// **'My Wallet'**
+  String get onboard_my_wallet;
+
+  /// No description provided for @onboard_view_transactions.
+  ///
+  /// In en, this message translates to:
+  /// **'View Transactions'**
+  String get onboard_view_transactions;
+
+  /// No description provided for @onboard_leaderboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Leaderboard'**
+  String get onboard_leaderboard;
+
+  /// No description provided for @onboard_check_your_rank.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your Rank'**
+  String get onboard_check_your_rank;
+
+  /// No description provided for @onboard_ad_sharing.
+  ///
+  /// In en, this message translates to:
+  /// **'Ad Sharing'**
+  String get onboard_ad_sharing;
+
+  /// No description provided for @onboard_social.
+  ///
+  /// In en, this message translates to:
+  /// **'Social'**
+  String get onboard_social;
+
+  /// No description provided for @onboard_survey.
+  ///
+  /// In en, this message translates to:
+  /// **'Survey'**
+  String get onboard_survey;
+
+  /// No description provided for @onboard_todays_task.
+  ///
+  /// In en, this message translates to:
+  /// **'Todays Task\'s'**
+  String get onboard_todays_task;
+
+  /// No description provided for @onboard_view_all.
+  ///
+  /// In en, this message translates to:
+  /// **'View All >'**
+  String get onboard_view_all;
+
+  /// No description provided for @onboard_do_task.
+  ///
+  /// In en, this message translates to:
+  /// **'Do Task'**
+  String get onboard_do_task;
+
+  /// No description provided for @onboard_recent_activity.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Activity'**
+  String get onboard_recent_activity;
+
+  /// No description provided for @onboard_quick_task.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Task'**
+  String get onboard_quick_task;
+
+  /// No description provided for @onboard_earn.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn'**
+  String get onboard_earn;
+
+  /// No description provided for @onboard_points.
+  ///
+  /// In en, this message translates to:
+  /// **'Points'**
+  String get onboard_points;
 }
 
 class _AppLocalizationsDelegate

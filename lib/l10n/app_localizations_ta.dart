@@ -210,4 +210,100 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get onboard_submit => 'சமர்ப்பிக்கவும்';
+
+  @override
+  String get onboard_forgot_title => 'கடவுச்சொல்லை மறந்துவிட்டீர்களா';
+
+  @override
+  String get onboard_email_adress => 'மின்னஞ்சல் முகவரியை உள்ளிடவும்';
+
+  @override
+  String get onboard_back_sign_in => 'உள்நுழைவிற்கு திரும்பவும்';
+
+  @override
+  String get onboard_get_otp => 'OTP ஐ பெறவும்';
+
+  @override
+  String get onboard_verification => 'சரிபார்ப்பு';
+
+  @override
+  String get onboard_4_digit => '4 இலக்க OTP ஒன்று அனுப்பப்பட்டுள்ளது\n';
+
+  @override
+  String get onboard_wait_for => 'காத்திருங்கள்';
+
+  @override
+  String get onboard_resend_otp => 'மீண்டும் அனுப்பவும்';
+
+  @override
+  String get onboard_new_password => 'புதிய கடவுச்சொல்';
+
+  @override
+  String get onboard_enter_new_password => 'புதிய கடவுச்சொல்லை உள்ளிடவும்';
+
+  @override
+  String get onboard_welcome_back => 'மீண்டும் வருக';
+
+  @override
+  String get onboard_home_title => 'ஜான் சாமுவேல்';
+
+  @override
+  String get onboard_available_bal => 'இருக்கும் இருப்பு';
+
+  @override
+  String get onboard_view_details => 'விவரங்களைப் பார்க்கவும் >';
+
+  @override
+  String get onboard_tasks_h1 => 'பணிகள்';
+
+  @override
+  String get onboard_rank_h1 => 'தரவரிசை';
+
+  @override
+  String get onboard_days_h1 => 'நாட்கள்';
+
+  @override
+  String get onboard_manage_now => 'இப்போது நிர்வகிக்கவும்';
+
+  @override
+  String get onboard_my_wallet => 'என் பணப்பை';
+
+  @override
+  String get onboard_view_transactions => 'பரிவர்த்தனைகளைப் பார்க்கவும்';
+
+  @override
+  String get onboard_leaderboard => 'தலைவர்கள் பட்டியல்';
+
+  @override
+  String get onboard_check_your_rank => 'உங்கள் தரவரிசையைச் சரிபார்க்கவும்';
+
+  @override
+  String get onboard_ad_sharing => 'விளம்பர பகிர்வு';
+
+  @override
+  String get onboard_social => 'சமூக';
+
+  @override
+  String get onboard_survey => 'கணக்கெடுப்பு';
+
+  @override
+  String get onboard_todays_task => 'இன்றைய பணிகள்';
+
+  @override
+  String get onboard_view_all => 'அனைத்தையும் பார்க்கவும் >';
+
+  @override
+  String get onboard_do_task => 'பணி செய்யவும்';
+
+  @override
+  String get onboard_recent_activity => 'சமீபத்திய செயல்பாடு';
+
+  @override
+  String get onboard_quick_task => 'விரைவு பணி';
+
+  @override
+  String get onboard_earn => 'சம்பாதிக்கவும்';
+
+  @override
+  String get onboard_points => 'மதிப்பெண்கள்';
 }

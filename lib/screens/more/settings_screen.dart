@@ -144,11 +144,7 @@ class SettingsScreen extends StatelessWidget {
                           iconColor: const Color(0xFF2196F3),
                           title: 'Language Selection',
                           subtitle: controller.selectedLanguage.value,
-                          onTap: () => Get.snackbar(
-                            'Language',
-                            'Navigate to language selection',
-                            snackPosition: SnackPosition.BOTTOM,
-                          ),
+                          onTap: () => controller.showLanguageDialog(),
                         ),
                       ),
                     ]),

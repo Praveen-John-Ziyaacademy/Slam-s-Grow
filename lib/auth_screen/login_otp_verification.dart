@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:social_media/auth_controller/login_otp_controller.dart';
 import 'package:social_media/colors/fonts.dart';
+import 'package:social_media/l10n/app_localizations.dart';
 
 class LoginOtpVerification extends StatelessWidget {
   const LoginOtpVerification({super.key});
@@ -30,7 +31,7 @@ class LoginOtpVerification extends StatelessWidget {
                 // Title
                 Center(
                   child: Text(
-                    'Verification',
+                    AppLocalizations.of(context)!.onboard_verification,
                     style: AppFonts.primaryFont(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -51,8 +52,8 @@ class LoginOtpVerification extends StatelessWidget {
                           height: 1.5,
                         ),
                         children: [
-                          const TextSpan(
-                            text: 'An 4 digit OTP has been sent to\n',
+                          TextSpan(
+                            text: AppLocalizations.of(context)!.onboard_4_digit,
                           ),
                           TextSpan(
                             text: controller.email.value,
@@ -106,7 +107,7 @@ class LoginOtpVerification extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Wait for ${controller.formatTime(controller.secondsRemaining.value)} ',
+                        '${AppLocalizations.of(context)!.onboard_wait_for} ${controller.formatTime(controller.secondsRemaining.value)} ',
                         style: AppFonts.primaryFont(
                           fontSize: 14,
                           color: Colors.black87,
@@ -117,7 +118,7 @@ class LoginOtpVerification extends StatelessWidget {
                             ? controller.resendOTP
                             : null,
                         child: Text(
-                          'Resend OTP',
+                          AppLocalizations.of(context)!.onboard_resend_otp,
                           style: AppFonts.primaryFont(
                             fontSize: 14,
                             color: controller.secondsRemaining.value == 0

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:social_media/auth_controller/new_password_controller.dart';
 import 'package:social_media/colors/fonts.dart';
+import 'package:social_media/l10n/app_localizations.dart';
 
 class NewPasswordScreen extends StatelessWidget {
   NewPasswordScreen({super.key});
@@ -37,7 +38,7 @@ class NewPasswordScreen extends StatelessWidget {
               const SizedBox(height: 30),
               Center(
                 child: Text(
-                  'New Password',
+                  AppLocalizations.of(context)!.onboard_new_password,
                   style: AppFonts.primaryFont(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -51,7 +52,7 @@ class NewPasswordScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Enter New Password',
+                    AppLocalizations.of(context)!.onboard_enter_new_password,
                     style: AppFonts.primaryFont(
                       fontSize: 14,
                       color: Colors.black87,
@@ -104,7 +105,7 @@ class NewPasswordScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   Text(
-                    'Confirm Password',
+                    AppLocalizations.of(context)!.onboard_confirm_password,
                     style: AppFonts.primaryFont(
                       fontSize: 14,
                       color: Colors.black87,
@@ -188,7 +189,7 @@ class NewPasswordScreen extends StatelessWidget {
                             ),
                           )
                         : Text(
-                            'Submit',
+                            AppLocalizations.of(context)!.onboard_submit,
                             style: AppFonts.primaryFont(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,

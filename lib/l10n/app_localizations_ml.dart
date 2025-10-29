@@ -210,4 +210,100 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get onboard_submit => 'സമർപ്പിക്കുക';
+
+  @override
+  String get onboard_forgot_title => 'പാസ്‌വേഡ് മറന്നോ';
+
+  @override
+  String get onboard_email_adress => 'ഇമെയിൽ വിലാസം നൽകുക';
+
+  @override
+  String get onboard_back_sign_in => 'സൈൻ ഇൻ ലേക്ക് മടങ്ങുക';
+
+  @override
+  String get onboard_get_otp => 'OTP നേടുക';
+
+  @override
+  String get onboard_verification => 'സ്ഥിരീകരണം';
+
+  @override
+  String get onboard_4_digit => 'ഒരു 4 അക്ക OTP അയച്ചിരിക്കുന്നു\n';
+
+  @override
+  String get onboard_wait_for => 'കാത്തിരിക്കുക';
+
+  @override
+  String get onboard_resend_otp => 'വീണ്ടും അയയ്ക്കുക';
+
+  @override
+  String get onboard_new_password => 'പുതിയ പാസ്‌വേഡ്';
+
+  @override
+  String get onboard_enter_new_password => 'പുതിയ പാസ്‌വേഡ് നൽകുക';
+
+  @override
+  String get onboard_welcome_back => 'തിരികെ വരവേൽപ്പ്';
+
+  @override
+  String get onboard_home_title => 'ജോൺ സാമുവൽ';
+
+  @override
+  String get onboard_available_bal => 'ലഭ്യമായ ബാലൻസ്';
+
+  @override
+  String get onboard_view_details => 'വിശദാംശങ്ങൾ കാണുക >';
+
+  @override
+  String get onboard_tasks_h1 => 'ടാസ്കുകൾ';
+
+  @override
+  String get onboard_rank_h1 => 'റാങ്ക്';
+
+  @override
+  String get onboard_days_h1 => 'ദിവസങ്ങൾ';
+
+  @override
+  String get onboard_manage_now => 'ഇപ്പോൾ നിയന്ത്രിക്കുക';
+
+  @override
+  String get onboard_my_wallet => 'എന്റെ വാലറ്റ്';
+
+  @override
+  String get onboard_view_transactions => 'ഇടപാടുകൾ കാണുക';
+
+  @override
+  String get onboard_leaderboard => 'ലീഡർബോർഡ്';
+
+  @override
+  String get onboard_check_your_rank => 'നിങ്ങളുടെ റാങ്ക് പരിശോധിക്കുക';
+
+  @override
+  String get onboard_ad_sharing => 'അഡ്സ് ഷെയറിംഗ്';
+
+  @override
+  String get onboard_social => 'സോഷ്യൽ';
+
+  @override
+  String get onboard_survey => 'സർവേ';
+
+  @override
+  String get onboard_todays_task => 'ഇന്നത്തെ ടാസ്കുകൾ';
+
+  @override
+  String get onboard_view_all => 'എല്ലാം കാണുക >';
+
+  @override
+  String get onboard_do_task => 'ടാസ്ക് ചെയ്യുക';
+
+  @override
+  String get onboard_recent_activity => 'സമീപകാല പ്രവർത്തനം';
+
+  @override
+  String get onboard_quick_task => 'വേഗത്തിലുള്ള ടാസ്ക്';
+
+  @override
+  String get onboard_earn => 'സമ്പാദിക്കുക';
+
+  @override
+  String get onboard_points => 'പോയിന്റുകൾ';
 }

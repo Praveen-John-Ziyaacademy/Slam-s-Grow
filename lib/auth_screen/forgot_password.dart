@@ -6,6 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:social_media/colors/colors.dart';
 import 'package:social_media/auth_controller/forgot_controller.dart';
 import 'package:social_media/colors/fonts.dart';
+import 'package:social_media/l10n/app_localizations.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   const ForgotPasswordScreen({super.key});
@@ -40,7 +41,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               // Title
               Center(
                 child: Text(
-                  'Forgot Password',
+                  AppLocalizations.of(context)!.onboard_forgot_title,
                   style: AppFonts.primaryFont(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -54,7 +55,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Enter Email Address',
+                    AppLocalizations.of(context)!.onboard_email_adress,
                     style: AppFonts.primaryFont(
                       fontSize: 14,
                       color: Colors.black87,
@@ -133,7 +134,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 child: TextButton(
                   onPressed: controller.goToSignIn,
                   child: Text(
-                    'Back to sign in',
+                    AppLocalizations.of(context)!.onboard_back_sign_in,
                     style: AppFonts.primaryFont(
                       color: Colors.black87,
                       fontSize: 12,
@@ -169,7 +170,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                             ),
                           )
                         : Text(
-                            'Get OTP',
+                            AppLocalizations.of(context)!.onboard_get_otp,
                             style: AppFonts.primaryFont(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -183,7 +184,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               // OR divider
               Center(
                 child: Text(
-                  'or',
+                  AppLocalizations.of(context)!.onboard_or,
                   style: AppFonts.primaryFont(
                     fontSize: 14,
                     color: Colors.black54,
@@ -228,7 +229,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    "Don't have an account?",
+                    AppLocalizations.of(context)!.onboard_dont_h_account,
                     style: AppFonts.primaryFont(
                       fontSize: 14,
                       color: Colors.black87,
@@ -250,7 +251,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        'Sign up',
+                        AppLocalizations.of(context)!.onboard_signup_button,
                         style: AppFonts.primaryFont(
                           fontSize: 14,
                           color: Colors.black87,

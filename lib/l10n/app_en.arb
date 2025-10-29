@@ -71,5 +71,42 @@
   "onboard_uploaded_documents": "Uploaded Documents",
   "onboard_confirm_information": "I confirm my information is correct",
   "onboard_agree_terms": "I agree to T&C and Privacy Policy",
-  "onboard_submit": "Submit"
+  "onboard_submit": "Submit",
+
+  "onboard_forgot_title": "Forgot Password",
+  "onboard_email_adress":"Enter Email Address",
+  "onboard_back_sign_in":"Back to sign in",
+  "onboard_get_otp":"Get OTP",
+
+  "onboard_verification":"Verification",
+  "onboard_4_digit":"An 4 digit OTP has been sent to\n",
+  "onboard_wait_for":"Wait for",
+  "onboard_resend_otp":"Resend OTP",
+
+  "onboard_new_password":"New Password",
+  "onboard_enter_new_password":"Enter New Password",
+  "onboard_confirm_password":"Confirm Password",
+
+  "onboard_welcome_back":"Welcome Back",
+  "onboard_home_title":"John Samual",
+  "onboard_available_bal":"Available Balance",
+  "onboard_view_details":"View Details >",
+  "onboard_tasks_h1":"Tasks",
+  "onboard_rank_h1":"Rank",
+  "onboard_days_h1":"Days",
+  "onboard_manage_now":"Manage Now",
+  "onboard_my_wallet":"My Wallet",
+  "onboard_view_transactions":"View Transactions",
+  "onboard_leaderboard":"Leaderboard",
+  "onboard_check_your_rank":"Check your Rank",
+  "onboard_ad_sharing":"Ad Sharing",
+  "onboard_social":"Social",
+  "onboard_survey":"Survey",
+  "onboard_todays_task":"Todays Task's",
+  "onboard_view_all":"View All >",
+  "onboard_do_task":"Do Task",
+  "onboard_recent_activity":"Recent Activity",
+  "onboard_quick_task":"Quick Task",
+  "onboard_earn":"Earn",
+  "onboard_points":"Points"
 }
