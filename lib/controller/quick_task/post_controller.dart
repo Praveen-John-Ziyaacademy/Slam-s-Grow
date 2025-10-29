@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:social_media/screens/quick_task/share_screen.dart';
 
 class PostController extends GetxController {
   var isLiked = false.obs;
@@ -28,13 +29,6 @@ class PostController extends GetxController {
   }
 
   void share() {
-    Get.snackbar(
-      'Share',
-      'Post shared successfully',
-      snackPosition: SnackPosition.BOTTOM,
-      duration: Duration(seconds: 2),
-      backgroundColor: Colors.black54,
-      colorText: Colors.white,
-    );
+    Get.to(() => ShareScreenshotsPage());
   }
 }

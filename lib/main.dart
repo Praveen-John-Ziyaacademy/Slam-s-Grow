@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         Locale('ml'),
         Locale('ta'),
       ],
-      home: HomePage(),
+      home: OnboardingScreen(),
     );
   }
 }

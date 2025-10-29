@@ -24,10 +24,8 @@ class TransactionSummaryScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
-          onPressed: () => Get.back(),
-        ),
+        automaticallyImplyLeading: false,
+
         title: const Text('', style: TextStyle(color: Colors.black)),
       ),
       body: Center(

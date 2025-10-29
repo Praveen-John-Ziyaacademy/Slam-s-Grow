@@ -27,7 +27,6 @@ class PostScreen extends StatelessWidget {
             ),
           ),
 
-          // Gradient overlay for better text visibility
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -42,7 +41,6 @@ class PostScreen extends StatelessWidget {
             ),
           ),
 
-          // Top Bar
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -167,7 +165,6 @@ class PostScreen extends StatelessWidget {
                         ),
                       ),
 
-                      // Share Button
                       _buildActionButton(
                         icon: Icons.send_outlined,
                         label: 'Share',

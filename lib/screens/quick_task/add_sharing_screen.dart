@@ -204,9 +204,9 @@ class AdSharingTasksPage extends StatelessWidget {
                     ...controller.tasks.map(
                       (task) => _buildTaskCard(task, controller),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 10),
                     _buildInfoCard(),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -368,31 +368,35 @@ class AdSharingTasksPage extends StatelessWidget {
   }
 
   Widget _buildInfoCard() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.blue.shade50,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'How it works',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Colors.blue,
+    return Padding(
+      padding: const EdgeInsets.only(left: 13, right: 13),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.blue.shade50,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'How it works',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: Colors.blue,
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          _buildInfoItem('• Tap on a task to start'),
-          _buildInfoItem('• Complete the required action'),
-          _buildInfoItem(
-            '• Credits will be added to your account automatically',
-          ),
-          _buildInfoItem('• New tasks are added daily!'),
-        ],
+            const SizedBox(height: 8),
+            _buildInfoItem('• Tap on a task to start'),
+            _buildInfoItem('• Complete the required action'),
+            _buildInfoItem(
+              '• Credits will be added to your account automatically',
+            ),
+            _buildInfoItem('• New tasks are added daily!'),
+          ],
+        ),
       ),
     );
   }

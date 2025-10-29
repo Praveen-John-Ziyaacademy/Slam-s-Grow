@@ -238,7 +238,7 @@ class LoginController extends GetxController {
 }
 
 class ApiService {
-  static const String baseUrl = 'http://192.168.1.25:8000/api';
+  static const String baseUrl = 'http://192.168.1.22:8000/api';
 
   static Future<Map<String, dynamic>> login({
     required String email,
