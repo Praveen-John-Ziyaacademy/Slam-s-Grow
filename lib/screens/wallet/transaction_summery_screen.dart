@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:social_media/colors/fonts.dart';
+import 'package:social_media/controller/home_screen_controller.dart';
 import 'package:social_media/screens/home/wallet_screen.dart';
 
 class TransactionController extends GetxController {
@@ -117,7 +118,9 @@ class TransactionSummaryScreen extends StatelessWidget {
                     Obx(
                       () => GestureDetector(
                         onTap: () {
-                          Get.to(() => WalletPage());
+                          final homeController = Get.find<HomeController>();
+                          homeController.selectedIndex.value = 3;
+                          Get.until((route) => route.isFirst);
                         },
                         child: Container(
                           width: 250,

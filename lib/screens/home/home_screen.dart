@@ -87,6 +87,7 @@ class HomeTabContent extends StatelessWidget {
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
@@ -543,7 +544,6 @@ class HomeTabContent extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 title,
-                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: AppFonts.primaryFont(
                   color: Colors.white,
@@ -557,7 +557,6 @@ class HomeTabContent extends StatelessWidget {
           Flexible(
             child: Text(
               subtitle,
-              maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: AppFonts.primaryFont(color: Colors.white70, fontSize: 10),
             ),

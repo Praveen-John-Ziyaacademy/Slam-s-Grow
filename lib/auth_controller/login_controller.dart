@@ -126,8 +126,8 @@ class LoginController extends GetxController {
           print('Role Saved: ${userData['role']}');
         }
       }
-
-      storage.write('is_logged_in', true);
+      storage.write('isLoggedIn', true);
+      storage.write('hasSeenOnboarding', true);
       print('Session saved successfully');
     } catch (e) {
       debugPrint('Error saving user session: $e');
@@ -238,7 +238,7 @@ class LoginController extends GetxController {
 }
 
 class ApiService {
-  static const String baseUrl = 'http://192.168.1.22:8000/api';
+  static const String baseUrl = 'http://192.168.1.21:8000/api';
 
   static Future<Map<String, dynamic>> login({
     required String email,

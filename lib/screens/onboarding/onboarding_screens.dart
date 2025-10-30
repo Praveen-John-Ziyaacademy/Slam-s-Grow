@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:social_media/auth_screen/login_screen.dart';
 import 'package:social_media/colors/colors.dart';
 import 'package:social_media/colors/fonts.dart';
@@ -261,9 +263,9 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   }
 
   void _navigateToLogin() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => LoginScreen()),
-    );
+    final box = GetStorage();
+    box.write('hasSeenOnboarding', true);
+
+    Get.offAll(() => LoginScreen());
   }
 }

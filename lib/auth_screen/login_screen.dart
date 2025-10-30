@@ -237,6 +237,7 @@ class LoginScreen extends StatelessWidget {
                                         color: Colors.white,
                                         fontSize: 10,
                                       ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                     Transform.scale(
                                       scale: 0.7,
@@ -261,28 +262,32 @@ class LoginScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              GestureDetector(
-                                onTap: controller.forgotPassword,
-                                child: IntrinsicWidth(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        AppLocalizations.of(
-                                          context,
-                                        )!.onboard_forgot_password,
-                                        style: AppFonts.primaryFont(
-                                          color: Colors.white,
-                                          fontSize: 10,
+                              Flexible(
+                                child: GestureDetector(
+                                  onTap: controller.forgotPassword,
+                                  child: IntrinsicWidth(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          AppLocalizations.of(
+                                            context,
+                                          )!.onboard_forgot_password,
+                                          style: AppFonts.primaryFont(
+                                            color: Colors.white,
+                                            fontSize: 10,
+                                          ),
+
+                                          overflow: TextOverflow.ellipsis,
                                         ),
-                                      ),
-                                      SizedBox(height: 1),
-                                      Container(
-                                        height: 1,
-                                        color: Colors.white,
-                                        width: double.infinity,
-                                      ),
-                                    ],
+                                        SizedBox(height: 1),
+                                        Container(
+                                          height: 1,
+                                          color: Colors.white,
+                                          width: double.infinity,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

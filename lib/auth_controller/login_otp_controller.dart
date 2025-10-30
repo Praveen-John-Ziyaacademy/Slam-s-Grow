@@ -114,7 +114,7 @@ class LoginOtpController extends GetxController {
       print('Sending OTP to: ${email.value}');
       print('Using token: $accessToken');
 
-      final url = Uri.parse('http://192.168.1.22:8000/api/send-otp/');
+      final url = Uri.parse('http://192.168.1.21:8000/api/send-otp/');
 
       final response = await http.post(
         url,
@@ -245,7 +245,7 @@ class LoginOtpController extends GetxController {
       print('User ID: $userIdValue');
       print('Using token: $accessToken');
 
-      final url = Uri.parse('http://192.168.1.22:8000/api/verify-otp/');
+      final url = Uri.parse('http://192.168.1.21:8000/api/verify-otp/');
 
       final response = await http.post(
         url,
@@ -273,7 +273,7 @@ class LoginOtpController extends GetxController {
         );
 
         await Future.delayed(const Duration(milliseconds: 500));
-        Get.to(() => HomePage());
+        Get.offAll(() => HomePage());
       } else {
         final errorData = jsonDecode(response.body);
         Get.snackbar(

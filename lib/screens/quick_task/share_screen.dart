@@ -16,6 +16,8 @@ class ShareScreenshotsPage extends StatelessWidget {
           Column(
             children: [
               Container(
+                height: 180,
+                padding: const EdgeInsets.only(left: 20, right: 20, top: 35),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [Color(0xFF4CAF50), Color(0xFF2196F3)],
@@ -34,54 +36,46 @@ class ShareScreenshotsPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
+                child: Column(
+                  children: [
+                    Row(
                       children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: IconButton(
-                                alignment: Alignment.topLeft,
-                                icon: const Icon(
-                                  Icons.arrow_back_ios_new,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () => Get.back(),
-                              ),
+                        Expanded(
+                          child: IconButton(
+                            alignment: Alignment.topLeft,
+                            icon: const Icon(
+                              Icons.arrow_back_ios_new,
+                              color: Colors.white,
                             ),
-                            IconButton(
-                              icon: const Icon(
-                                Icons.download,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {},
-                            ),
-                          ],
-                        ),
-                        Text(
-                          'Share Screenshots',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 8),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Text(
-                            'Upload screenshots from your social media shares',
-                            style: TextStyle(color: Colors.white, fontSize: 14),
-                            textAlign: TextAlign.center,
+                            onPressed: () => Get.back(),
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        IconButton(
+                          icon: const Icon(Icons.download, color: Colors.white),
+                          onPressed: () {},
+                        ),
                       ],
                     ),
-                  ),
+                    Text(
+                      'Share Screenshots',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 8),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        'Upload screenshots from your social media shares',
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                  ],
                 ),
               ),
               Expanded(

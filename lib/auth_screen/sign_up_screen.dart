@@ -295,6 +295,7 @@ class SignUpScreen extends StatelessWidget {
         Text(
           label,
           style: AppFonts.primaryFont(color: Colors.white, fontSize: 10),
+          overflow: TextOverflow.ellipsis,
         ),
         const SizedBox(height: 6),
 

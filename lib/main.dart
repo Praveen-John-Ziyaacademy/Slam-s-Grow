@@ -3,14 +3,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:social_media/auth_screen/forgot_password.dart';
-import 'package:social_media/auth_screen/kyc_verification.dart';
-import 'package:social_media/auth_screen/new_password.dart';
-import 'package:social_media/auth_screen/otp_verification.dart';
+import 'package:social_media/auth_screen/login_screen.dart';
 import 'package:social_media/components/bottom_bar.dart';
 import 'package:social_media/l10n/app_localizations.dart';
-import 'package:social_media/l10n/app_localizations_en.dart';
-import 'package:social_media/screens/home/home_screen.dart';
 import 'package:social_media/screens/onboarding/onboarding_screens.dart';
 
 void main() async {
@@ -29,6 +24,19 @@ class MyApp extends StatelessWidget {
     final box = GetStorage();
     final savedLocale = box.read('locale') ?? 'en';
 
+    final hasSeenOnboarding = box.read('hasSeenOnboarding') ?? false;
+
+    final isLoggedIn = box.read('isLoggedIn') ?? false;
+
+    Widget initialScreen;
+    if (isLoggedIn) {
+      initialScreen = HomePage();
+    } else if (hasSeenOnboarding) {
+      initialScreen = LoginScreen();
+    } else {
+      initialScreen = OnboardingScreen();
+    }
+
     return GetMaterialApp(
       title: 'Social Media App',
       debugShowCheckedModeBanner: false,
@@ -46,7 +54,7 @@ class MyApp extends StatelessWidget {
         Locale('ml'),
         Locale('ta'),
       ],
-      home: OnboardingScreen(),
+      home: initialScreen,
     );
   }
 }

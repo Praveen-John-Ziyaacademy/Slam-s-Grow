@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:social_media/models/home_screen_models.dart';
+import 'package:social_media/screens/home/wallet_screen.dart';
 
 class HomeController extends GetxController {
   var balance = 2650.0.obs;
@@ -55,11 +56,7 @@ class HomeController extends GetxController {
   }
 
   void viewTransactions() {
-    Get.snackbar(
-      'My Wallet',
-      'Opening wallet transactions',
-      snackPosition: SnackPosition.BOTTOM,
-    );
+    selectedIndex.value = 3;
   }
 
   void viewLeaderboard() {

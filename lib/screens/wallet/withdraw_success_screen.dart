@@ -27,7 +27,7 @@ class _WithdrawalSuccessScreenState extends State<WithdrawalSuccessScreen> {
     super.initState();
 
     Future.delayed(const Duration(seconds: 3), () {
-      Get.to(() => TransactionSummaryScreen());
+      Get.off(() => TransactionSummaryScreen());
     });
   }
 

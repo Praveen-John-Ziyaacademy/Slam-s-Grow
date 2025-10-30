@@ -15,6 +15,21 @@ class SettingsController extends GetxController {
   void onInit() {
     super.onInit();
     loadSavedLanguage();
+    loadUserInfo();
+  }
+
+  void loadUserInfo() {
+    // Load user info from storage if available
+    final savedFirstName = box.read('first_name') ?? '';
+    final savedLastName = box.read('last_name') ?? '';
+    final savedEmail = box.read('email') ?? '';
+
+    if (savedFirstName.isNotEmpty || savedLastName.isNotEmpty) {
+      userName.value = '$savedFirstName $savedLastName'.trim();
+    }
+    if (savedEmail.isNotEmpty) {
+      userEmail.value = savedEmail;
+    }
   }
 
   void loadSavedLanguage() {
@@ -77,11 +92,9 @@ class SettingsController extends GetxController {
     selectedLanguage.value = language;
     selectedLocale.value = Locale(localeCode);
 
-    // Save to storage
     box.write('language', language);
     box.write('locale', localeCode);
 
-    // Update app locale
     Get.updateLocale(selectedLocale.value);
 
     Get.snackbar(
@@ -104,7 +117,27 @@ class SettingsController extends GetxController {
           ),
           TextButton(
             onPressed: () {
-              Get.to(() => LoginScreen());
+              box.write('isLoggedIn', false);
+              box.remove('access');
+              box.remove('refresh');
+              box.remove('id');
+              box.remove('email');
+              box.remove('first_name');
+              box.remove('last_name');
+              box.remove('phone_number');
+              box.remove('role');
+
+              Get.back();
+              Get.offAll(() => LoginScreen());
+
+              Get.snackbar(
+                'Logged Out',
+                'You have been successfully logged out',
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.green.withOpacity(0.7),
+                colorText: Colors.white,
+                duration: const Duration(seconds: 2),
+              );
             },
             child: const Text('Logout', style: TextStyle(color: Colors.red)),
           ),

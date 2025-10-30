@@ -19,6 +19,8 @@ class SurveyHomePage extends StatelessWidget {
       body: Column(
         children: [
           Container(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 35),
+            height: 210,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [Color(0xFF4CAF50), Color(0xFF2196F3)],
@@ -37,101 +39,96 @@ class SurveyHomePage extends StatelessWidget {
                 ),
               ],
             ),
-            child: SafeArea(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
+            child: Column(
+              children: [
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.arrow_back_ios_new,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {},
+                        ),
+
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 6,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.3),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: const Text(
+                                '30',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
                             IconButton(
                               icon: const Icon(
-                                Icons.arrow_back_ios_new,
+                                Icons.notifications_outlined,
                                 color: Colors.white,
                               ),
                               onPressed: () {},
                             ),
-
-                            Row(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 12,
-                                    vertical: 6,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.3),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: const Text(
-                                    '30',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(width: 8),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.notifications_outlined,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () {},
-                                ),
-                              ],
-                            ),
                           ],
-                        ),
-                        Text(
-                          'Survey',
-                          style: AppFonts.primaryFont(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Text(
-                          'Complete Survey to earn credits',
-                          style: AppFonts.primaryFont(
-                            color: Colors.white,
-                            fontSize: 14,
-                          ),
                         ),
                       ],
                     ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Container(
-                      width: 280,
-                      height: 45,
-                      decoration: BoxDecoration(
+                    Text(
+                      'Survey',
+                      style: AppFonts.primaryFont(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(5),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
                       ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Search',
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: SvgPicture.asset(
-                              "assets/search-visual-stroke-rounded 1.svg",
-                            ),
-                          ),
-                          border: InputBorder.none,
+                    ),
+                    Text(
+                      'Complete Survey to earn credits',
+                      style: AppFonts.primaryFont(
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
 
-                          isDense: false,
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Container(
+                    width: 280,
+                    height: 45,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search',
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: SvgPicture.asset(
+                            "assets/search-visual-stroke-rounded 1.svg",
+                          ),
                         ),
+                        border: InputBorder.none,
+
+                        isDense: false,
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
 
@@ -240,6 +237,7 @@ class SurveyCard extends StatelessWidget {
                           color: Colors.grey[600],
                           height: 1.3,
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),

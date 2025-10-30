@@ -234,7 +234,6 @@ class SignUpController extends GetxController {
   }
 
   String? validateReference(String? value) {
-    // Reference is optional, so we can return null
     return null;
   }
 
