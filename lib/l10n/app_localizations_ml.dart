@@ -306,4 +306,28 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get onboard_points => 'പോയിന്റുകൾ';
+
+  @override
+  String get onboard_account_title => 'അക്കൗണ്ട്';
+
+  @override
+  String get onboard_task_preference => 'ടാസ്ക് മുൻഗണന';
+
+  @override
+  String get onboard_language_selection => 'ഭാഷ തിരഞ്ഞെടുപ്പ്';
+
+  @override
+  String get onboard_application_title => 'അപ്ലിക്കേഷൻ';
+
+  @override
+  String get onboard_notifications => 'അറിയിപ്പുകൾ';
+
+  @override
+  String get onboard_profile_privacy => 'സ്വകാര്യതയും നയവും';
+
+  @override
+  String get onboard_help_support => 'സഹായവും പിന്തുണയും';
+
+  @override
+  String get onboard_session => 'സെഷൻ';
 }

@@ -107,5 +107,14 @@
   "onboard_recent_activity": "हाल की गतिविधि",
   "onboard_quick_task": "त्वरित कार्य",
   "onboard_earn": "कमाएं",
-  "onboard_points": "अंक"
+  "onboard_points": "अंक",
+
+  "onboard_account_title": "खाता",
+  "onboard_task_preference": "कार्य वरीयता",
+  "onboard_language_selection": "भाषा चयन",
+  "onboard_application_title": "एप्लिकेशन",
+  "onboard_notifications": "सूचनाएं",
+  "onboard_profile_privacy": "गोपनीयता और नीति",
+  "onboard_help_support": "सहायता और समर्थन",
+  "onboard_session": "सत्र"
 }

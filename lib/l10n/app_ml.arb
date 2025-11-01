@@ -107,5 +107,14 @@
   "onboard_recent_activity": "സമീപകാല പ്രവർത്തനം",
   "onboard_quick_task": "വേഗത്തിലുള്ള ടാസ്ക്",
   "onboard_earn": "സമ്പാദിക്കുക",
-  "onboard_points": "പോയിന്റുകൾ"
+  "onboard_points": "പോയിന്റുകൾ",
+
+  "onboard_account_title": "അക്കൗണ്ട്",
+  "onboard_task_preference": "ടാസ്ക് മുൻഗണന",
+  "onboard_language_selection": "ഭാഷ തിരഞ്ഞെടുപ്പ്",
+  "onboard_application_title": "അപ്ലിക്കേഷൻ",
+  "onboard_notifications": "അറിയിപ്പുകൾ",
+  "onboard_profile_privacy": "സ്വകാര്യതയും നയവും",
+  "onboard_help_support": "സഹായവും പിന്തുണയും",
+  "onboard_session": "സെഷൻ"
 }

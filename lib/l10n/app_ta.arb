@@ -107,5 +107,14 @@
   "onboard_recent_activity": "சமீபத்திய செயல்பாடு",
   "onboard_quick_task": "விரைவு பணி",
   "onboard_earn": "சம்பாதிக்கவும்",
-  "onboard_points": "மதிப்பெண்கள்"
+  "onboard_points": "மதிப்பெண்கள்",
+
+  "onboard_account_title": "கணக்கு",
+  "onboard_task_preference": "பணியின் விருப்பம்",
+  "onboard_language_selection": "மொழி தேர்வு",
+  "onboard_application_title": "விண்ணப்பம்",
+  "onboard_notifications": "அறிவிப்புகள்",
+  "onboard_profile_privacy": "தனியுரிமை மற்றும் கொள்கை",
+  "onboard_help_support": "உதவி மற்றும் ஆதரவு",
+  "onboard_session": "அமர்வு"
 }

@@ -305,4 +305,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboard_points => 'Points';
+
+  @override
+  String get onboard_account_title => 'Account';
+
+  @override
+  String get onboard_task_preference => 'Task Preference';
+
+  @override
+  String get onboard_language_selection => 'Language Selection';
+
+  @override
+  String get onboard_application_title => 'Application';
+
+  @override
+  String get onboard_notifications => 'Notifications';
+
+  @override
+  String get onboard_profile_privacy => 'Privacy & Policy';
+
+  @override
+  String get onboard_help_support => 'Help & Support';
+
+  @override
+  String get onboard_session => 'session';
 }

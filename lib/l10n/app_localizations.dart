@@ -683,6 +683,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Points'**
   String get onboard_points;
+
+  /// No description provided for @onboard_account_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get onboard_account_title;
+
+  /// No description provided for @onboard_task_preference.
+  ///
+  /// In en, this message translates to:
+  /// **'Task Preference'**
+  String get onboard_task_preference;
+
+  /// No description provided for @onboard_language_selection.
+  ///
+  /// In en, this message translates to:
+  /// **'Language Selection'**
+  String get onboard_language_selection;
+
+  /// No description provided for @onboard_application_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Application'**
+  String get onboard_application_title;
+
+  /// No description provided for @onboard_notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get onboard_notifications;
+
+  /// No description provided for @onboard_profile_privacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy & Policy'**
+  String get onboard_profile_privacy;
+
+  /// No description provided for @onboard_help_support.
+  ///
+  /// In en, this message translates to:
+  /// **'Help & Support'**
+  String get onboard_help_support;
+
+  /// No description provided for @onboard_session.
+  ///
+  /// In en, this message translates to:
+  /// **'session'**
+  String get onboard_session;
 }
 
 class _AppLocalizationsDelegate

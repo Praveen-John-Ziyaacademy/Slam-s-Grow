@@ -108,5 +108,16 @@
   "onboard_recent_activity":"Recent Activity",
   "onboard_quick_task":"Quick Task",
   "onboard_earn":"Earn",
-  "onboard_points":"Points"
+  "onboard_points":"Points",
+
+  "onboard_account_title":"Account",
+  "onboard_task_preference":"Task Preference",
+  "onboard_language_selection":"Language Selection",
+  "onboard_application_title":"Application",
+  "onboard_notifications":"Notifications",
+  "onboard_profile_privacy":"Privacy & Policy",
+  "onboard_help_support":"Help & Support",
+  "onboard_session":"session"
+
+
 }

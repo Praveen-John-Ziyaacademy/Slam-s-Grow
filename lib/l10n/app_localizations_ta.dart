@@ -306,4 +306,28 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get onboard_points => 'மதிப்பெண்கள்';
+
+  @override
+  String get onboard_account_title => 'கணக்கு';
+
+  @override
+  String get onboard_task_preference => 'பணியின் விருப்பம்';
+
+  @override
+  String get onboard_language_selection => 'மொழி தேர்வு';
+
+  @override
+  String get onboard_application_title => 'விண்ணப்பம்';
+
+  @override
+  String get onboard_notifications => 'அறிவிப்புகள்';
+
+  @override
+  String get onboard_profile_privacy => 'தனியுரிமை மற்றும் கொள்கை';
+
+  @override
+  String get onboard_help_support => 'உதவி மற்றும் ஆதரவு';
+
+  @override
+  String get onboard_session => 'அமர்வு';
 }

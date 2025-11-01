@@ -305,4 +305,28 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get onboard_points => 'अंक';
+
+  @override
+  String get onboard_account_title => 'खाता';
+
+  @override
+  String get onboard_task_preference => 'कार्य वरीयता';
+
+  @override
+  String get onboard_language_selection => 'भाषा चयन';
+
+  @override
+  String get onboard_application_title => 'एप्लिकेशन';
+
+  @override
+  String get onboard_notifications => 'सूचनाएं';
+
+  @override
+  String get onboard_profile_privacy => 'गोपनीयता और नीति';
+
+  @override
+  String get onboard_help_support => 'सहायता और समर्थन';
+
+  @override
+  String get onboard_session => 'सत्र';
 }

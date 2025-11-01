@@ -659,6 +659,7 @@ class HomeTabContent extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+
                 const SizedBox(height: 4),
 
                 Text(
@@ -670,6 +671,7 @@ class HomeTabContent extends StatelessWidget {
                     color: Colors.grey[600],
                   ),
                 ),
+
                 const SizedBox(height: 6),
 
                 Row(
@@ -683,7 +685,6 @@ class HomeTabContent extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 5),
-
                     Expanded(
                       child: Text(
                         task.status,
@@ -695,7 +696,6 @@ class HomeTabContent extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     if (task.timeLeft.isNotEmpty) ...[
                       const SizedBox(width: 8),
                       Flexible(
@@ -712,11 +712,38 @@ class HomeTabContent extends StatelessWidget {
                     ],
                   ],
                 ),
+
+                if (index != 0) ...[
+                  const SizedBox(height: 4),
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      final double lineWidth = (task.status.length * 7)
+                          .toDouble()
+                          .clamp(40, constraints.maxWidth);
+                      return Stack(
+                        children: [
+                          Container(
+                            width: lineWidth,
+                            height: 1,
+                            color: Colors.grey[400],
+                          ),
+
+                          Container(
+                            width: lineWidth * 0.4,
+                            height: 1,
+                            color: Colors.blue,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ],
               ],
             ),
           ),
 
           SizedBox(width: isSmallScreen ? 8 : 12),
+
           GestureDetector(
             onTap: () => controller.doTask(index),
             child: Container(

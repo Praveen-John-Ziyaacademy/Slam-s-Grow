@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:social_media/controller/more/settings_controller.dart';
+import 'package:social_media/l10n/app_localizations.dart';
 
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({Key? key}) : super(key: key);
@@ -104,8 +105,8 @@ class SettingsScreen extends StatelessWidget {
                     const SizedBox(height: 24),
 
                     // Account Section
-                    const Text(
-                      'Account',
+                    Text(
+                      AppLocalizations.of(context)!.onboard_account_title,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
